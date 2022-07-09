@@ -1,12 +1,17 @@
 <!-- breadcrumbs -->
 {% if breadcrumbs | length > 0 %}
-    <div class="btn-group btn-breadcrumb mb-3">
-        <a href="{{ app.request.get('locale_url_prefix') }}" class="btn btn-primary">
-            <i class="icon-home"></i>
-        </a>
+    <ul class="uk-breadcrumb uk-flex-center uk-margin-remove">
+        <li>
+            <a href="{{ app.request.get('locale_url_prefix') }}">
+                {{ 'Home page' | trans }}
+            </a>
+        </li>
         {% for crumb in breadcrumbs %}
-            <a href="{{ catalogPath(crumb.uri) }}" class="btn btn-primary">{{ crumb.title }}</a>
+            <li>
+                <a href="{{ catalogPath(crumb.uri) }}">{{ crumb.title }}</a>
+            </li>
         {% endfor %}
-    </div>
+        <li><span>{{ currentCategory.title }}</span></li>
+    </ul>
 {% endif %}
 <!-- /breadcrumbs -->
