@@ -1,0 +1,114 @@
+[
+  {
+    "title": "Название",
+    "name": "title",
+    "description": "",
+    "inputType": "text",
+    "inputProperties": {
+      "value": "",
+      "handler": ""
+    },
+    "outputType": "text",
+    "outputProperties": {
+      "className": "",
+      "chunkName": "header"
+    },
+    "group": "Основное",
+    "required": true,
+    "showInTable": true,
+    "showInList": true,
+    "isFilter": false
+  },
+  {
+    "title": "Системное имя",
+    "name": "name",
+    "description": "",
+    "inputType": "system_name",
+    "inputProperties": {
+      "value": "",
+      "source_field": "title",
+      "handler": ""
+    },
+    "outputType": "system_name",
+    "outputProperties": {
+      "className": ""
+    },
+    "group": "Основное",
+    "required": true,
+    "showInTable": true,
+    "showInList": false,
+    "isFilter": false
+  },
+  {
+    "title": "Основной текст",
+    "name": "description",
+    "description": "",
+    "inputType": "textarea",
+    "inputProperties": {
+      "value": "",
+      "handler": "",
+      "rows": "6"
+    },
+    "outputType": "textarea",
+    "outputProperties": {
+      "className": "",
+      "chunkName": "description"
+    },
+    "group": "Основное",
+    "required": false,
+    "showInTable": false,
+    "showInList": false,
+    "isFilter": false,
+    "showOnPage": true,
+    "id": ""
+  },
+  {
+    "id": 0,
+    "title": "Ссылка",
+    "name": "url",
+    "description": "",
+    "inputType": "text",
+    "outputType": "text",
+    "group": "Основное",
+    "required": false,
+    "showInTable": true,
+    "showOnPage": true,
+    "showInList": false,
+    "isFilter": false,
+    "inputProperties": {
+      "value": "",
+      "handler": ""
+    },
+    "outputProperties": {
+      "className": "",
+      "chunkName": ""
+    }
+  },
+  {
+    "id": 0,
+    "title": "Картинка",
+    "name": "image",
+    "description": "",
+    "inputType": "file",
+    "outputType": "file",
+    "group": "Параметры",
+    "required": false,
+    "showInTable": false,
+    "showOnPage": true,
+    "showInList": false,
+    "isFilter": false,
+    "inputProperties": {
+      "value": "",
+      "handler": "",
+      "allowed_extensions": "image/*",
+      "has_preview_image": "1",
+      "multiple": "0"
+    },
+    "outputProperties": {
+      "className": "",
+      "chunkName": "",
+      "allowed_extensions": "image/*",
+      "required": "1"
+    }
+  }
+]

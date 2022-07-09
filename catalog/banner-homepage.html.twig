@@ -1,0 +1,20 @@
+{% if items | length > 0 %}
+<section class="uk-position-relative uk-visible-toggle uk-light" uk-slideshow="min-height: 200; max-height: 400;">
+    <ul class="uk-slideshow-items">
+        {% for item in items %}
+        <li style="background-color: #0b0a12">
+            <a href="{{ item.url }}">
+                <figure class="uk-container uk-height-1-1">
+                    <img src="/uploads/{{ imageUrl(item.image) }}" alt="" width="1200" height="400" uk-cover>
+                </figure>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slideshow-item="previous" uk-slidenav-previous></a>
+    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slideshow-item="next" uk-slidenav-next></a>
+    <div class="uk-position-bottom-center uk-position-small">
+        <ul class="uk-slideshow-nav uk-dotnav"></ul>
+    </div>
+</section>
+{% endif %}

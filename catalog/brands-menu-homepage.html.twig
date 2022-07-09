@@ -1,0 +1,31 @@
+{% if items | length > 0 %}
+<li>
+    <a href="/brands/">
+        {{ 'Brands' | trans }}
+        <span class="uk-margin-xsmall-left" uk-icon="icon: chevron-down; ratio: .75;"></span>
+    </a>
+    <div class="uk-navbar-dropdown uk-padding-remove-vertical" uk-drop="pos: bottom-justify;delay-show: 125;delay-hide: 50;duration: 75;boundary: .tm-navbar-container;offset: 10px;boundary-align: true;pos: bottom-justify;flip: x">
+        <div class="uk-container uk-container-small uk-margin-top uk-margin-bottom">
+            <ul class="uk-grid-small uk-child-width-1-6" uk-grid>
+                {% for item in items %}
+                <li>
+                    <div class="tm-ratio tm-ratio-4-3">
+                        <a class="uk-link-muted uk-text-center uk-display-block uk-padding-small uk-box-shadow-hover-large tm-media-box" href="{{ item.url }}" title="{{ item.title }}">
+                            <figure class="tm-media-box-wrap">
+                                <img src="/uploads/{{ imageUrl(item.image) }}" alt="{{ item.title }}">
+                            </figure>
+                        </a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            <div class="uk-text-center uk-margin">
+                <a class="uk-link-muted uk-text-uppercase tm-link-to-all" href="/brands/">
+                    <span>{{ 'See all brands' | trans }}</span>
+                    <span uk-icon="icon: chevron-right; ratio: .75;"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</li>
+{% endif %}

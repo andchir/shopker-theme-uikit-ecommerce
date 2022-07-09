@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}" class="h-100">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{{ app_name }}{% endblock %}</title>
+    <base href="{{ app.request.baseUrl }}">
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    {% block stylesheets -%}
+        <link href="{{ asset('app_build/app_styles.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    {% endblock -%}
+
+    <!-- twv-script -->
+    {% if is_granted('ROLE_ADMIN') %}
+        <link href="{{ asset('bundles/twigvisual/css/twv-icomoon/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/twigvisual/dist/twigvisual_styles.min.css') }}" rel="stylesheet">
+        <script src="{{ asset('bundles/twigvisual/dist/twigvisual.min.js') }}"></script>
+        <script>
+            const twigVisual = new TwigVisual( {{ twigVisualOptions(_self, _context) }} );
+        </script>
+    {% endif %}
+    <!-- /twv-script -->
+
+</head>
+<body class="d-flex flex-column h-100 bg-light">
+
+{% include 'header.html.twig' %}
+
+<main role="main" class="flex-shrink-0">
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
+</main>
+
+{% block footer %}
+    <footer class="footer mt-auto border-top mt-3">
+        <div class="container">
+            <div class="float-end p-2">
+                <a href="https://shopker.org/" target="_blank">
+                    <img src="{{ asset('img/shk-logo-small-gray.png') }}" width="120" alt="Shopker">
+                </a>
+            </div>
+            <div class="py-3 text-muted">
+                {{ app_name }} &copy; {{ 'now' | date('Y') }}
+            </div>
+        </div>
+    </footer>
+    {% if 'shop_cart_edit' not in app.request.attributes.get('_route') %}
+        {{ shopCart('shop_cart', 'shop', 'shop_cart_empty') }}
+    {% endif %}
+{% endblock %}
+
+{% block javascripts -%}
+    <!-- JAVASCRIPT -->
+    <script src="{{ asset('app_build/app.js') }}"></script>
+{% endblock -%}
+
+</body>
+</html>
