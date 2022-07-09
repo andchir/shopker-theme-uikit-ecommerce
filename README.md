@@ -1,4 +1,4 @@
-# Theme for Shopker
+# UIkit ECommerce Theme for Shopker
 
 https://shopker.org/   
 
