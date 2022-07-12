@@ -17,7 +17,9 @@
     "required": true,
     "showInTable": true,
     "showInList": true,
-    "isFilter": false
+    "isFilter": false,
+    "id": "",
+    "showOnPage": false
   },
   {
     "title": "Системное имя",
@@ -66,6 +68,28 @@
     "id": 0,
     "title": "Ссылка",
     "name": "url",
+    "description": "",
+    "inputType": "text",
+    "outputType": "text",
+    "group": "Основное",
+    "required": false,
+    "showInTable": true,
+    "showOnPage": true,
+    "showInList": false,
+    "isFilter": false,
+    "inputProperties": {
+      "value": "",
+      "handler": ""
+    },
+    "outputProperties": {
+      "className": "",
+      "chunkName": ""
+    }
+  },
+  {
+    "id": 0,
+    "title": "Иконка",
+    "name": "icon",
     "description": "",
     "inputType": "text",
     "outputType": "text",

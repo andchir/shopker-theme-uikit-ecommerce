@@ -17,7 +17,9 @@
     "required": true,
     "showInTable": true,
     "showInList": true,
-    "isFilter": false
+    "isFilter": false,
+    "id": "",
+    "showOnPage": false
   },
   {
     "title": "Системное имя",
@@ -40,6 +42,51 @@
     "isFilter": false
   },
   {
+    "id": 0,
+    "title": "Ссылка",
+    "name": "url",
+    "description": "",
+    "inputType": "text",
+    "outputType": "text",
+    "group": "Параметры",
+    "required": false,
+    "showInTable": true,
+    "showOnPage": true,
+    "showInList": false,
+    "isFilter": false,
+    "inputProperties": {
+      "value": "",
+      "handler": ""
+    },
+    "outputProperties": {
+      "className": "",
+      "chunkName": ""
+    }
+  },
+  {
+    "id": 0,
+    "title": "Популярный",
+    "name": "popular",
+    "description": "",
+    "inputType": "checkbox",
+    "outputType": "checkbox",
+    "group": "Основное",
+    "required": false,
+    "showInTable": true,
+    "showOnPage": true,
+    "showInList": false,
+    "isFilter": false,
+    "inputProperties": {
+      "value": "",
+      "handler": "",
+      "values_list": ""
+    },
+    "outputProperties": {
+      "className": "",
+      "chunkName": ""
+    }
+  },
+  {
     "title": "Основной текст",
     "name": "description",
     "description": "",
@@ -59,28 +106,6 @@
     "showInList": false,
     "isFilter": false,
     "showOnPage": true
-  },
-  {
-    "id": 0,
-    "title": "Ключевые слова",
-    "name": "keywords",
-    "description": "",
-    "inputType": "tags",
-    "outputType": "tags",
-    "group": "Параметры",
-    "required": false,
-    "showInTable": true,
-    "showOnPage": true,
-    "showInList": false,
-    "isFilter": false,
-    "inputProperties": {
-      "value": "",
-      "handler": ""
-    },
-    "outputProperties": {
-      "className": "",
-      "chunkName": ""
-    }
   },
   {
     "id": 0,

@@ -17,7 +17,9 @@
     "required": true,
     "showInTable": true,
     "showInList": true,
-    "isFilter": false
+    "isFilter": false,
+    "id": "",
+    "showOnPage": false
   },
   {
     "title": "Системное имя",
@@ -40,27 +42,6 @@
     "isFilter": false
   },
   {
-    "title": "Основной текст",
-    "name": "description",
-    "description": "",
-    "inputType": "rich_text",
-    "inputProperties": {
-      "value": "",
-      "handler": ""
-    },
-    "outputType": "rich_text",
-    "outputProperties": {
-      "className": "",
-      "chunkName": "description"
-    },
-    "group": "Основное",
-    "required": false,
-    "showInTable": false,
-    "showInList": false,
-    "isFilter": false,
-    "showOnPage": true
-  },
-  {
     "id": 0,
     "title": "Ссылка",
     "name": "url",
@@ -81,6 +62,50 @@
       "className": "",
       "chunkName": ""
     }
+  },
+  {
+    "id": 0,
+    "title": "Популярный",
+    "name": "popular",
+    "description": "",
+    "inputType": "checkbox",
+    "outputType": "checkbox",
+    "group": "Основное",
+    "required": false,
+    "showInTable": true,
+    "showOnPage": true,
+    "showInList": false,
+    "isFilter": false,
+    "inputProperties": {
+      "value": "",
+      "handler": "",
+      "values_list": ""
+    },
+    "outputProperties": {
+      "className": "",
+      "chunkName": ""
+    }
+  },
+  {
+    "title": "Основной текст",
+    "name": "description",
+    "description": "",
+    "inputType": "rich_text",
+    "inputProperties": {
+      "value": "",
+      "handler": ""
+    },
+    "outputType": "rich_text",
+    "outputProperties": {
+      "className": "",
+      "chunkName": "description"
+    },
+    "group": "Основное",
+    "required": false,
+    "showInTable": false,
+    "showInList": false,
+    "isFilter": false,
+    "showOnPage": true
   },
   {
     "id": 0,
