@@ -87,6 +87,35 @@
   },
   {
     "id": 0,
+    "title": "Дата и время",
+    "name": "datetime",
+    "description": "",
+    "inputType": "date",
+    "outputType": "date",
+    "group": "Параметры",
+    "required": false,
+    "showInTable": true,
+    "showOnPage": true,
+    "showInList": false,
+    "isFilter": false,
+    "inputProperties": {
+      "value": "",
+      "handler": "",
+      "format": "mm/dd/yy",
+      "show_time": "1",
+      "hour_format": "24",
+      "first_day_of_week": "1",
+      "locale": "ru",
+      "default_current": "1"
+    },
+    "outputProperties": {
+      "className": "",
+      "chunkName": "",
+      "format": "MM/dd/yyyy"
+    }
+  },
+  {
+    "id": 0,
     "title": "Картинка",
     "name": "image",
     "description": "",
