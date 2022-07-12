@@ -1,0 +1,23 @@
+{% if items | length > 0 %}
+<section class="uk-section uk-section-default uk-section-small">
+    <div class="uk-container">
+        <div uk-slider>
+            <ul class="uk-slider-items uk-child-width-1-1 uk-child-width-1-2@s uk-child-width-1-5@m uk-grid">
+                {% for item in items %}
+                <li>
+                    <div class="uk-grid-small uk-flex-center uk-flex-left@s" uk-grid>
+                        <div><span uk-icon="icon: {{ item.icon }}; ratio: 2.5;"></span>
+                        </div>
+                        <div class="uk-text-center uk-text-left@s uk-width-expand@s">
+                            <div>{{ item.title }}</div>
+                            <div class="uk-text-meta">{{ item.description }}</div>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin-medium-top"></ul>
+        </div>
+    </div>
+</section>
+{% endif %}
