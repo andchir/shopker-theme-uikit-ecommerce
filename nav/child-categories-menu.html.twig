@@ -37,6 +37,7 @@
                                                 </div>
                                             </div>
                                         </header>
+                                        {% if category.children | length > 0 or category.description is not empty %}
                                         <div class="uk-card-body">
 
                                             {% if category.description is not empty %}
@@ -56,6 +57,7 @@
                                             {% endif %}
 
                                         </div>
+                                        {% endif %}
                                     </div>
                                 </section>
 

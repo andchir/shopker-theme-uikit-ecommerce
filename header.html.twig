@@ -175,8 +175,8 @@
                     <div class="uk-container">
                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-expand">
-                                <form class="uk-search uk-search-navbar uk-width-1-1">
-                                    <input class="uk-search-input" type="search" placeholder="Search…" autofocus>
+                                <form action="{{ pathLocalized('search_results') }}" method="get" class="uk-search uk-search-navbar uk-width-1-1">
+                                    <input class="uk-search-input" type="search" name="query" placeholder="{{ 'Search' | trans }}..." autofocus>
                                 </form>
                             </div>
                             <div class="uk-width-auto"><a class="uk-navbar-dropdown-close" href="#" uk-close></a></div>
