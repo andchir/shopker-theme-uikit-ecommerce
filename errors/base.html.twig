@@ -6,19 +6,27 @@
     <title>{% block title %}{{ app_name }}{% endblock %}</title>
     <base href="{{ app.request.baseUrl }}">
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
     {% block stylesheets -%}
-        <link href="{{ asset('app_build/app_styles.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500">
+        <link rel="stylesheet" href="/assets/uikit-ecommerce/styles/style.css">
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     {% endblock -%}
 
 </head>
 <body>
 
-{% block body %}{% endblock %}
+<main>
+    {% block body %}{% endblock %}
+</main>
+
+{% include 'footer.html.twig' %}
 
 {% block javascripts %}
+    <script src="/assets/uikit-ecommerce/scripts/uikit.js"></script>
+    <script src="/assets/uikit-ecommerce/scripts/uikit-icons.js"></script>
+    <script src="/assets/uikit-ecommerce/scripts/script.js"></script>
     <script src="{{ asset('app_build/app.js') }}"></script>
 {% endblock %}
 

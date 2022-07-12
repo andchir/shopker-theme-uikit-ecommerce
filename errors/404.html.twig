@@ -3,12 +3,17 @@
 {% block body %}
     {% include 'header.html.twig' ignore missing %}
 
-    <main role="main" class="container">
-        <div class="min-height400 pt-4">
+    <section class="uk-section uk-section-small">
+        <div class="uk-container min-height300">
             <h1>404 - Page not found</h1>
+
             {% if message is defined and message is not empty %}
-                <div class="alert alert-danger">{{ message }}</div>
+                <div class="uk-alert-danger uk-box-shadow-small" uk-alert>
+                    <a class="uk-alert-close" uk-close></a>
+                    <p>{{ message }}</p>
+                </div>
             {% endif %}
+
         </div>
-    </main>
+    </section>
 {% endblock %}

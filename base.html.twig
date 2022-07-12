@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app.request.locale }}">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500">
-    <link rel="stylesheet" href="/assets/uikit-ecommerce/styles/style.css">
-    <script src="/assets/uikit-ecommerce/scripts/uikit.js"></script>
-    <script src="/assets/uikit-ecommerce/scripts/uikit-icons.js"></script>
+    <title>{% block title %}{{ app_name }}{% endblock %}</title>
+    <base href="{{ app.request.baseUrl }}">
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
+    {% block stylesheets -%}
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500">
+        <link rel="stylesheet" href="/assets/uikit-ecommerce/styles/style.css">
+        <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    {% endblock -%}
 
     <!-- twv-script -->
     {% if is_granted('ROLE_ADMIN') %}
@@ -101,6 +106,8 @@
 
 {% block javascripts -%}
     <!-- JAVASCRIPT -->
+    <script src="/assets/uikit-ecommerce/scripts/script.js"></script>
+    <script src="/assets/uikit-ecommerce/scripts/uikit-icons.js"></script>
     <script src="/assets/uikit-ecommerce/scripts/script.js"></script>
     <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyClyjCemJi4m2q78gNeGkhlckpdH1hzTYA&amp;callback=initMap" async defer></script>
 {% endblock -%}
