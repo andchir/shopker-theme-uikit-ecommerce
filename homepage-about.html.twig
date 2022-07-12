@@ -1,0 +1,12 @@
+<h2 class="uk-text-center uk-text-left@s">{{ title }}</h2>
+{% if summary is defined %}
+    <div class="uk-margin-bottom">
+        {{ summary | raw }}
+    </div>
+{% endif %}
+<div class="uk-text-center uk-text-left@s">
+    <a class="uk-link-muted uk-text-uppercase tm-link-to-all" href="/{{ name }}">
+        <span>{{ 'Read more' | trans }}</span>
+        <span uk-icon="icon: chevron-right; ratio: .75;"></span>
+    </a>
+</div>

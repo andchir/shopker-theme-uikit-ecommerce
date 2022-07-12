@@ -419,15 +419,14 @@
             </div>
           </div>
         </section>
+
         <section class="uk-section uk-section-default uk-section-small">
           <div class="uk-container">
             <div class="uk-grid-medium uk-child-width-1-1 uk-child-width-1-2@s" uk-grid>
               <section>
-                <h2 class="uk-text-center uk-text-left@s">About</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at neque vulputate, vestibulum magna in, accumsan urna. Nulla feugiat ipsum ex, molestie porttitor nibh faucibus at. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam hendrerit lorem ut finibus semper. Donec ac vehicula erat, nec consequat massa.</p>
-                <p>Quisque rhoncus fermentum sapien id congue. Nam at rutrum turpis. Aliquam sagittis imperdiet tortor vel dignissim. Ut ipsum nunc, egestas et odio id, vestibulum posuere orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-                <div class="uk-text-center uk-text-left@s"><a class="uk-link-muted uk-text-uppercase tm-link-to-all" href="about.html"><span>read more</span><span uk-icon="icon: chevron-right; ratio: .75;"></span></a>
-                </div>
+
+                {{ includeContent('homepage-about', 'text_content', 1, 'homepage-about') }}
+
               </section>
               <section>
                 <h2 class="uk-text-center uk-text-left@s">Latest News</h2>
@@ -472,6 +471,7 @@
             </div>
           </div>
         </section>
+
         <section class="uk-section uk-section-primary uk-section-small uk-light">
           <div class="uk-container">
             <div class="uk-text-center">

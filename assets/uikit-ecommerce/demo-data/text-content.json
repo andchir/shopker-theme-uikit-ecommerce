@@ -1,0 +1,129 @@
+[
+  {
+    "title": "Название",
+    "name": "title",
+    "description": "",
+    "inputType": "text",
+    "inputProperties": {
+      "value": "",
+      "handler": ""
+    },
+    "outputType": "text",
+    "outputProperties": {
+      "className": "",
+      "chunkName": "header"
+    },
+    "group": "Основное",
+    "required": true,
+    "showInTable": true,
+    "showInList": true,
+    "isFilter": false
+  },
+  {
+    "title": "Системное имя",
+    "name": "name",
+    "description": "",
+    "inputType": "system_name",
+    "inputProperties": {
+      "value": "",
+      "source_field": "title",
+      "handler": ""
+    },
+    "outputType": "system_name",
+    "outputProperties": {
+      "className": ""
+    },
+    "group": "Основное",
+    "required": true,
+    "showInTable": true,
+    "showInList": false,
+    "isFilter": false
+  },
+  {
+    "id": 0,
+    "title": "Краткое описание",
+    "name": "summary",
+    "description": "",
+    "inputType": "textarea",
+    "outputType": "textarea",
+    "group": "Основное",
+    "required": false,
+    "showInTable": false,
+    "showOnPage": true,
+    "showInList": false,
+    "isFilter": false,
+    "inputProperties": {
+      "value": "",
+      "handler": "",
+      "rows": "6"
+    },
+    "outputProperties": {
+      "className": "",
+      "chunkName": ""
+    }
+  },
+  {
+    "title": "Основной текст",
+    "name": "description",
+    "description": "",
+    "inputType": "rich_text",
+    "inputProperties": {
+      "value": "",
+      "handler": ""
+    },
+    "outputType": "rich_text",
+    "outputProperties": {
+      "className": "",
+      "chunkName": "description"
+    },
+    "group": "Основное",
+    "required": false,
+    "showInTable": false,
+    "showInList": false,
+    "isFilter": false,
+    "showOnPage": true
+  },
+  {
+    "title": "Позиция в меню",
+    "name": "menuIndex",
+    "description": "",
+    "inputType": "number",
+    "inputProperties": {
+      "value": "0",
+      "handler": "",
+      "min": 0,
+      "max": null,
+      "step": 1
+    },
+    "outputType": "text",
+    "outputProperties": {
+      "className": "",
+      "chunkName": ""
+    },
+    "group": "Параметры",
+    "required": false,
+    "showInTable": true,
+    "showInList": false,
+    "isFilter": false
+  },
+  {
+    "title": "Прикрепить форму",
+    "name": "form_name",
+    "description": "",
+    "inputType": "text",
+    "inputProperties": {
+      "value": "",
+      "handler": ""
+    },
+    "outputType": "text",
+    "outputProperties": {
+      "className": "",
+      "chunkName": ""
+    },
+    "group": "Параметры",
+    "required": false,
+    "showInTable": true,
+    "showInList": false,
+    "isFilter": false
+  }
+]
