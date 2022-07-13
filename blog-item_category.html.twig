@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Laptops</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500">
+    <link rel="stylesheet" href="/assets/uikit-ecommerce/styles/style.css">
+    <script src="/assets/uikit-ecommerce/scripts/uikit.js"></script>
+    <script src="/assets/uikit-ecommerce/scripts/uikit-icons.js"></script>
+
+    <!-- twv-script -->
+    {% if is_granted('ROLE_ADMIN') %}
+        <link href="{{ asset('bundles/twigvisual/css/twv-icomoon/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/twigvisual/dist/twigvisual_styles.min.css') }}" rel="stylesheet">
+        <script src="{{ asset('bundles/twigvisual/dist/twigvisual.min.js') }}"></script>
+        <script>
+            const twigVisual = new TwigVisual({{ twigVisualOptions(_self, _context) }});
+        </script>
+    {% endif %}
+    <!-- /twv-script -->
+
+</head>
+<body>
+<div class="uk-offcanvas-content">
+
+    {% include 'header.html.twig' %}
+
+    <main>
+
+        <section class="uk-section uk-section-small">
+            <div class="uk-container">
+                <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
+                    <div class="uk-text-center">
+
+                        {% include 'nav/breadcrumbs.html.twig' %}
+
+                        <h1 class="uk-margin-small-top uk-margin-remove-bottom">{{ currentCategory.title }}</h1>
+                    </div>
+                    <div>
+
+                        {% if items | length > 0 %}
+                        <div class="uk-grid-medium" uk-grid>
+                            <section class="uk-width-1-1 uk-width-expand@m">
+                                <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
+
+                                    {% for item in items %}
+                                    <div>
+                                        <a href="{{ catalogPath('blog/', item.name) }}">
+                                            <article class="uk-card uk-card-default uk-card-small uk-article uk-overflow-hidden uk-box-shadow-hover-large uk-height-1-1 tm-ignore-container">
+                                                <div class="tm-ratio tm-ratio-16-9">
+                                                    <figure class="tm-media-box uk-cover-container uk-margin-remove">
+                                                        <img src="images/articles/macbook-photo.jpg" alt="Everything You Need to Know About the MacBook Pro" uk-cover="uk-cover"/>
+                                                    </figure>
+                                                </div>
+                                                <div class="uk-card-body">
+                                                    <div class="uk-article-body">
+                                                        <div class="uk-article-meta uk-margin-xsmall-bottom">
+                                                            <time>May 21, 2018</time>
+                                                        </div>
+                                                        <div>
+                                                            <h3 class="uk-margin-remove">{{ item.title }}</h3>
+                                                        </div>
+                                                        <div class="uk-margin-small-top">
+                                                            <p>{{ item.summary }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </a>
+                                    </div>
+                                    {% endfor %}
+
+                                </div>
+                            </section>
+                            <aside class="uk-width-1-4 uk-visible@m tm-aside-column">
+                                <section class="uk-card uk-card-default uk-card-small" uk-sticky="offset: 90; bottom: true;">
+                                    <nav>
+                                        <ul class="uk-nav uk-nav-default tm-nav">
+                                            <li><a href="about.html">About</a></li>
+                                            <li><a href="contacts.html">Contacts</a></li>
+                                            <li class="uk-active"><a href="blog.html">Blog</a></li>
+                                            <li><a href="news.html">News</a></li>
+                                            <li><a href="faq.html">FAQ</a></li>
+                                            <li><a href="delivery.html">Delivery</a></li>
+                                        </ul>
+                                    </nav>
+                                </section>
+                            </aside>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% include 'features.html.twig' %}
+
+    </main>
+
+    {% include 'footer.html.twig' %}
+
+    {% include 'nav/offcanvas.html.twig' %}
+
+</div>
+<script src="/assets/uikit-ecommerce/scripts/script.js"></script>
+<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyClyjCemJi4m2q78gNeGkhlckpdH1hzTYA&amp;callback=initMap" async
+        defer></script>
+</body>
+</html>
