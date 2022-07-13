@@ -1,0 +1,28 @@
+{% if items | length > 0 %}
+<h2 class="uk-text-center uk-text-left@s">{{ 'Latest News' | trans }}</h2>
+<ul class="uk-list uk-list-small uk-list-divider">
+    {% for item in items %}
+    <li>
+        <article class="uk-article">
+            <div class="uk-article-body">
+                <div class="uk-article-meta uk-margin-xsmall-bottom">
+                    <time>{{ item.datetime | date }}</time>
+                </div>
+                <h3 class="uk-h4 uk-margin-remove">
+                    <a class="uk-link-heading" href="{{ catalogPath('news/', item.name) }}">{{ item.title }}</a>
+                </h3>
+                <div class="uk-margin-xsmall-top uk-text-small">
+                    <p>{{ item.summary }}</p>
+                </div>
+            </div>
+        </article>
+    </li>
+    {% endfor %}
+</ul>
+<div class="uk-margin uk-text-center uk-text-left@s">
+    <a class="uk-link-muted uk-text-uppercase tm-link-to-all" href="/news/">
+        <span>{{ 'See all news' | trans }}</span>
+        <span uk-icon="icon: chevron-right; ratio: .75;"></span>
+    </a>
+</div>
+{% endif %}

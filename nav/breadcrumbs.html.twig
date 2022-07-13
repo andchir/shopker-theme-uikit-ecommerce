@@ -8,10 +8,13 @@
         </li>
         {% for crumb in breadcrumbs %}
             <li>
-                <a href="{{ catalogPath(crumb.uri) }}">{{ crumb.title }}</a>
+                {% if crumb.id == currentPage.id %}
+                    <span>{{ crumb.title }}</span>
+                {% else %}
+                    <a href="{{ catalogPath(crumb.uri) }}">{{ crumb.title }}</a>
+                {% endif %}
             </li>
         {% endfor %}
-        <li><span>{{ currentCategory.title }}</span></li>
     </ul>
 {% endif %}
 <!-- /breadcrumbs -->
