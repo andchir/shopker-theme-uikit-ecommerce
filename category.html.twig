@@ -9,7 +9,12 @@
                     {% include 'nav/breadcrumbs.html.twig' %}
 
                     <h1 class="uk-margin-small-top uk-margin-remove-bottom">{{ currentCategory.title }}</h1>
-                    <div class="uk-text-meta uk-margin-xsmall-top">289 items</div>
+                    {% if itemsTotal > 0 %}
+                        <div class="uk-text-meta uk-margin-xsmall-top">
+                            {{ itemsTotal }}
+                            {{ 'product|products' | trans({'%count%': itemsTotal}) }}
+                        </div>
+                    {% endif %}
                 </div>
                 <div>
                     <div class="uk-grid-medium" uk-grid>
