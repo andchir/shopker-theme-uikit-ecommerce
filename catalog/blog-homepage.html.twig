@@ -1,0 +1,43 @@
+{% if items | length > 0 %}
+<section class="uk-section uk-section-small">
+    <div class="uk-container">
+        <h2 class="uk-text-center">{{ 'Blog' | trans }}</h2>
+        <div class="uk-grid-medium uk-grid-match uk-child-width-1-1 uk-child-width-1-2@s" uk-grid>
+
+            {% for item in items %}
+            <div>
+                <a href="{{ catalogPath('blog/', item.name) }}">
+                    <article class="uk-card uk-card-default uk-card-small uk-article uk-overflow-hidden uk-box-shadow-hover-large uk-height-1-1 tm-ignore-container">
+                        <div class="tm-ratio tm-ratio-16-9">
+                            <figure class="tm-media-box uk-cover-container uk-margin-remove">
+                                <img src="{{ imageUrl(item.image) }}" alt="{{ item.title }}" uk-cover="uk-cover">
+                            </figure>
+                        </div>
+                        <div class="uk-card-body">
+                            <div class="uk-article-body">
+                                <div class="uk-article-meta uk-margin-xsmall-bottom">
+                                    <time>{{ item.datetime | date }}</time>
+                                </div>
+                                <div>
+                                    <h3 class="uk-margin-remove">{{ item.title }}</h3>
+                                </div>
+                                <div class="uk-margin-small-top">
+                                    <p>{{ item.summary }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </a>
+            </div>
+            {% endfor %}
+
+        </div>
+        <div class="uk-margin uk-text-center">
+            <a class="uk-link-muted uk-text-uppercase tm-link-to-all" href="/blog/">
+                <span>{{ 'See all articles' | trans }}</span>
+                <span uk-icon="icon: chevron-right; ratio: .75;"></span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}

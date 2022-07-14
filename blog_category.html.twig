@@ -51,13 +51,13 @@
                                             <article class="uk-card uk-card-default uk-card-small uk-article uk-overflow-hidden uk-box-shadow-hover-large uk-height-1-1 tm-ignore-container">
                                                 <div class="tm-ratio tm-ratio-16-9">
                                                     <figure class="tm-media-box uk-cover-container uk-margin-remove">
-                                                        <img src="images/articles/macbook-photo.jpg" alt="Everything You Need to Know About the MacBook Pro" uk-cover="uk-cover"/>
+                                                        <img src="{{ imageUrl(item.image) }}" alt="{{ item.title }}" uk-cover="uk-cover"/>
                                                     </figure>
                                                 </div>
                                                 <div class="uk-card-body">
                                                     <div class="uk-article-body">
                                                         <div class="uk-article-meta uk-margin-xsmall-bottom">
-                                                            <time>May 21, 2018</time>
+                                                            <time>{{ item.datetime | date }}</time>
                                                         </div>
                                                         <div>
                                                             <h3 class="uk-margin-remove">{{ item.title }}</h3>
@@ -105,8 +105,9 @@
     {% include 'nav/offcanvas.html.twig' %}
 
 </div>
+<script src="/assets/uikit-ecommerce/scripts/uikit.js"></script>
+<script src="/assets/uikit-ecommerce/scripts/uikit-icons.js"></script>
 <script src="/assets/uikit-ecommerce/scripts/script.js"></script>
-<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyClyjCemJi4m2q78gNeGkhlckpdH1hzTYA&amp;callback=initMap" async
-        defer></script>
+<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyClyjCemJi4m2q78gNeGkhlckpdH1hzTYA&amp;callback=initMap" async defer></script>
 </body>
 </html>
