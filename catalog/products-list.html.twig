@@ -1,0 +1,136 @@
+<div class="uk-width-expand">
+    <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
+        <div>
+            <div class="uk-card uk-card-default uk-card-small tm-ignore-container">
+                <div class="uk-grid-collapse uk-child-width-1-1" id="products" uk-grid>
+                    <div class="uk-card-header">
+                        <div class="uk-grid-small uk-flex-middle" uk-grid>
+                            <div class="uk-width-1-1 uk-width-expand@s uk-flex uk-flex-center uk-flex-left@s uk-text-small">
+                                <span class="uk-margin-small-right uk-text-muted">{{ 'Sort by' | trans }}:</span>
+                                <ul class="uk-subnav uk-margin-remove">
+                                    <li class="uk-active uk-padding-remove">
+                                        <a class="uk-text-capitalize" href="#">
+                                            {{ 'catalog.sort_by_novelty' | trans }}
+                                            <span class="uk-margin-xsmall-left" uk-icon="icon: chevron-down; ratio: .5;"></span>
+                                        </a>
+                                        <div class="uk-width-medium" uk-dropdown="mode: click">
+                                            <ul class="uk-nav uk-dropdown-nav">
+                                                <li class="uk-active">
+                                                    <a href="#">
+                                                        <span uk-icon="clock"></span>
+                                                        <span class="uk-margin-small-right" uk-icon="arrow-down"></span>
+                                                        {{ 'catalog.sort_by_novelty' | trans }}
+                                                    </a>
+                                                </li>
+                                                <li class="uk-active">
+                                                    <a href="#">
+                                                        <span uk-icon="tag"></span>
+                                                        <span class="uk-margin-small-right" uk-icon="arrow-down"></span>
+                                                        {{ 'catalog.sort_by_price_increase' | trans }}
+                                                    </a>
+                                                </li>
+                                                <li class="uk-active">
+                                                    <a href="#">
+                                                        <span uk-icon="tag"></span>
+                                                        <span class="uk-margin-small-right" uk-icon="arrow-up"></span>
+                                                        {{ 'catalog.sort_by_price_reduction' | trans }}
+                                                    </a>
+                                                </li>
+                                                <li class="uk-active">
+                                                    <a href="#">
+                                                        <span uk-icon="list"></span>
+                                                        <span class="uk-margin-small-right" uk-icon="arrow-down"></span>
+                                                        {{ 'catalog.sort_by_name' | trans }}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="uk-width-1-1 uk-width-auto@s uk-flex uk-flex-center uk-flex-middle">
+                                <button class="uk-button uk-button-default uk-button-small uk-hidden@m" uk-toggle="target: #filters"><span class="uk-margin-xsmall-right" uk-icon="icon: settings; ratio: .75;"></span>Filters
+                                </button>
+                                <div class="tm-change-view uk-margin-small-left">
+                                    <ul class="uk-subnav uk-iconnav" id="shkNavListType" uk-switcher>
+                                        <li>
+                                            <a{% if listTemplate == 'grid' %} class="uk-active"{% endif %} data-view="grid" uk-icon="grid" uk-tooltip="{{ 'Grid' | trans }}"></a>
+                                        </li>
+                                        <li>
+                                            <a{% if listTemplate == 'list' %} class="uk-active"{% endif %} data-view="list" uk-icon="list" uk-tooltip="{{ 'List' | trans }}"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="uk-grid-collapse uk-child-width-1-3 tm-products-{{ listTemplate }}" uk-grid>
+
+                            {% for item in items %}
+                                <article class="tm-product-card">
+                                    <div class="tm-product-card-media">
+                                        <div class="tm-ratio tm-ratio-4-3">
+                                            <a class="tm-media-box" href="product.html">
+                                                <div class="tm-product-card-labels">
+                                                    <span class="uk-label uk-label-warning">top selling</span>
+                                                    <span class="uk-label uk-label-danger">trade-in</span>
+                                                </div>
+                                                <figure class="tm-media-box-wrap">
+                                                    <img src="/assets/uikit-ecommerce/images/products/1/1-medium.jpg" alt="{{ item.title }}">
+                                                </figure>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="tm-product-card-body">
+                                        <div class="tm-product-card-info">
+                                            <h3 class="tm-product-card-title">
+                                                <a class="uk-link-heading" href="{{ catalogPath(currentCategory.uri, item.name, item, 'categories') }}">{{ item.title }}</a>
+                                            </h3>
+                                            <ul class="uk-list uk-text-small tm-product-card-properties">
+                                                <li><span class="uk-text-muted">Diagonal display: </span><span>15.4"</span></li>
+                                                <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i7</span></li>
+                                                <li><span class="uk-text-muted">RAM: </span><span>16&nbsp;GB</span></li>
+                                                <li><span class="uk-text-muted">Video Card: </span><span>AMD Radeon Pro 555</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="tm-product-card-shop">
+                                            <div class="tm-product-card-prices">
+                                                <del class="uk-text-meta">$1899.00</del>
+                                                <div class="tm-product-card-price">$1599.00</div>
+                                            </div>
+                                            <div class="tm-product-card-add">
+                                                <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites tm-action-button-active js-added-to" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare tm-action-button-active js-added-to" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
+                                                <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart"><span class="tm-product-card-add-button-icon" uk-icon="cart"></span><span class="tm-product-card-add-button-text">add to cart</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                    <div>
+                        <button class="uk-button uk-button-default uk-button-large uk-width-1-1" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+                            <span class="uk-margin-small-right" uk-icon="icon: plus; ratio: .75;"></span>
+                            <span>{{ 'Load more' | trans }}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <ul class="uk-pagination uk-flex-center">
+                <li class="uk-active"><span>1</span></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li class="uk-disabled"><span>…</span></li>
+                <li><a href="#">20</a></li>
+                <li><a href="#"><span uk-pagination-next></span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>

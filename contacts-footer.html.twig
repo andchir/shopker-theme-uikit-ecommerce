@@ -1,0 +1,26 @@
+<ul class="uk-list uk-text-small">
+    <li>
+        <a class="uk-link-muted" href="tel:{{ phone }}">
+            <span class="uk-margin-small-right" uk-icon="receiver"></span>
+            <span class="tm-pseudo">{{ phone }}</span>
+        </a>
+    </li>
+    <li>
+        <a class="uk-link-muted" href="mailto:{{ email }}">
+            <span class="uk-margin-small-right" uk-icon="mail"></span>
+            <span class="tm-pseudo">{{ email }}</span>
+        </a>
+    </li>
+    <li>
+        <div class="uk-text-muted">
+            <span class="uk-margin-small-right" uk-icon="location"></span>
+            <span>{{ address | raw }}</span>
+        </div>
+    </li>
+    <li>
+        <div class="uk-text-muted">
+            <span class="uk-margin-small-right" uk-icon="clock"></span>
+            <span>{{ working_hours }}</span>
+        </div>
+    </li>
+</ul>

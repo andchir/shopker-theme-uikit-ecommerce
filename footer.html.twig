@@ -36,18 +36,7 @@
                     </nav>
                 </div>
                 <div>
-                    <ul class="uk-list uk-text-small">
-                        <li><a class="uk-link-muted" href="#"><span class="uk-margin-small-right" uk-icon="receiver"></span><span class="tm-pseudo">8 800 799 99 99</span></a></li>
-                        <li><a class="uk-link-muted" href="#"><span class="uk-margin-small-right" uk-icon="mail"></span><span class="tm-pseudo">example@example.com</span></a></li>
-                        <li>
-                            <div class="uk-text-muted"><span class="uk-margin-small-right" uk-icon="location"></span><span>St.&nbsp;Petersburg, Nevsky&nbsp;Prospect&nbsp;28</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="uk-text-muted"><span class="uk-margin-small-right" uk-icon="clock"></span><span>Daily 10:00–22:00</span>
-                            </div>
-                        </li>
-                    </ul>
+                    {{ includeContent('contacts-footer', 'contacts', 1, 'contacts-footer') }}
                 </div>
                 <div>
                     <form class="uk-form-stacked">

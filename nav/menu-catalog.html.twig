@@ -11,7 +11,7 @@
                 <li>
                     <div class="uk-margin-top uk-margin-bottom">
                         <a class="uk-link-reset" href="{{ catalogPath(category.uri, '', category) }}">
-                            <img class="uk-display-block uk-margin-auto uk-margin-bottom" src="{{ imageUrl(category.image) }}" alt="{{ category.title }}" width="80" height="80">
+                            <img class="uk-display-block uk-margin-auto uk-margin-bottom" src="{{ imageUrl(category.image, '/assets/uikit-ecommerce/images/catalog/shopping.svg') }}" alt="{{ category.title }}" width="80" height="80">
                             <div class="uk-text-bolder">{{ category.title }}</div>
                         </a>
                         {{ categoriesTree(category.id, 'menu_dropdown_child', category) }}
