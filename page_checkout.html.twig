@@ -1,5 +1,70 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% form_theme form 'form/uikit-form.html.twig' %}
 
+{% block body %}
+<section class="uk-section uk-section-small">
+    <div class="uk-container">
+        <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
+            <section class="uk-text-center">
+                <a class="uk-link-muted uk-text-small" href="{{ pathLocalized('shop_cart_edit') }}">
+                    <span class="uk-margin-xsmall-right" uk-icon="icon: arrow-left; ratio: .75;"></span>
+                    {{ 'Edit an order' | trans }}
+                </a>
+                <h1 class="uk-margin-small-top uk-margin-remove-bottom">
+                    {{ 'Order checkout' | trans }}
+                </h1>
+            </section>
+
+            {% if not is_granted('ROLE_USER') %}
+                <div class="uk-text-center">
+                    <a class="uk-display-inline-block uk-card uk-card-body uk-card-default uk-link-toggle uk-padding-small" href="{{ pathLocalized('register') }}">
+                        <h3 class="uk-card-title">
+                            <span class="uk-link-heading">
+                                <span uk-icon="user" class="uk-margin-small-right"></span>
+                                {{ 'Sign up' | trans }}
+                            </span>
+                        </h3>
+                    </a>
+                </div>
+            {% endif %}
+
+            {{ form_start(form, {'noDeliveryFirst': true, 'attr': {'novalidate': 'novalidate'}}) }}
+            <section>
+                <div class="uk-grid-medium" uk-grid>
+
+                    <div class="uk-form-stacked uk-width-1-1 tm-checkout uk-width-expand@m">
+                        <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
+
+                            {% if checkoutFields is empty or 'options' in checkoutFields %}
+                                <section>
+                                    <h2 class="tm-checkout-title">{{ 'Delivery address' | trans }}</h2>
+                                    <div class="uk-card uk-card-default uk-card-small uk-card-body tm-ignore-container">
+                                        {{ form_widget(form.options) }}
+                                    </div>
+                                </section>
+                            {% endif %}
+                            <section>
+                                <h2 class="tm-checkout-title">{{ 'Contact information' | trans }}</h2>
+                                <div class="uk-card uk-card-default uk-card-small uk-card-body tm-ignore-container">
+                                    {{ form_widget(form) }}
+                                </div>
+                            </section>
+
+                        </div>
+
+                    </div>
+                    <div class="uk-width-1-1 uk-width-1-4@m tm-aside-column">
+
+                        {{ shopCart('shop_cart_checkout', 'shop', 'shop_cart_empty') }}
+
+                    </div>
+
+                </div>
+            </section>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+</section>
 {% endblock %}
