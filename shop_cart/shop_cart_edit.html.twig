@@ -1,0 +1,287 @@
+<div class="uk-grid-medium uk-child-width-1-1" uk-grid>
+    <div class="uk-text-center">
+        <h1 class="uk-margin-small-top uk-margin-remove-bottom">
+            {{ 'Shopping cart' | trans }}
+        </h1>
+    </div>
+    <div class="min-height300">
+
+        {% include 'flash_messages.html.twig' %}
+
+        <div class="uk-grid-medium" uk-grid>
+            <div class="uk-width-1-1 uk-width-expand@m">
+
+                {% if items | length > 0 %}
+                    <div class="uk-card uk-card-default uk-card-small tm-ignore-container">
+
+                        <header class="uk-card-header uk-text-uppercase uk-text-muted uk-text-center uk-text-small uk-visible@m">
+                            <div class="uk-grid-small uk-child-width-1-2" uk-grid>
+                                <div>{{ 'Product' | trans }}</div>
+                                <div>
+                                    <div class="uk-grid-small uk-child-width-expand" uk-grid>
+                                        <div>{{ 'Price' | trans }}</div>
+                                        <div class="tm-quantity-column">{{ 'Quantity' | trans }}</div>
+                                        <div>{{ 'Sum' | trans }}</div>
+                                        <div class="uk-width-auto">
+                                            <div style="width: 20px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </header>
+
+                        <form action="{{ path('shop_cart_action') }}" method="post">
+                            {% for item in items %}
+                                <div class="uk-card-body">
+                                    <div class="uk-grid-small uk-child-width-1-1 uk-child-width-1-2@m uk-flex-middle" uk-grid>
+                                        <div>
+                                            <div class="uk-grid-small" uk-grid>
+                                                <div class="uk-width-1-3">
+                                                    <div class="tm-ratio tm-ratio-4-3">
+                                                        <a class="tm-media-box" href="/{{ item.uri }}">
+                                                            <figure class="tm-media-box-wrap">
+                                                                <img src="{{ item.image | default('/img/nofoto.png') | imagine_filter('thumb_small') }}" alt="">
+                                                            </figure>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-expand">
+                                                    <a class="uk-link-heading" href="/{{ item.uri }}">
+                                                        {{ item.title }}
+                                                    </a>
+                                                    <div class="uk-text-meta">{{ item.parametersString | raw }}</div>
+                                                    {% if item.filesString is not empty %}
+                                                        <div class="uk-text-meta">
+                                                            <span uk-icon="file"></span>
+                                                            {{ 'File|Files' | trans({'%count%': item.files | length}) }}: {{ item.filesString }}
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="uk-grid-small uk-child-width-1-1 uk-child-width-expand@s uk-text-center" uk-grid>
+                                                <div>
+                                                    <div class="uk-text-muted uk-hidden@m">{{ 'Price' | trans }}</div>
+                                                    <div>
+                                                        <span class="shk-price">{{ item.price | price }}</span>
+                                                        <span class="shk-currency">{{ currencySelected | default(currency) }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="tm-cart-quantity-column">
+                                                    <a onclick="increment(-1, 'product-{{ item.id }}')" uk-icon="icon: minus; ratio: .75"></a>
+                                                    <input class="uk-input tm-quantity-input" id="product-{{ item.id }}" type="number" maxlength="3" value="{{ item.count }}">
+                                                    <a onclick="increment(+1, 'product-{{ item.id }}')" uk-icon="icon: plus; ratio: .75"></a>
+                                                </div>
+                                                <div>
+                                                    <div class="uk-text-muted uk-hidden@m">{{ 'Sum' | trans }}</div>
+                                                    <div>
+                                                        <span class="shk-price">{{ item.priceTotal | price }}</span>
+                                                        <span class="shk-currency">{{ currencySelected | default(currency) }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-auto@s">
+                                                    <button class="uk-text-danger" uk-icon="close" type="submit" name="remove_by_index" value="{{ loop.index0 }}" uk-tooltip="{{ 'Delete item' | trans }}"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </form>
+
+                        <div class="uk-card-footer">
+                            <form action="{{ path('shop_cart_action') }}" method="post">
+                                <input type="hidden" name="type" value="{{ type }}">
+                                <label>
+                                    <span class="uk-form-label uk-margin-small-right">{{ 'Promo code' | trans }}</span>
+                                    <div class="uk-inline">
+                                        <button type="submit" class="uk-form-icon uk-form-icon-flip" uk-icon="arrow-right" name="action" value="promo_code"></button>
+                                        <input class="uk-input uk-form-width-small" type="text" name="promo_code">
+                                    </div>
+                                </label>
+                            </form>
+                        </div>
+
+                    </div>
+                {% else %}
+                    <div class="uk-alert-primary uk-box-shadow-small" uk-alert>
+                        <a class="uk-alert-close" uk-close></a>
+                        <p>{{ 'The cart is empty' | trans }}.</p>
+                    </div>
+                {% endif %}
+
+            </div>
+
+            {% if items | length > 0 %}
+            <div class="uk-width-1-1 tm-aside-column uk-width-1-4@m">
+                <div class="uk-card uk-card-default uk-card-small tm-ignore-container" uk-sticky="offset: 30; bottom: true; media: @m;">
+                    <div class="uk-card-body">
+                        <div class="uk-grid-small" uk-grid>
+                            <div class="uk-width-expand uk-text-muted">Subtotal</div>
+                            <div>$3148</div>
+                        </div>
+                        <div class="uk-grid-small" uk-grid>
+                            <div class="uk-width-expand uk-text-muted">Discount</div>
+                            <div class="uk-text-danger">−$29</div>
+                        </div>
+                    </div>
+                    <div class="uk-card-body">
+                        <div class="uk-grid-small uk-flex-middle" uk-grid>
+                            <div class="uk-width-expand uk-text-muted">Total</div>
+                            <div class="uk-text-lead uk-text-bolder">$3119</div>
+                        </div><a class="uk-button uk-button-primary uk-margin-small uk-width-1-1" href="checkout.html">checkout</a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+
+{#<div id="shoppingCartContainer">#}
+{#    <h1>#}
+{#        {{ 'Shopping cart' | trans }}#}
+{#    </h1>#}
+{#    #}
+{#    {% include 'flash_messages.html.twig' %}#}
+{#    #}
+{#    {% if items | length > 0 %}#}
+{#        <form action="{{ path('shop_cart_action') }}" method="post">#}
+{#            <input type="hidden" name="type" value="{{ type }}">#}
+{#            <div class="float-end">#}
+{#                <button type="submit" class="btn btn-sm btn-info rounded-pill mb-2" name="action" value="update">#}
+{#                    <i class="icon-reload"></i>#}
+{#                    {{ 'Recalculate' | trans }}#}
+{#                </button>#}
+{#                <button class="btn btn-outline-info btn-sm rounded-pill mb-2 ml-1" type="submit" name="action" value="clean">#}
+{#                    <i class="icon-cross"></i>#}
+{#                    {{ 'Empty cart' | trans }}#}
+{#                </button>#}
+{#            </div>#}
+{#            <div class="clearfix"></div>#}
+{#            <table class="table mb-3">#}
+{#                <tbody>#}
+{#                {% for item in items %}#}
+{#                    <tr>#}
+{#                        <td class="d-none d-lg-table-cell">{{ loop.index }}</td>#}
+{#                        <td class="d-none d-lg-table-cell">#}
+{#                            <img src="{{ item.image | default('/img/nofoto.png') | imagine_filter('thumb_small') }}" width="100" alt="">#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            <div>#}
+{#                                <a href="/{{ item.uri }}">#}
+{#                                    {{ item.title }}#}
+{#                                </a>#}
+{#                            </div>#}
+{#                            {{ item.parametersString | raw }}#}
+{#                            {% if item.filesString is not empty %}#}
+{#                                <div class="text-muted small">#}
+{#                                    <i class="icon-file"></i>#}
+{#                                    {{ 'File|Files' | trans({'%count%': item.files | length}) }}: {{ item.filesString }}#}
+{#                                </div>#}
+{#                            {% endif %}#}
+{#                        </td>#}
+{#                        <td class="d-none d-lg-table-cell">#}
+{#                            <span class="shk-price">{{ item.price | price }}</span>#}
+{#                            <span class="shk-currency">{{ currencySelected | default(currency) }}</span>#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            <input type="number" class="form-control" min="1" step="1" name="count[]" value="{{ item.count }}" style="width: 80px;">#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            <span class="shk-price">{{ item.priceTotal | price }}</span>#}
+{#                            <span class="shk-currency">{{ currencySelected | default(currency) }}</span>#}
+{#                        </td>#}
+{#                        <td class="text-end">#}
+{#                            <button class="btn btn-outline-info btn-sm ml-1" type="submit" name="remove_by_index" value="{{ loop.index0 }}" title="{{ 'Delete item' | trans }}">#}
+{#                                <i class="icon-cross"></i>#}
+{#                            </button>#}
+{#                        </td>#}
+{#                    </tr>#}
+{#                {% endfor %}#}
+{#                </tbody>#}
+{#                <tfoot>#}
+{#                    {% if shoppingCart.discountPercent is not empty or shoppingCart.discount is not empty %}#}
+{#                    <tr>#}
+{#                        <td class="d-none d-lg-table-cell"></td>#}
+{#                        <td class="d-none d-lg-table-cell"></td>#}
+{#                        <td></td>#}
+{#                        <td class="d-none d-lg-table-cell"></td>#}
+{#                        <td>#}
+{#                            <div class="text-end text-danger">#}
+{#                                {{ 'Discount' | trans }}:#}
+{#                            </div>#}
+{#                        </td>#}
+{#                        <td colspan="2" class="text-danger">#}
+{#                            {% if shoppingCart.discountPercent is not empty %}#}
+{#                                {{ shoppingCart.discountPercent }}%#}
+{#                            {% else %}#}
+{#                                <span class="shk-price">{{ shoppingCart.discount }}</span>#}
+{#                                <span class="shk-currency">{{ currencySelected | default(currency) }}</span>#}
+{#                            {% endif %}#}
+{#                        </td>#}
+{#                    </tr>#}
+{#                    {% endif %}#}
+{#                    <tr>#}
+{#                        <td class="d-none d-lg-table-cell"></td>#}
+{#                        <td class="d-none d-lg-table-cell"></td>#}
+{#                        <td></td>#}
+{#                        <td class="d-none d-lg-table-cell"></td>#}
+{#                        <td>#}
+{#                            <div class="float-start">#}
+{#                            #}
+{#                            </div>#}
+{#                            <div class="text-end">#}
+{#                                {{ 'Total' | trans }}:#}
+{#                            </div>#}
+{#                        </td>#}
+{#                        <td colspan="2">#}
+{#                            <span class="big shk-price">{{ priceTotal | price }}</span>#}
+{#                            <span class="shk-currency">{{ currencySelected | default(currency) }}</span>#}
+{#                        </td>#}
+{#                    </tr>#}
+{#                </tfoot>#}
+{#            </table>#}
+{#        </form>#}
+{#        #}
+{#        <div class="row">#}
+{#            <div class="col-lg-6">#}
+{#                <div class="card mb-3">#}
+{#                    <div class="card-body">#}
+{#    #}
+{#                        <form action="{{ path('shop_cart_action') }}" method="post">#}
+{#                            <input type="hidden" name="type" value="{{ type }}">#}
+{#                            <label for="fieldPromoCode">#}
+{#                                {{ 'Promo code' | trans }}#}
+{#                            </label>#}
+{#                            <div class="input-group">#}
+{#                                <input type="text" class="form-control" name="promo_code" placeholder="{{ 'Enter promo code here' | trans }}" id="fieldPromoCode">#}
+{#                                <button class="btn btn-outline-secondary" type="submit" name="action" value="promo_code">#}
+{#                                    {{ 'Submit' | trans }}#}
+{#                                </button>#}
+{#                            </div>#}
+{#                        </form>#}
+{#                    #}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="col-lg-6">#}
+{#                <div class="float-end">#}
+{#                    <a class="btn btn-outline-info rounded-pill btn-wide" href="{{ pathLocalized('page_checkout') }}">#}
+{#                        {{ 'Continue' | trans }}#}
+{#                        <i class="icon-keyboard_arrow_right"></i>#}
+{#                    </a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        #}
+{#    {% else %}#}
+{#        <div class="alert alert-info">#}
+{#            {{ 'The cart is empty' | trans }}.#}
+{#        </div>#}
+{#    {% endif %}#}
+{#    <div class="clearfix"></div>#}
+{#</div>#}

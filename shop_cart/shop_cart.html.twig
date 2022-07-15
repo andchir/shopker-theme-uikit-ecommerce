@@ -1,0 +1,87 @@
+<a class="uk-navbar-item uk-link-muted tm-navbar-button"
+   href="#"
+   uk-toggle="target: #cart-offcanvas"
+   onclick="return false">
+        <span uk-icon="cart"></span>
+        <span class="uk-badge">{{ items | length }}</span>
+</a>
+
+{% if 'shop_cart_edit' not in app.request.attributes.get('_route') %}
+<div id="cart-offcanvas" uk-offcanvas="overlay: true; flip: true">
+    <aside class="uk-offcanvas-bar uk-padding-remove">
+        <form action="{{ path('shop_cart_action') }}" method="post">
+            <div class="uk-card uk-card-default uk-card-small uk-height-1-1 uk-flex uk-flex-column tm-shadow-remove">
+                <header class="uk-card-header uk-flex uk-flex-middle">
+                    <div class="uk-grid-small uk-flex-1" uk-grid>
+                        <div class="uk-width-expand">
+                            <div class="uk-h3">{{ 'Shopping cart' | trans }}</div>
+                        </div>
+                        <button class="uk-offcanvas-close" type="button" uk-close></button>
+                    </div>
+                </header>
+                <div class="uk-card-body uk-overflow-auto">
+                    <ul class="uk-list uk-list-divider">
+
+                        {% for item in items %}
+                        <li class="uk-visible-toggle">
+                            <arttcle>
+                                <div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-4">
+                                        <div class="tm-ratio tm-ratio-4-3">
+                                            <a class="tm-media-box" href="/{{ item.uri }}">
+                                                <figure class="tm-media-box-wrap">
+                                                    <img src="{{ item.image | default('/img/nofoto.png') | imagine_filter('thumb_small') }}" alt="">
+                                                </figure>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-expand">
+                                        <a class="uk-link-heading uk-text-small" href="/{{ item.uri }}">{{ item.title }}</a>
+                                        <div class="uk-margin-xsmall uk-grid-small uk-flex-middle" uk-grid>
+                                            <div class="uk-text-bolder uk-text-small">
+                                                <span class="shk-price">{{ item.priceTotal | price }}</span>
+                                                <span class="shk-currency">{{ currencySelected | default(currency) }}</span>
+                                            </div>
+                                            <div class="uk-text-meta uk-text-xsmall">
+                                                {{ item.count }} ×
+                                                <span class="shk-price">{{ item.price | price }}</span>
+                                                <span class="shk-currency">{{ currencySelected | default(currency) }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="uk-icon-link uk-text-danger uk-invisible-hover" type="submit" name="remove_by_index" value="{{ loop.index0 }}" uk-icon="icon: close; ratio: .75" uk-tooltip="{{ 'Delete item' | trans }}"></button>
+                                    </div>
+                                </div>
+                            </arttcle>
+                        </li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+                <footer class="uk-card-footer">
+                    <div class="uk-grid-small" uk-grid>
+                        <div class="uk-width-expand uk-text-muted uk-h4">{{ 'Total' | trans }}</div>
+                        <div class="uk-h4 uk-text-bolder">
+                            <span class="big shk-price">{{ priceTotal | price }}</span>
+                            <span class="shk-currency">{{ currencySelected | default(currency) }}</span>
+                        </div>
+                    </div>
+                    <div class="uk-grid-small uk-child-width-1-1 uk-child-width-1-2@m uk-margin-small" uk-grid>
+                        <div>
+                            <a class="uk-button uk-button-default uk-margin-small uk-width-1-1" href="{{ pathLocalized('shop_cart_edit') }}">
+                                {{ 'View cart' | trans }}
+                            </a>
+                        </div>
+                        <div>
+                            <a class="uk-button uk-button-primary uk-margin-small uk-width-1-1" href="{{ pathLocalized('page_checkout') }}">
+                                {{ 'Checkout' | trans }}
+                            </a>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </form>
+    </aside>
+</div>
+{% endif %}
