@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{ currentPage.title | default('') }} - {{ app_name }}{% endblock %}
+
 {% block body %}
     <section class="uk-section uk-section-small">
         <div class="uk-container">

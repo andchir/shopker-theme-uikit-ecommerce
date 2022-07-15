@@ -1,11 +1,7 @@
-<div class="position-relative">
-    <div class="position-absolute pos-left-top10">
-        {% for tagValue in data %}
-            <div>
-                <span class="badge {{ switch(arraySearch(tagValue, fieldProperties.inputProperties.values_list|split('||')), [0, 1, 2], ['bg-success', 'bg-warning', 'bg-info']) }}">
-                    {{ tagValue }}
-                </span>
-            </div>
-        {% endfor %}
-    </div>
+<div class="tm-product-card-labels">
+    {% for tagValue in data %}
+        <span class="uk-label {{ switch(arraySearch(tagValue, fieldProperties.inputProperties.values_list|split('||')), [0, 1, 2], ['uk-label-danger', 'uk-label-warning', 'uk-label-info']) }}">
+            {{ tagValue }}
+        </span>
+    {% endfor %}
 </div>

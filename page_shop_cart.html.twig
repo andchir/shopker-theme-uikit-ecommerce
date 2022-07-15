@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% set shoppingCartTemplateName = 'shop_cart_edit' %}
+{% if shoppingCartContentType == 'favorites' %}
+    {% set shoppingCartTemplateName = 'favorites_edit' %}
+{% endif %}
+
+{% block body %}
+    <section class="uk-section uk-section-small">
+        <div class="uk-container">
+
+            {{ shopCart(shoppingCartTemplateName, shoppingCartContentType) }}
+
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{#    <script>#}
+{#        var shoppingCart;#}
+{#        document.addEventListener('DOMContentLoaded', function() {#}
+{#            shoppingCart = new ShoppingCart({#}
+{#                baseUrl: '{{ app.request.baseUrl }}',#}
+{#                connectorUrl: '{{ pathLocalized('shop_cart_action') }}',#}
+{#                selector: '#shoppingCartContainer',#}
+{#                templateName: '{{ shoppingCartTemplateName }}'#}
+{#            });#}
+{#        });#}
+{#    </script>#}
+{% endblock %}

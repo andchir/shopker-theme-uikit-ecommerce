@@ -49,15 +49,17 @@
                                 </ul>
                             </div>
                             <div class="uk-width-1-1 uk-width-auto@s uk-flex uk-flex-center uk-flex-middle">
-                                <button class="uk-button uk-button-default uk-button-small uk-hidden@m" uk-toggle="target: #filters"><span class="uk-margin-xsmall-right" uk-icon="icon: settings; ratio: .75;"></span>Filters
+                                <button class="uk-button uk-button-default uk-button-small uk-hidden@m" uk-toggle="target: #filters">
+                                    <span class="uk-margin-xsmall-right" uk-icon="icon: settings; ratio: .75;"></span>
+                                    {{ 'Filters' | trans }}
                                 </button>
                                 <div class="tm-change-view uk-margin-small-left">
                                     <ul class="uk-subnav uk-iconnav" id="shkNavListType" uk-switcher>
-                                        <li>
-                                            <a{% if listTemplate == 'grid' %} class="uk-active"{% endif %} data-view="grid" uk-icon="grid" uk-tooltip="{{ 'Grid' | trans }}"></a>
+                                        <li{% if listTemplate == 'grid' %} class="uk-active"{% endif %}>
+                                            <a data-view="grid" uk-icon="grid" uk-tooltip="{{ 'Grid' | trans }}"></a>
                                         </li>
-                                        <li>
-                                            <a{% if listTemplate == 'list' %} class="uk-active"{% endif %} data-view="list" uk-icon="list" uk-tooltip="{{ 'List' | trans }}"></a>
+                                        <li{% if listTemplate == 'list' %} class="uk-active"{% endif %}>
+                                            <a data-view="list" uk-icon="list" uk-tooltip="{{ 'List' | trans }}"></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -72,10 +74,7 @@
                                     <div class="tm-product-card-media">
                                         <div class="tm-ratio tm-ratio-4-3">
                                             <a class="tm-media-box" href="{{ catalogPath(currentCategory.uri, item.name, item, 'categories') }}">
-                                                <div class="tm-product-card-labels">
-                                                    <span class="uk-label uk-label-warning">top selling</span>
-                                                    <span class="uk-label uk-label-danger">trade-in</span>
-                                                </div>
+                                                {{ renderOutputTypeChunk(item, fieldsAll, 'tag', 'list_', [], 1) }}
                                                 <figure class="tm-media-box-wrap">
                                                     <img src="{{ imageUrl(item.image, '/img/nofoto.png') | imagine_filter('thumb_small') }}" alt="{{ item.title }}">
                                                 </figure>
@@ -96,13 +95,37 @@
                                         </div>
                                         <div class="tm-product-card-shop">
                                             <div class="tm-product-card-prices">
-                                                <del class="uk-text-meta">$1899.00</del>
-                                                <div class="tm-product-card-price">$1599.00</div>
+                                                {% if item.old_price is defined and item.old_price is not empty %}
+                                                    <del class="uk-text-meta">
+                                                        <span class="shk-price">{{ item.old_price | price }}</span>
+                                                        <span class="shk-currency">{{ currency }}</span>
+                                                    </del>
+                                                {% endif %}
+                                                <div class="tm-product-card-price">
+                                                    <span class="shk-price">{{ item.price | price }}</span>
+                                                    <span class="shk-currency">{{ currency }}</span>
+                                                </div>
                                             </div>
                                             <div class="tm-product-card-add">
-                                                <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites tm-action-button-active js-added-to" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare tm-action-button-active js-added-to" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
-                                                <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart"><span class="tm-product-card-add-button-icon" uk-icon="cart"></span><span class="tm-product-card-add-button-text">add to cart</span>
-                                                </button>
+                                                <div class="uk-text-meta tm-product-card-actions">
+                                                    <a class="tm-product-card-action js-add-to js-add-to-favorites tm-action-button-active" type="submit" title="{{ 'Add to favorites' | trans }}">
+                                                        <span uk-icon="icon: heart; ratio: .75;"></span>
+                                                        <span class="tm-product-card-action-text">{{ 'Add to favorites' | trans }}</span>
+                                                    </a>
+                                                    <a class="tm-product-card-action js-add-to js-add-to-compare tm-action-button-active" type="submit" title="{{ 'Add to compare' | trans }}">
+                                                        <span uk-icon="icon: copy; ratio: .75;"></span>
+                                                        <span class="tm-product-card-action-text">{{ 'Add to compare' | trans }}</span>
+                                                    </a>
+                                                </div>
+                                                <form action="{{ pathLocalized('shop_cart_action') }}" method="post">
+                                                    <input type="hidden" name="item_id" value="{{ item._id }}">
+                                                    <input type="hidden" name="category_id" value="{{ item.parentId }}">
+                                                    <input type="hidden" name="type" value="shop">
+                                                    <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine" type="submit" title="{{ 'Add to cart' | trans }}">
+                                                        <span class="tm-product-card-add-button-icon" uk-icon="cart"></span>
+                                                        <span class="tm-product-card-add-button-text">{{ 'Add to cart' | trans }}</span>
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
