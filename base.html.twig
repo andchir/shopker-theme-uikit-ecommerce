@@ -9,6 +9,17 @@
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ currentPage.title | default('') }} - {{ app_name }}">
+    <meta property="og:site_name" content="{{ app_name }}">
+    <meta property="og:url" content="{{ app.request.uri }}">
+    <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() }}{{ app_logo_image_url }}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ currentPage.title | default('') }} - {{ app_name }}">
+    <meta name="twitter:image" content="{{ app.request.getSchemeAndHttpHost() }}{{ app_logo_image_url }}">
+    <meta name="twitter:site" content="{{ app_name }}">
+
     {% block stylesheets -%}
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500">
         <link rel="stylesheet" href="/assets/uikit-ecommerce/styles/style.css">

@@ -16,9 +16,17 @@
                                     <time>{{ currentPage.datetime | date }}</time>
                                 </div>
                             </header>
-                            <div class="uk-article-body">
+                            <section class="uk-article-body">
+                                <p>{{ currentPage.summary }}</p>
+                                {% if currentPage.image is not empty %}
+                                <div class="tm-wrapper uk-text-center">
+                                    <figure>
+                                        <img src="{{ imageUrl(currentPage.image) }}" alt="{{ currentPage.title }}">
+                                    </figure>
+                                </div>
+                                {% endif %}
                                 {{ currentPage.description | raw }}
-                            </div>
+                            </section>
                         </article>
                     </div>
                 </section>

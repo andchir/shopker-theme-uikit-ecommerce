@@ -8,11 +8,13 @@
             <div>
                 <a href="{{ catalogPath('blog/', item.name) }}">
                     <article class="uk-card uk-card-default uk-card-small uk-article uk-overflow-hidden uk-box-shadow-hover-large uk-height-1-1 tm-ignore-container">
+                        {% if item.image is not empty %}
                         <div class="tm-ratio tm-ratio-16-9">
                             <figure class="tm-media-box uk-cover-container uk-margin-remove">
                                 <img src="{{ imageUrl(item.image) }}" alt="{{ item.title }}" uk-cover="uk-cover">
                             </figure>
                         </div>
+                        {% endif %}
                         <div class="uk-card-body">
                             <div class="uk-article-body">
                                 <div class="uk-article-meta uk-margin-xsmall-bottom">

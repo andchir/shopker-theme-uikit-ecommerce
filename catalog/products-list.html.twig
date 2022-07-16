@@ -25,14 +25,14 @@
                                                 <li class="uk-active">
                                                     <a data-sort="price_asc" href="#">
                                                         <span uk-icon="tag"></span>
-                                                        <span class="uk-margin-small-right" uk-icon="chevron-down"></span>
+                                                        <span class="uk-margin-small-right" uk-icon="chevron-up"></span>
                                                         {{ 'catalog.sort_by_price_increase' | trans }}
                                                     </a>
                                                 </li>
                                                 <li class="uk-active">
                                                     <a data-sort="price_desc" href="#">
                                                         <span uk-icon="tag"></span>
-                                                        <span class="uk-margin-small-right" uk-icon="chevron-up"></span>
+                                                        <span class="uk-margin-small-right" uk-icon="chevron-down"></span>
                                                         {{ 'catalog.sort_by_price_reduction' | trans }}
                                                     </a>
                                                 </li>
@@ -117,15 +117,17 @@
                                                         <span class="tm-product-card-action-text">{{ 'Add to compare' | trans }}</span>
                                                     </a>
                                                 </div>
-                                                <form action="{{ pathLocalized('shop_cart_action') }}" method="post">
-                                                    <input type="hidden" name="item_id" value="{{ item._id }}">
-                                                    <input type="hidden" name="category_id" value="{{ item.parentId }}">
-                                                    <input type="hidden" name="type" value="shop">
-                                                    <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine" type="submit" title="{{ 'Add to cart' | trans }}">
-                                                        <span class="tm-product-card-add-button-icon" uk-icon="cart"></span>
-                                                        <span class="tm-product-card-add-button-text">{{ 'Add to cart' | trans }}</span>
-                                                    </button>
-                                                </form>
+                                                <div class="tm-product-card-actions">
+                                                    <form action="{{ pathLocalized('shop_cart_action') }}" method="post">
+                                                        <input type="hidden" name="item_id" value="{{ item._id }}">
+                                                        <input type="hidden" name="category_id" value="{{ item.parentId }}">
+                                                        <input type="hidden" name="type" value="shop">
+                                                        <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine" type="submit" title="{{ 'Add to cart' | trans }}">
+                                                            <span class="tm-product-card-add-button-icon" uk-icon="cart"></span>
+                                                            <span class="tm-product-card-add-button-text">{{ 'Add to cart' | trans }}</span>
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
