@@ -79,16 +79,15 @@
                             <aside class="uk-width-1-4 uk-visible@m tm-aside-column">
                                 <section class="uk-card uk-card-default uk-card-small" uk-sticky="offset: 90; bottom: true;">
                                     <div class="uk-card-header">{{ 'Tags' | trans }}</div>
-                                    <nav>
-                                        {% set blogTags = distinctValues('blog', 'tags') %}
-                                        <ul class="uk-nav uk-nav-default tm-nav">
-                                            {% for tagValue in blogTags %}
-                                            <li{% if queryOptions.filter.tags is defined and queryOptions.filter.tags == tagValue %} class="uk-active"{% endif %}>
-                                                <a href="/blog/?filter[tags]={{ tagValue }}">{{ tagValue }}</a>
-                                            </li>
+                                    <div class="uk-card-body">
+                                        {% for filterData in filters %}
+                                            {% for tagValue in filterData.values %}
+                                                <a href="/blog/?filter[tags]={{ tagValue }}">
+                                                    <span class="uk-label{% if queryOptions.filter.tags is defined and queryOptions.filter.tags == tagValue %} uk-label-warning{% endif %}">{{ tagValue }}</span>
+                                                </a>
                                             {% endfor %}
-                                        </ul>
-                                    </nav>
+                                        {% endfor %}
+                                    </div>
                                     {% if queryOptions.filter | length > 0 %}
                                     <div class="uk-card-footer">
                                         <a class="uk-button uk-button-default uk-width-1-1" href="/blog/">
