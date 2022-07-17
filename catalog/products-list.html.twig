@@ -101,10 +101,12 @@
                                                         <span class="shk-currency">{{ currency }}</span>
                                                     </del>
                                                 {% endif %}
+                                                {% if item.price is not empty %}
                                                 <div class="tm-product-card-price">
                                                     <span class="shk-price">{{ item.price | price }}</span>
                                                     <span class="shk-currency">{{ currency }}</span>
                                                 </div>
+                                                {% endif %}
                                             </div>
                                             <div class="tm-product-card-add">
                                                 <div class="uk-text-meta tm-product-card-actions">
