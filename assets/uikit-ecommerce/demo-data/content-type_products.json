@@ -1,0 +1,409 @@
+[
+  {
+    "title": "Название",
+    "name": "title",
+    "description": "",
+    "inputType": "text",
+    "inputProperties": {
+      "value": "",
+      "handler": ""
+    },
+    "outputType": "text",
+    "outputProperties": {
+      "className": "",
+      "chunkName": "header"
+    },
+    "group": "Основное",
+    "required": true,
+    "showInTable": true,
+    "showInList": true,
+    "showOnPage": true,
+    "isFilter": false,
+    "listOrder": 0
+  },
+  {
+    "title": "Системное имя",
+    "name": "name",
+    "description": "",
+    "inputType": "system_name",
+    "inputProperties": {
+      "value": "",
+      "source_field": "title",
+      "handler": ""
+    },
+    "outputType": "system_name",
+    "outputProperties": {
+      "className": ""
+    },
+    "group": "Основное",
+    "required": true,
+    "showInTable": true,
+    "showInList": false,
+    "showOnPage": false,
+    "isFilter": false
+  },
+  {
+    "title": "Картинка",
+    "name": "image",
+    "description": "",
+    "inputType": "file",
+    "inputProperties": {
+      "value": "",
+      "handler": "",
+      "allowed_extensions": "image/*",
+      "has_preview_image": "1",
+      "multiple": 1
+    },
+    "outputType": "file",
+    "outputProperties": {
+      "className": "",
+      "chunkName": "image"
+    },
+    "group": "Изображения",
+    "required": false,
+    "showInTable": false,
+    "showInList": true,
+    "showOnPage": true,
+    "isFilter": false,
+    "listOrder": 2
+  },
+  {
+    "title": "Описание",
+    "name": "description",
+    "description": "",
+    "inputType": "textarea",
+    "inputProperties": {
+      "value": "",
+      "handler": "",
+      "rows": 6
+    },
+    "outputType": "textarea",
+    "outputProperties": {
+      "className": "",
+      "chunkName": "description"
+    },
+    "group": "Основное",
+    "required": false,
+    "showInTable": false,
+    "showInList": false,
+    "showOnPage": true,
+    "isFilter": false
+  },
+  {
+    "id": "",
+    "title": "Старая цена",
+    "name": "old_price",
+    "description": "",
+    "inputType": "number",
+    "outputType": "number",
+    "group": "Основное",
+    "required": false,
+    "showInTable": false,
+    "showOnPage": true,
+    "showInList": true,
+    "isFilter": true,
+    "inputProperties": {
+      "value": "",
+      "handler": "",
+      "allow_decimals": 0,
+      "decimal_precision": 2,
+      "decimal_separator": ".",
+      "min": 0,
+      "max": null,
+      "step": 1
+    },
+    "outputProperties": {
+      "className": "",
+      "chunkName": ""
+    }
+  },
+  {
+    "title": "Цена",
+    "name": "price",
+    "description": "",
+    "inputType": "number",
+    "inputProperties": {
+      "value": "",
+      "handler": "",
+      "allow_decimals": 0,
+      "decimal_precision": 2,
+      "decimal_separator": ".",
+      "min": 0,
+      "max": null,
+      "step": 1
+    },
+    "outputType": "number",
+    "outputProperties": {
+      "className": "",
+      "chunkName": "price"
+    },
+    "group": "Основное",
+    "required": false,
+    "showInTable": true,
+    "showInList": true,
+    "showOnPage": true,
+    "isFilter": true,
+    "filterOrder": 0,
+    "listOrder": 3
+  },
+  {
+    "title": "Дата публикации",
+    "name": "date_pub",
+    "description": "",
+    "inputType": "date",
+    "inputProperties": {
+      "value": "",
+      "handler": "",
+      "format": "dd.mm.yy",
+      "show_time": "1",
+      "hour_format": "24",
+      "locale": "ru"
+    },
+    "outputType": "date",
+    "outputProperties": {
+      "className": "",
+      "chunkName": "",
+      "format": "dd.mm.yy"
+    },
+    "group": "Основное",
+    "required": false,
+    "showInTable": false,
+    "showInList": false,
+    "showOnPage": false,
+    "isFilter": false,
+    "filterOrder": 0,
+    "listOrder": 3
+  },
+  {
+    "title": "Бренд",
+    "name": "brand",
+    "description": "",
+    "inputType": "text",
+    "inputProperties": {
+      "value": "",
+      "handler": ""
+    },
+    "outputType": "text",
+    "outputProperties": {
+      "className": ""
+    },
+    "group": "Параметры",
+    "required": false,
+    "showInTable": false,
+    "showInList": false,
+    "showOnPage": true,
+    "isFilter": true,
+    "filterOrder": 1
+  },
+  {
+    "title": "Страна",
+    "name": "country",
+    "description": "",
+    "inputType": "text",
+    "inputProperties": {
+      "value": "",
+      "handler": ""
+    },
+    "outputType": "text",
+    "outputProperties": {
+      "className": ""
+    },
+    "group": "Параметры",
+    "required": false,
+    "showInTable": false,
+    "showInList": false,
+    "showOnPage": true,
+    "isFilter": true,
+    "filterOrder": 2
+  },
+  {
+    "title": "Цвет",
+    "name": "color",
+    "description": "",
+    "inputType": "color",
+    "inputProperties": {
+      "value": "",
+      "handler": ""
+    },
+    "outputType": "color",
+    "outputProperties": {
+      "className": ""
+    },
+    "group": "Параметры",
+    "required": false,
+    "showInTable": false,
+    "showInList": false,
+    "showOnPage": false,
+    "isFilter": true,
+    "filterOrder": 3
+  },
+  {
+    "title": "Материал",
+    "name": "material",
+    "description": "",
+    "inputType": "text",
+    "inputProperties": {
+      "value": "",
+      "handler": ""
+    },
+    "outputType": "text",
+    "outputProperties": {
+      "className": ""
+    },
+    "group": "Параметры",
+    "required": false,
+    "showInTable": false,
+    "showInList": false,
+    "showOnPage": true,
+    "isFilter": true,
+    "filterOrder": 4
+  },
+  {
+    "title": "Метки",
+    "name": "tags",
+    "description": "",
+    "inputType": "checkbox",
+    "inputProperties": {
+      "value": "",
+      "handler": "",
+      "values_list": "New||Top Selling||Promo"
+    },
+    "outputType": "text",
+    "outputProperties": {
+      "className": "",
+      "chunkName": "tag"
+    },
+    "group": "Параметры",
+    "required": false,
+    "showInTable": false,
+    "showInList": true,
+    "showOnPage": true,
+    "isFilter": true,
+    "filterOrder": 5,
+    "listOrder": 1,
+    "id": ""
+  },
+  {
+    "title": "Артикул",
+    "name": "vendorCode",
+    "description": "",
+    "inputType": "text",
+    "inputProperties": {
+      "value": "",
+      "handler": ""
+    },
+    "outputType": "text",
+    "outputProperties": {
+      "className": ""
+    },
+    "group": "Параметры",
+    "required": false,
+    "showInTable": false,
+    "showInList": false,
+    "showOnPage": true,
+    "isFilter": false,
+    "filterOrder": 5
+  },
+  {
+    "title": "Количество на складе",
+    "name": "stock",
+    "description": "",
+    "inputType": "number",
+    "inputProperties": {
+      "value": "",
+      "handler": "",
+      "allow_decimals": 0,
+      "decimal_precision": 2,
+      "decimal_separator": ".",
+      "min": 0,
+      "max": null,
+      "step": 1
+    },
+    "outputType": "number",
+    "outputProperties": {
+      "className": "",
+      "chunkName": "stock"
+    },
+    "group": "Параметры",
+    "required": false,
+    "showInTable": false,
+    "showInList": false,
+    "showOnPage": false,
+    "isFilter": false,
+    "filterOrder": 0,
+    "listOrder": 6
+  },
+  {
+    "title": "Оценка",
+    "name": "rating",
+    "description": "",
+    "inputType": "number",
+    "inputProperties": {
+      "value": "",
+      "handler": "",
+      "allow_decimals": 0,
+      "decimal_precision": 2,
+      "decimal_separator": ".",
+      "min": 0,
+      "max": 5,
+      "step": 1
+    },
+    "outputType": "number",
+    "outputProperties": {
+      "className": "",
+      "chunkName": "rating"
+    },
+    "group": "Параметры",
+    "required": false,
+    "showInTable": false,
+    "showInList": true,
+    "showOnPage": true,
+    "isFilter": false,
+    "filterOrder": 0,
+    "listOrder": 7
+  },
+  {
+    "title": "Параметры",
+    "name": "parameters",
+    "description": "",
+    "inputType": "parameters",
+    "inputProperties": {
+      "value": "",
+      "handler": ""
+    },
+    "outputType": "parameters",
+    "outputProperties": {
+      "type": "radio",
+      "chunkName": "parameters",
+      "firstSelected": "1",
+      "groupByName": "1"
+    },
+    "group": "Параметры",
+    "required": false,
+    "showInTable": false,
+    "showInList": false,
+    "showOnPage": true,
+    "isFilter": false
+  },
+  {
+    "title": "Категории",
+    "name": "categories",
+    "description": "Вы можете выбрать несколько категорий для товара.",
+    "inputType": "categories",
+    "inputProperties": {
+      "value": "",
+      "handler": "",
+      "layout": "vertical"
+    },
+    "outputType": "categories",
+    "outputProperties": {
+      "className": ""
+    },
+    "group": "Категории",
+    "required": false,
+    "showInTable": false,
+    "showInList": false,
+    "showOnPage": false,
+    "isFilter": false
+  }
+]

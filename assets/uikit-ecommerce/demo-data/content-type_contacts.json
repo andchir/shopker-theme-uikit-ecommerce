@@ -1,0 +1,155 @@
+[
+	{
+		"title": "Название",
+		"name": "title",
+		"description": "",
+		"inputType": "text",
+		"inputProperties": {
+			"value": "",
+			"handler": ""
+		},
+		"outputType": "text",
+		"outputProperties": {
+			"className": "",
+			"chunkName": "header"
+		},
+		"group": "Основное",
+		"required": true,
+		"showInTable": true,
+		"showInList": true,
+		"isFilter": false,
+		"id": "",
+		"showOnPage": false
+	},
+	{
+		"title": "Системное имя",
+		"name": "name",
+		"description": "",
+		"inputType": "system_name",
+		"inputProperties": {
+			"value": "",
+			"source_field": "title",
+			"handler": ""
+		},
+		"outputType": "system_name",
+		"outputProperties": {
+			"className": ""
+		},
+		"group": "Основное",
+		"required": true,
+		"showInTable": true,
+		"showInList": false,
+		"isFilter": false
+	},
+	{
+		"title": "Основной текст",
+		"name": "description",
+		"description": "",
+		"inputType": "textarea",
+		"inputProperties": {
+			"value": "",
+			"handler": "",
+			"rows": "6"
+		},
+		"outputType": "textarea",
+		"outputProperties": {
+			"className": "",
+			"chunkName": "description"
+		},
+		"group": "Основное",
+		"required": false,
+		"showInTable": false,
+		"showInList": false,
+		"isFilter": false,
+		"showOnPage": true,
+		"id": ""
+	},
+	{
+		"id": 0,
+		"title": "Адрес",
+		"name": "address",
+		"description": "",
+		"inputType": "text",
+		"outputType": "text",
+		"group": "Основное",
+		"required": false,
+		"showInTable": true,
+		"showOnPage": true,
+		"showInList": false,
+		"isFilter": false,
+		"inputProperties": {
+			"value": "",
+			"handler": ""
+		},
+		"outputProperties": {
+			"className": "",
+			"chunkName": ""
+		}
+	},
+	{
+		"id": 0,
+		"title": "Phone",
+		"name": "phone",
+		"description": "",
+		"inputType": "text",
+		"outputType": "text",
+		"group": "Основное",
+		"required": false,
+		"showInTable": true,
+		"showOnPage": true,
+		"showInList": false,
+		"isFilter": false,
+		"inputProperties": {
+			"value": "",
+			"handler": ""
+		},
+		"outputProperties": {
+			"className": "",
+			"chunkName": ""
+		}
+	},
+	{
+		"id": 0,
+		"title": "Email",
+		"name": "email",
+		"description": "",
+		"inputType": "text",
+		"outputType": "text",
+		"group": "Основное",
+		"required": false,
+		"showInTable": false,
+		"showOnPage": true,
+		"showInList": false,
+		"isFilter": false,
+		"inputProperties": {
+			"value": "",
+			"handler": ""
+		},
+		"outputProperties": {
+			"className": "",
+			"chunkName": ""
+		}
+	},
+	{
+		"id": 0,
+		"title": "Working hours",
+		"name": "working_hours",
+		"description": "",
+		"inputType": "text",
+		"outputType": "text",
+		"group": "Основное",
+		"required": false,
+		"showInTable": false,
+		"showOnPage": true,
+		"showInList": false,
+		"isFilter": false,
+		"inputProperties": {
+			"value": "",
+			"handler": ""
+		},
+		"outputProperties": {
+			"className": "",
+			"chunkName": ""
+		}
+	}
+]

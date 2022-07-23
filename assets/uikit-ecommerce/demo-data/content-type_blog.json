@@ -43,33 +43,11 @@
   },
   {
     "id": 0,
-    "title": "Ссылка",
-    "name": "url",
+    "title": "Дата и время",
+    "name": "datetime",
     "description": "",
-    "inputType": "text",
-    "outputType": "text",
-    "group": "Параметры",
-    "required": false,
-    "showInTable": true,
-    "showOnPage": true,
-    "showInList": false,
-    "isFilter": false,
-    "inputProperties": {
-      "value": "",
-      "handler": ""
-    },
-    "outputProperties": {
-      "className": "",
-      "chunkName": ""
-    }
-  },
-  {
-    "id": 0,
-    "title": "Популярный",
-    "name": "popular",
-    "description": "",
-    "inputType": "checkbox",
-    "outputType": "checkbox",
+    "inputType": "date",
+    "outputType": "date",
     "group": "Основное",
     "required": false,
     "showInTable": true,
@@ -79,7 +57,36 @@
     "inputProperties": {
       "value": "",
       "handler": "",
-      "values_list": ""
+      "format": "mm/dd/yy",
+      "show_time": "1",
+      "hour_format": "24",
+      "first_day_of_week": "1",
+      "locale": "ru",
+      "default_current": "1"
+    },
+    "outputProperties": {
+      "className": "",
+      "chunkName": "",
+      "format": "MM/dd/yyyy"
+    }
+  },
+  {
+    "id": 0,
+    "title": "Краткое описание",
+    "name": "summary",
+    "description": "",
+    "inputType": "textarea",
+    "outputType": "textarea",
+    "group": "Основное",
+    "required": false,
+    "showInTable": false,
+    "showOnPage": true,
+    "showInList": false,
+    "isFilter": false,
+    "inputProperties": {
+      "value": "",
+      "handler": "",
+      "rows": "6"
     },
     "outputProperties": {
       "className": "",
@@ -106,6 +113,28 @@
     "showInList": false,
     "isFilter": false,
     "showOnPage": true
+  },
+  {
+    "id": 0,
+    "title": "Ключевые слова",
+    "name": "tags",
+    "description": "",
+    "inputType": "tags",
+    "outputType": "tags",
+    "group": "Параметры",
+    "required": false,
+    "showInTable": false,
+    "showOnPage": true,
+    "showInList": false,
+    "isFilter": true,
+    "inputProperties": {
+      "value": "",
+      "handler": ""
+    },
+    "outputProperties": {
+      "className": "",
+      "chunkName": ""
+    }
   },
   {
     "id": 0,
