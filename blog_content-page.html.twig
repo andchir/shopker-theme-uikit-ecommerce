@@ -22,9 +22,9 @@
                                 <div class="tm-wrapper uk-text-center">
                                     <figure>
                                         <img src="{{ imageUrl(currentPage.image) }}" alt="{{ currentPage.title }}">
-                                        {% if currentPage.keywords is not empty %}
+                                        {% if currentPage.tags is not empty %}
                                             <figcaption>
-                                                {{ 'Tags' | trans }}: {{ currentPage.keywords | join(', ') }}
+                                                {{ 'Tags' | trans }}: {{ currentPage.tags | join(', ') }}
                                             </figcaption>
                                         {% endif %}
                                     </figure>
