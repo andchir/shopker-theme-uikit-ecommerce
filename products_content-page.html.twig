@@ -68,18 +68,37 @@
                                                 <div class="uk-padding-small uk-background-primary-lighten uk-border-rounded">
                                                     <div class="uk-grid-small uk-child-width-1-1" uk-grid>
                                                         <div>
-                                                            <del class="uk-text-meta">$1899.00</del>
-                                                            <div class="tm-product-price">$1599.00</div>
+                                                            {% if currentPage.old_price is defined and currentPage.old_price is not empty %}
+                                                                <del class="uk-text-meta">
+                                                                    <span class="shk-price">{{ currentPage.old_price }}</span>
+                                                                    <span class="shk-currency">{{ currency }}</span>
+                                                                </del>
+                                                            {% endif %}
+                                                            <div class="tm-product-price">
+                                                                <span class="shk-price">{{ currentPage.price | price }}</span>
+                                                                <span class="shk-currency">{{ currency }}</span>
+                                                            </div>
                                                         </div>
                                                         <div>
                                                             <div class="uk-grid-small" uk-grid>
-                                                                <div><a onclick="increment(-1, 'product-1')" uk-icon="icon: minus; ratio: .75"></a>
-                                                                    <input class="uk-input tm-quantity-input" id="product-1" type="text" maxlength="3" value="1"/><a onclick="increment(+1, 'product-1')" uk-icon="icon: plus; ratio: .75"></a>
+                                                                <div>
+                                                                    <a onclick="increment(-1, 'product-1')" uk-icon="icon: minus; ratio: .75"></a>
+                                                                    <input class="uk-input tm-quantity-input" id="product-1" type="text" maxlength="3" value="1">
+                                                                    <a onclick="increment(+1, 'product-1')" uk-icon="icon: plus; ratio: .75"></a>
                                                                 </div>
                                                                 <div>
-                                                                    <button class="uk-button uk-button-primary tm-product-add-button tm-shine js-add-to-cart">add to cart</button>
+                                                                    <button class="uk-button uk-button-primary tm-product-add-button tm-shine js-add-to-cart">
+                                                                        {{ 'Add to cart' | trans }}
+                                                                    </button>
                                                                 </div>
-                                                                <div class="uk-width-auto uk-width-expand@s uk-flex uk-flex-middle uk-text-meta"><a class="uk-margin-small-right js-add-to js-add-to-favorites tm-action-button-active js-added-to" uk-tooltip="Add to favorites"><span uk-icon="heart"></span></a><a class="js-add-to js-add-to-compare tm-action-button-active js-added-to" uk-tooltip="Add to compare"><span uk-icon="copy"></span></a></div>
+                                                                <div class="uk-width-auto uk-width-expand@s uk-flex uk-flex-middle uk-text-meta">
+                                                                    <a class="uk-margin-small-right js-add-to js-add-to-favorites tm-action-button-active js-added-to" uk-tooltip="Add to favorites">
+                                                                        <span uk-icon="heart"></span>
+                                                                    </a>
+                                                                    <a class="js-add-to js-add-to-compare tm-action-button-active js-added-to" uk-tooltip="Add to compare">
+                                                                        <span uk-icon="copy"></span>
+                                                                    </a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
