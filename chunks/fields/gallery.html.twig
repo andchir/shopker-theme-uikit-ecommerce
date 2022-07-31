@@ -1,67 +1,51 @@
-<div id="carouselImageGallery" class="carousel slide mb-3" data-bs-ride="false" data-interval="false">
-
-    {% if fileFields | length > 1 %}
-        <ol class="carousel-indicators carousel-indicators-inverted">
-            {% for fieldName in fileFields|keys %}
-                <li data-bs-target="#carouselImageGallery" data-bs-slide-to="{{ loop.index0 }}"{% if fieldName == fieldBaseName %} class="active"{% endif %}></li>
-            {% endfor %}
-        </ol>
-    {% endif %}
-
-    <div class="carousel-inner border rounded-big">
-
-        {% if fileFields | length > 0 %}
-            {% for fieldName in fileFields|keys %}
-                <div class="carousel-item{% if fieldName == fieldBaseName %} active{% endif %}">
-                    {% if fileFields[fieldName] is not empty %}
-                        <a data-bs-toggle="modal" data-bs-target="#imageModal" href="{{ imageUrl(fileFields[fieldName]) }}" target="_blank">
-                            <img class="d-block w-100" src="{{ imageUrl(fileFields[fieldName]) | imagine_filter('thumb_medium') }}" alt="">
-                        </a>
-                    {% else %}
-                        <img src="/img/nofoto.png" alt="" style="width: 100%;">
-                    {% endif %}
+<div class="uk-width-1-1 uk-width-expand@m">
+    <div class="uk-grid-collapse uk-child-width-1-1" uk-slideshow="finite: true; ratio: 4:3;" uk-grid>
+        <div>
+            <ul class="uk-slideshow-items" uk-lightbox>
+                {% if fileFields | length > 0 %}
+                    {% for fieldName in fileFields|keys %}
+                        <li>
+                            <a class="uk-card-body tm-media-box tm-media-box-zoom" href="{{ imageUrl(fileFields[fieldName]) }}">
+                                <figure class="tm-media-box-wrap">
+                                    <img src="{{ imageUrl(fileFields[fieldName]) | imagine_filter('thumb_medium') }}" alt="">
+                                </figure>
+                            </a>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <li><img src="/img/nofoto.png" alt="" style="width: 100%;"></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div>
+            <div class="uk-card-body uk-flex uk-flex-center">
+                <div class="uk-width-1-2 uk-visible@s">
+                    <div uk-slider="finite: true" id="thumbs-slider">
+                        <div class="uk-position-relative">
+                            <div class="uk-slider-container">
+                                <ul class="tm-slider-items uk-slider-items uk-child-width-1-4 uk-grid uk-grid-small">
+                                    {% for fieldName in fileFields|keys %}
+                                        <li uk-slideshow-item="{{ loop.index0 }}">
+                                            <div class="tm-ratio tm-ratio-1-1">
+                                                <a class="tm-media-box tm-media-box-frame">
+                                                    <figure class="tm-media-box-wrap">
+                                                        <img src="{{ imageUrl(fileFields[fieldName]) | imagine_filter('thumb_small') }}" alt="">
+                                                    </figure>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                <div>
+                                    <a class="uk-position-center-left-out uk-position-small" href="#" uk-slider-item="previous" uk-slidenav-previous></a>
+                                    <a class="uk-position-center-right-out uk-position-small" href="#" uk-slider-item="next" uk-slidenav-next></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            {% endfor %}
-        {% else %}
-            <img src="/img/nofoto.png" alt="" style="width: 100%;">
-        {% endif %}
-
-    </div>
-
-    {% if fileFields | length > 1 %}
-        <button type="button" class="carousel-control-prev carousel-control-icon" data-bs-target="#carouselImageGallery" data-bs-slide="prev">
-            <i class="icon-keyboard_arrow_left"></i>
-        </button>
-        <button type="button" class="carousel-control-next carousel-control-icon" data-bs-target="#carouselImageGallery" data-bs-slide="next">
-            <i class="icon-keyboard_arrow_right"></i>
-        </button>
-    {% endif %}
-</div>
-
-<div class="modal fade" tabindex="-1" role="dialog" id="imageModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <img class="d-block w-100" src="" alt="">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'Close' | trans }}</button>
+                <ul class="uk-slideshow-nav uk-dotnav uk-hidden@s"></ul>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        jQuery('#imageModal')
-            .on('show.bs.modal', function (e) {
-                var $modal = jQuery('#imageModal'),
-                    currentImageUrl = jQuery('#carouselImageGallery')
-                        .find('.carousel-item.active a').attr('href');
-
-                $modal
-                    .find('.modal-dialog').css({maxWidth: '990px'})
-                    .find('img').attr('src', currentImageUrl);
-            });
-    });
-</script>
