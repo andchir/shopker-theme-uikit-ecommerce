@@ -53,9 +53,11 @@
 
 {% block javascripts -%}
     <!-- JAVASCRIPT -->
-    <script src="/assets/uikit-ecommerce/scripts/uikit.js"></script>
-    <script src="/assets/uikit-ecommerce/scripts/uikit-icons.js"></script>
-    <script src="/assets/uikit-ecommerce/scripts/script.js"></script>
+    <script src="{{ asset('assets/uikit-ecommerce/scripts/uikit.js') }}"></script>
+    <script src="{{ asset('assets/uikit-ecommerce/scripts/uikit-icons.js') }}"></script>
+    <script src="{{ asset('assets/uikit-ecommerce/scripts/script.js') }}"></script>
+    <script src="{{ asset('js/shopkeeper.js') }}"></script>
+    <script src="{{ asset('js/shopping_cart.js') }}"></script>
 {% endblock -%}
 
 </body>

@@ -45,11 +45,15 @@
                                                     <div>
                                                         <div class="uk-text-small uk-margin-xsmall-bottom">Color</div>
                                                         <ul class="uk-subnav uk-subnav-pill tm-variations" uk-switcher>
-                                                            <li><a class="tm-variation-color" uk-tooltip="Space Grey">
-                                                                    <div style="background-color: #aaaeb1"></div></a>
+                                                            <li>
+                                                                <a class="tm-variation-color" uk-tooltip="Space Grey">
+                                                                    <div style="background-color: #aaaeb1"></div>
+                                                                </a>
                                                             </li>
-                                                            <li><a class="tm-variation-color" uk-tooltip="Silver">
-                                                                    <div style="background-color: #dddfde"></div></a>
+                                                            <li>
+                                                                <a class="tm-variation-color" uk-tooltip="Silver">
+                                                                    <div style="background-color: #dddfde"></div>
+                                                                </a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -65,43 +69,52 @@
                                                 </div>
                                             </div>
                                             <div class="uk-margin">
-                                                <div class="uk-padding-small uk-background-primary-lighten uk-border-rounded">
-                                                    <div class="uk-grid-small uk-child-width-1-1" uk-grid>
-                                                        <div>
-                                                            {% if currentPage.old_price is defined and currentPage.old_price is not empty %}
-                                                                <del class="uk-text-meta">
-                                                                    <span class="shk-price">{{ currentPage.old_price }}</span>
+                                                <div class="uk-padding-small uk-background-primary-lighten uk-border-rounded js-shopping-cart-product">
+
+                                                    <form id="shk-form" action="{{ pathLocalized('shop_cart_action') }}" method="post">
+                                                        <input type="hidden" name="item_id" value="{{ currentPage.id }}">
+                                                        <input type="hidden" name="category_id" value="{{ currentPage.parentId }}">
+                                                        <input type="hidden" name="type" value="shop">
+
+                                                        <div class="uk-grid-small uk-child-width-1-1" uk-grid>
+                                                            <div>
+                                                                {% if currentPage.old_price is defined and currentPage.old_price is not empty %}
+                                                                    <del class="uk-text-meta">
+                                                                        <span class="shk-price">{{ currentPage.old_price }}</span>
+                                                                        <span class="shk-currency">{{ currency }}</span>
+                                                                    </del>
+                                                                {% endif %}
+                                                                <div class="tm-product-price">
+                                                                    <span class="shk-price">{{ currentPage.price | price }}</span>
                                                                     <span class="shk-currency">{{ currency }}</span>
-                                                                </del>
-                                                            {% endif %}
-                                                            <div class="tm-product-price">
-                                                                <span class="shk-price">{{ currentPage.price | price }}</span>
-                                                                <span class="shk-currency">{{ currency }}</span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="uk-grid-small" uk-grid>
-                                                                <div>
-                                                                    <a onclick="increment(-1, 'product-1')" uk-icon="icon: minus; ratio: .75"></a>
-                                                                    <input class="uk-input tm-quantity-input" id="product-1" type="text" maxlength="3" value="1">
-                                                                    <a onclick="increment(+1, 'product-1')" uk-icon="icon: plus; ratio: .75"></a>
-                                                                </div>
-                                                                <div>
-                                                                    <button class="uk-button uk-button-primary tm-product-add-button tm-shine js-add-to-cart">
-                                                                        {{ 'Add to cart' | trans }}
-                                                                    </button>
-                                                                </div>
-                                                                <div class="uk-width-auto uk-width-expand@s uk-flex uk-flex-middle uk-text-meta">
-                                                                    <a class="uk-margin-small-right js-add-to js-add-to-favorites tm-action-button-active js-added-to" uk-tooltip="Add to favorites">
-                                                                        <span uk-icon="heart"></span>
-                                                                    </a>
-                                                                    <a class="js-add-to js-add-to-compare tm-action-button-active js-added-to" uk-tooltip="Add to compare">
-                                                                        <span uk-icon="copy"></span>
-                                                                    </a>
+                                                            <div>
+                                                                <div class="uk-grid-small" uk-grid>
+                                                                    <div>
+                                                                        <a onclick="increment(-1, 'product-1')" uk-icon="icon: minus; ratio: .75"></a>
+                                                                        <input class="uk-input tm-quantity-input" id="product-1" type="text" maxlength="3" value="1" name="count">
+                                                                        <a onclick="increment(+1, 'product-1')" uk-icon="icon: plus; ratio: .75"></a>
+                                                                    </div>
+                                                                    <div>
+                                                                        <button type="submit" class="uk-button uk-button-primary tm-product-add-button tm-shine js-add-to-cart">
+                                                                            {{ 'Add to cart' | trans }}
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="uk-width-auto uk-width-expand@s uk-flex uk-flex-middle uk-text-meta">
+                                                                        <a class="uk-margin-small-right js-add-to js-add-to-favorites tm-action-button-active js-added-to" uk-tooltip="Add to favorites">
+                                                                            <span uk-icon="heart"></span>
+                                                                        </a>
+                                                                        <a class="js-add-to js-add-to-compare tm-action-button-active js-added-to" uk-tooltip="Add to compare">
+                                                                            <span uk-icon="copy"></span>
+                                                                        </a>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+
+                                                    </form>
+
                                                 </div>
                                             </div>
                                             <div class="uk-margin">
@@ -141,15 +154,21 @@
                                         <header>
                                             <nav class="tm-product-nav" uk-sticky="offset: 80; bottom: #description; cls-active: tm-product-nav-fixed;">
                                                 <ul class="uk-subnav uk-subnav-pill js-product-switcher" uk-switcher="connect: .js-tabs">
-                                                    <li><a class="js-scroll-to-description" href="#description">Overview</a></li>
-                                                    <li><a class="js-scroll-to-description" href="#description">Specifications</a></li>
-                                                    <li><a class="js-scroll-to-description" href="#description">
-                                                            Accessories
-                                                            <span>(9)</span></a></li>
-                                                    <li><a class="js-scroll-to-description" href="#description">
-                                                            Reviews
-                                                            <span>(2)</span></a></li>
-                                                    <li><a class="js-scroll-to-description" href="#description">Q&A</a></li>
+                                                    <li>
+                                                        <a class="js-scroll-to-description" href="#description">{{ 'Overview' | trans }}</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="js-scroll-to-description" href="#description">{{ 'Specifications' | trans }}</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="js-scroll-to-description" href="#description">{{ 'Accessories' | trans }}<span>(9)</span></a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="js-scroll-to-description" href="#description">{{ 'Reviews' | trans }}<span>(2)</span></a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="js-scroll-to-description" href="#description">{{ 'Q&A' | trans }}</a>
+                                                    </li>
                                                 </ul>
                                             </nav>
                                         </header>
@@ -1178,4 +1197,9 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/product-page.js') }}"></script>
 {% endblock %}

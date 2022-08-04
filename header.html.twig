@@ -20,7 +20,11 @@
                                             <div>St.&nbsp;Petersburg, Nevsky&nbsp;Prospect&nbsp;28</div>
                                             <div>Daily 10:00–22:00</div>
                                         </div>
-                                        <div class="uk-margin-small"><a class="uk-link-muted uk-text-uppercase tm-link-to-all uk-link-reset" href="contacts.html"><span>contacts</span><span uk-icon="icon: chevron-right; ratio: .75;"></span></a>
+                                        <div class="uk-margin-small">
+                                            <a class="uk-link-muted uk-text-uppercase tm-link-to-all uk-link-reset" href="contacts.html">
+                                                <span>contacts</span>
+                                                <span uk-icon="icon: chevron-right; ratio: .75;"></span>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -29,6 +33,11 @@
                         <li>
                             <div class="uk-navbar-item">
                                 {{ settingsList('SETTINGS_LANGUAGES', 'languages_list', false, true) }}
+                            </div>
+                        </li>
+                        <li>
+                            <div class="uk-navbar-item">
+                                {{ settingsList('SETTINGS_CURRENCY', 'currency_list', true) }}
                             </div>
                         </li>
                     </ul>
@@ -82,7 +91,12 @@
                             <div class="uk-width-auto"><a class="uk-navbar-dropdown-close" href="#" uk-close></a></div>
                         </div>
                     </div>
-                </div><a class="uk-navbar-item uk-link-muted uk-visible@m tm-navbar-button" href="compare.html"><span uk-icon="copy"></span><span class="uk-badge">3</span></a><a class="uk-navbar-item uk-link-muted tm-navbar-button" href="account.html" uk-icon="user"></a>
+                </div>
+                <a class="uk-navbar-item uk-link-muted uk-visible@m tm-navbar-button" href="compare.html">
+                    <span uk-icon="copy"></span>
+                    <span class="uk-badge">3</span>
+                </a>
+                <a class="uk-navbar-item uk-link-muted tm-navbar-button" href="account.html" uk-icon="user"></a>
                 <div class="uk-padding-small uk-margin-remove" uk-dropdown="pos: bottom-right; offset: -10; delay-hide: 200;" style="min-width: 150px;">
                     <ul class="uk-nav uk-dropdown-nav">
                         {% if is_granted('ROLE_USER') %}

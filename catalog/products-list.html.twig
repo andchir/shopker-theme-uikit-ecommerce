@@ -119,7 +119,7 @@
                                                         <span class="tm-product-card-action-text">{{ 'Add to compare' | trans }}</span>
                                                     </a>
                                                 </div>
-                                                <div class="tm-product-card-actions">
+                                                <div class="tm-product-card-actions js-shopping-cart-product">
                                                     <form action="{{ pathLocalized('shop_cart_action') }}" method="post">
                                                         <input type="hidden" name="item_id" value="{{ item._id }}">
                                                         <input type="hidden" name="category_id" value="{{ item.parentId }}">
