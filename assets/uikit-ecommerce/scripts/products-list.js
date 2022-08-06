@@ -3,12 +3,19 @@ shk.onAfterInit(function() {
     shk.filtersInit(true);
 });
 
+let shkFiltersApplyTimer;
 shk.onFilterChange = function(element) {
     const onFilterChangeElements = document.querySelectorAll('.shk-onfilter-change');
     onFilterChangeElements.forEach(function(el) {
         el.style.display = 'block';
         el.style.top = ((element.tagName === 'DIV' ? element : element.parentNode).offsetTop - 20) + 'px';
     });
+    clearTimeout(shkFiltersApplyTimer);
+    shkFiltersApplyTimer = setTimeout(function() {
+        onFilterChangeElements.forEach(function(el) {
+            el.style.display = 'none';
+        });
+    }, 4000);
 };
 
 // Filters accordion

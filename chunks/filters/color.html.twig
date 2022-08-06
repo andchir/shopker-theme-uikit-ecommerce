@@ -9,7 +9,7 @@
                     <input type="checkbox"
                            class="tm-checkbox"
                            name="filter[{{ filter.name }}][]"
-                           value="{{ value }}"
+                           value="{{ value|replace({'#':''}) }}"
                            id="filter_{{ filter.name }}{{ loop.index }}">
                     <label for="filter_{{ filter.name }}{{ loop.index }}">
                         <span>
