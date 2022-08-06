@@ -1,12 +1,12 @@
 {% if filter.values | length > 1 %}
     {% set min = min(filter.values) %}
     {% set max = max(filter.values) %}
-    <div class="filter-block">
-        <h4>
+    <section class="uk-card-body js-accordion-section filter-block uk-open">
+        <h4 class="uk-accordion-title uk-margin-remove">
             {{ filter.title | trans }}
         </h4>
-        <div class="my-2">
-            <div class="mb-5 pt-4 pb-2 px-0">
+        <div class="uk-accordion-content uk-margin-remove">
+            <div class="uk-padding uk-padding-remove-horizontal">
                 <div class="shk-slider-range" data-name="{{ filter.name }}">
                     <input class="form-control"
                            name="filter[{{ filter.name }}][from]"
@@ -25,6 +25,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    <hr>
+    </section>
 {% endif %}

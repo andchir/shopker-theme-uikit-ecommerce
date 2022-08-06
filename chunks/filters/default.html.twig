@@ -1,24 +1,24 @@
-<div class="filter-block">
-    <h4>
+<section class="uk-card-body js-accordion-section filter-block">
+    <h4 class="uk-accordion-title uk-margin-remove">
         {{ filter.title | trans }}
     </h4>
-    <div class="my-2">
-        <div class="max-height200">
+    <div class="uk-accordion-content">
+        <ul class="uk-list tm-scrollbox">
             {% for value in filter.values %}
-                <label class="p-2 mb-0">
-                    <div class="form-check">
-                        <input type="checkbox"
-                               class="form-check-input"
-                               name="filter[{{ filter.name }}][]"
-                               value="{{ value }}"
-                               id="filter_{{ filter.name }}{{ loop.index }}">
-                        <label class="form-check-label" for="filter_{{ filter.name }}{{ loop.index }}">
+                <li>
+                    <input type="checkbox"
+                           class="tm-checkbox"
+                           name="filter[{{ filter.name }}][]"
+                           value="{{ value }}"
+                           id="filter_{{ filter.name }}{{ loop.index }}">
+                    <label for="filter_{{ filter.name }}{{ loop.index }}">
+                        <span>
                             {{ value }}
-                        </label>
-                    </div>
-                </label>
+                            <!--span class="uk-text-meta uk-text-xsmall">177</span-->
+                        </span>
+                    </label>
+                </li>
             {% endfor %}
-        </div>
+        </ul>
     </div>
-</div>
-<hr>
+</section>

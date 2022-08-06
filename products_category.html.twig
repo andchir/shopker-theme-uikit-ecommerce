@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ currentPage.title | default('') }} - {{ app_name }}{% endblock %}
+
+{% block body %}
+    <section class="uk-section uk-section-small">
+        <div class="uk-container">
+            <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
+                <div class="uk-text-center">
+
+                    {% include 'nav/breadcrumbs.html.twig' %}
+
+                    <h1 class="uk-margin-small-top uk-margin-remove-bottom">{{ currentCategory.title }}</h1>
+                    {% if itemsTotal > 0 %}
+                        <div class="uk-text-meta uk-margin-xsmall-top">
+                            {{ itemsTotal }}
+                            {{ 'product|products' | trans({'%count%': itemsTotal}) }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div>
+                    {% include 'nav/child-categories-menu.html.twig' %}
+
+                    {% if items | length == 0 and queryOptions.filter | length == 0 %}
+                        {% if categoriesMenu | length == 0 %}
+                            <div>
+                                {{ 'This category is empty' | trans }}.
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="uk-grid-medium" uk-grid>
+                            {% include 'catalog/filters.html.twig' %}
+                            {% include 'catalog/products-list.html.twig' %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'features.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('node_modules/wnumb/wNumb.js') }}"></script>
+    <script src="{{ asset('node_modules/nouislider/dist/nouislider.js') }}"></script>
+    {{ parent() }}
+    <script src="{{ asset('js/product-page.js') }}"></script>
+    <script src="{{ asset('js/products-list.js') }}"></script>
+{% endblock %}

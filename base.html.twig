@@ -22,8 +22,9 @@
 
     {% block stylesheets -%}
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500">
-        <link rel="stylesheet" href="/assets/uikit-ecommerce/styles/style.css">
-        <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('node_modules/nouislider/dist/nouislider.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/uikit-ecommerce/styles/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/uikit-ecommerce/styles/custom.css') }}">
     {% endblock -%}
 
     <!-- twv-script -->
@@ -52,7 +53,6 @@
 {% endblock %}
 
 {% block javascripts -%}
-    <!-- JAVASCRIPT -->
     <script src="{{ asset('assets/uikit-ecommerce/scripts/uikit.js') }}"></script>
     <script src="{{ asset('assets/uikit-ecommerce/scripts/uikit-icons.js') }}"></script>
     <script src="{{ asset('assets/uikit-ecommerce/scripts/script.js') }}"></script>
