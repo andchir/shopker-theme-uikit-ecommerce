@@ -9,7 +9,20 @@
     <section class="uk-section uk-section-small">
         <div class="uk-container">
 
-            {{ shopCart(shoppingCartTemplateName, shoppingCartContentType) }}
+            <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
+                <div class="uk-text-center">
+                    <h1 class="uk-margin-small-top uk-margin-remove-bottom">
+                        {{ 'Shopping cart' | trans }}
+                    </h1>
+                </div>
+                <div class="min-height300">
+
+                    {% include 'flash_messages.html.twig' %}
+
+                    {{ shopCart(shoppingCartTemplateName, shoppingCartContentType) }}
+
+                </div>
+            </div>
 
         </div>
     </section>
@@ -17,15 +30,5 @@
 
 {% block javascripts %}
     {{ parent() }}
-{#    <script>#}
-{#        var shoppingCart;#}
-{#        document.addEventListener('DOMContentLoaded', function() {#}
-{#            shoppingCart = new ShoppingCart({#}
-{#                baseUrl: '{{ app.request.baseUrl }}',#}
-{#                connectorUrl: '{{ pathLocalized('shop_cart_action') }}',#}
-{#                selector: '#shoppingCartContainer',#}
-{#                templateName: '{{ shoppingCartTemplateName }}'#}
-{#            });#}
-{#        });#}
-{#    </script>#}
+    <script src="{{ asset('assets/uikit-ecommerce/scripts/checkout-page.js') }}"></script>
 {% endblock %}

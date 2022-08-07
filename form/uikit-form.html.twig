@@ -41,3 +41,14 @@
     {%- set attr = attr|merge({class: (attr.class|default('') ~ ' uk-select')|trim}) -%}
     {{- parent() -}}
 {%- endblock choice_widget_collapsed %}
+
+{% block captcha_widget %}
+    <div class="form-group-captcha uk-margin uk-margin-remove-top" uk-grid>
+        <div class="uk-width-auto">
+            <img src="{{ captcha_code }}" width="{{ captcha_width }}" height="{{ captcha_height }}" alt="">
+        </div>
+        <div class="uk-width-expand">
+            {{ form_widget(form) }}
+        </div>
+    </div>
+{% endblock %}

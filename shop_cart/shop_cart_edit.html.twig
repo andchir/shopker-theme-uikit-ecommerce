@@ -1,163 +1,157 @@
-<div class="uk-grid-medium uk-child-width-1-1" uk-grid>
-    <div class="uk-text-center">
-        <h1 class="uk-margin-small-top uk-margin-remove-bottom">
-            {{ 'Shopping cart' | trans }}
-        </h1>
-    </div>
-    <div class="min-height300">
+<div class="uk-grid-medium" id="shoppingCartContainer" uk-grid>
+    <div class="uk-width-1-1 uk-width-expand@m">
 
-        {% include 'flash_messages.html.twig' %}
+        {% if items | length > 0 %}
+            <div class="uk-card uk-card-default uk-card-small tm-ignore-container">
 
-        <div class="uk-grid-medium" id="shoppingCartContainer" uk-grid>
-            <div class="uk-width-1-1 uk-width-expand@m">
+                <header class="uk-card-header uk-text-uppercase uk-text-muted uk-text-center uk-text-small uk-visible@m">
+                    <div class="uk-grid-small uk-child-width-1-2" uk-grid>
+                        <div>{{ 'Product' | trans }}</div>
+                        <div>
+                            <div class="uk-grid-small uk-child-width-expand" uk-grid>
+                                <div>{{ 'Price' | trans }}</div>
+                                <div class="tm-quantity-column">{{ 'Quantity' | trans }}</div>
+                                <div>{{ 'Sum' | trans }}</div>
+                                <div class="uk-width-auto">
+                                    <div style="width: 20px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
 
-                {% if items | length > 0 %}
-                    <div class="uk-card uk-card-default uk-card-small tm-ignore-container">
-
-                        <header class="uk-card-header uk-text-uppercase uk-text-muted uk-text-center uk-text-small uk-visible@m">
-                            <div class="uk-grid-small uk-child-width-1-2" uk-grid>
-                                <div>{{ 'Product' | trans }}</div>
+                <form action="{{ path('shop_cart_action') }}" method="post">
+                    {% for item in items %}
+                        <div class="uk-card-body">
+                            <div class="uk-grid-small uk-child-width-1-1 uk-child-width-1-2@m uk-flex-middle" uk-grid>
                                 <div>
-                                    <div class="uk-grid-small uk-child-width-expand" uk-grid>
-                                        <div>{{ 'Price' | trans }}</div>
-                                        <div class="tm-quantity-column">{{ 'Quantity' | trans }}</div>
-                                        <div>{{ 'Sum' | trans }}</div>
-                                        <div class="uk-width-auto">
-                                            <div style="width: 20px;"></div>
+                                    <div class="uk-grid-small" uk-grid>
+                                        <div class="uk-width-1-3">
+                                            <div class="tm-ratio tm-ratio-4-3">
+                                                <a class="tm-media-box" href="/{{ item.uri }}">
+                                                    <figure class="tm-media-box-wrap">
+                                                        <img src="{{ item.image | default('/img/nofoto.png') | imagine_filter('thumb_small') }}" alt="">
+                                                    </figure>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="uk-width-expand">
+                                            <a class="uk-link-heading" href="/{{ item.uri }}">
+                                                {{ item.title }}
+                                            </a>
+                                            <div class="uk-text-meta">{{ item.parametersString | raw }}</div>
+                                            {% if item.filesString is not empty %}
+                                                <div class="uk-text-meta">
+                                                    <span uk-icon="file"></span>
+                                                    {{ 'File|Files' | trans({'%count%': item.files | length}) }}: {{ item.filesString }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="uk-grid-small uk-child-width-1-1 uk-child-width-expand@s uk-text-center" uk-grid>
+                                        <div>
+                                            <div class="uk-text-muted uk-hidden@m">{{ 'Price' | trans }}</div>
+                                            <div>
+                                                <span class="shk-price">{{ item.price | price }}</span>
+                                                <span class="shk-currency">{{ currencySelected | default(currency) }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="tm-cart-quantity-column">
+                                            <a onclick="increment(-1, 'product-{{ item.id }}')" uk-icon="icon: minus; ratio: .75"></a>
+                                            <input class="uk-input tm-quantity-input" id="product-{{ item.id }}" type="number" name="count[]" maxlength="3" value="{{ item.count }}">
+                                            <a onclick="increment(+1, 'product-{{ item.id }}')" uk-icon="icon: plus; ratio: .75"></a>
+                                        </div>
+                                        <div>
+                                            <div class="uk-text-muted uk-hidden@m">{{ 'Sum' | trans }}</div>
+                                            <div>
+                                                <span class="shk-price">{{ item.priceTotal | price }}</span>
+                                                <span class="shk-currency">{{ currencySelected | default(currency) }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="uk-width-auto@s">
+                                            <button class="uk-text-danger" uk-icon="close" type="submit" name="remove_by_index" value="{{ loop.index0 }}" uk-tooltip="{{ 'Delete item' | trans }}"></button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </header>
-
-                        <form action="{{ path('shop_cart_action') }}" method="post">
-                            {% for item in items %}
-                                <div class="uk-card-body">
-                                    <div class="uk-grid-small uk-child-width-1-1 uk-child-width-1-2@m uk-flex-middle" uk-grid>
-                                        <div>
-                                            <div class="uk-grid-small" uk-grid>
-                                                <div class="uk-width-1-3">
-                                                    <div class="tm-ratio tm-ratio-4-3">
-                                                        <a class="tm-media-box" href="/{{ item.uri }}">
-                                                            <figure class="tm-media-box-wrap">
-                                                                <img src="{{ item.image | default('/img/nofoto.png') | imagine_filter('thumb_small') }}" alt="">
-                                                            </figure>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="uk-width-expand">
-                                                    <a class="uk-link-heading" href="/{{ item.uri }}">
-                                                        {{ item.title }}
-                                                    </a>
-                                                    <div class="uk-text-meta">{{ item.parametersString | raw }}</div>
-                                                    {% if item.filesString is not empty %}
-                                                        <div class="uk-text-meta">
-                                                            <span uk-icon="file"></span>
-                                                            {{ 'File|Files' | trans({'%count%': item.files | length}) }}: {{ item.filesString }}
-                                                        </div>
-                                                    {% endif %}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="uk-grid-small uk-child-width-1-1 uk-child-width-expand@s uk-text-center" uk-grid>
-                                                <div>
-                                                    <div class="uk-text-muted uk-hidden@m">{{ 'Price' | trans }}</div>
-                                                    <div>
-                                                        <span class="shk-price">{{ item.price | price }}</span>
-                                                        <span class="shk-currency">{{ currencySelected | default(currency) }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="tm-cart-quantity-column">
-                                                    <a onclick="increment(-1, 'product-{{ item.id }}')" uk-icon="icon: minus; ratio: .75"></a>
-                                                    <input class="uk-input tm-quantity-input" id="product-{{ item.id }}" type="number" maxlength="3" value="{{ item.count }}">
-                                                    <a onclick="increment(+1, 'product-{{ item.id }}')" uk-icon="icon: plus; ratio: .75"></a>
-                                                </div>
-                                                <div>
-                                                    <div class="uk-text-muted uk-hidden@m">{{ 'Sum' | trans }}</div>
-                                                    <div>
-                                                        <span class="shk-price">{{ item.priceTotal | price }}</span>
-                                                        <span class="shk-currency">{{ currencySelected | default(currency) }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="uk-width-auto@s">
-                                                    <button class="uk-text-danger" uk-icon="close" type="submit" name="remove_by_index" value="{{ loop.index0 }}" uk-tooltip="{{ 'Delete item' | trans }}"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </form>
-
-                        <div class="uk-card-footer">
-                            <form action="{{ path('shop_cart_action') }}" method="post">
-                                <input type="hidden" name="type" value="{{ type }}">
-                                <label>
-                                    <span class="uk-form-label uk-margin-small-right">{{ 'Promo code' | trans }}</span>
-                                    <div class="uk-inline">
-                                        <button type="submit" class="uk-form-icon uk-form-icon-flip" uk-icon="arrow-right" name="action" value="promo_code"></button>
-                                        <input class="uk-input uk-form-width-small" type="text" name="promo_code">
-                                    </div>
-                                </label>
-                            </form>
                         </div>
+                    {% endfor %}
+                    <div class="uk-position-bottom-right uk-margin-bottom uk-margin-right">
+                        <button type="submit" class="uk-button uk-button-default uk-button-small" name="action" value="update">
+                            <span uk-icon="refresh"></span>
+                            {{ 'Recalculate' | trans }}
+                        </button>
+                    </div>
+                </form>
 
-                    </div>
-                {% else %}
-                    <div class="uk-alert-primary uk-box-shadow-small" uk-alert>
-                        <a class="uk-alert-close" uk-close></a>
-                        <p>{{ 'The cart is empty' | trans }}.</p>
-                    </div>
-                {% endif %}
+                <div class="uk-card-footer">
+                    <form action="{{ path('shop_cart_action') }}" method="post">
+                        <input type="hidden" name="type" value="{{ type }}">
+                        <label>
+                            <span class="uk-form-label uk-margin-small-right">{{ 'Promo code' | trans }}</span>
+                            <div class="uk-inline">
+                                <button type="submit" class="uk-form-icon uk-form-icon-flip" uk-icon="arrow-right" name="action" value="promo_code"></button>
+                                <input class="uk-input uk-form-width-small" type="text" name="promo_code">
+                            </div>
+                        </label>
+                    </form>
+                </div>
 
             </div>
+        {% else %}
+            <div class="uk-alert-primary uk-box-shadow-small" uk-alert>
+                <a class="uk-alert-close" uk-close></a>
+                <p>{{ 'The cart is empty' | trans }}.</p>
+            </div>
+        {% endif %}
 
-            {% if items | length > 0 %}
-            <div class="uk-width-1-1 tm-aside-column uk-width-1-4@m">
-                <div class="uk-card uk-card-default uk-card-small tm-ignore-container" uk-sticky="offset: 90; bottom: true; media: @m;">
-                    <div class="uk-card-body">
+    </div>
+
+    {% if items | length > 0 %}
+        <div class="uk-width-1-1 tm-aside-column uk-width-1-4@m">
+            <div class="uk-card uk-card-default uk-card-small tm-ignore-container" uk-sticky="offset: 90; bottom: true; media: @m;">
+                <div class="uk-card-body">
+                    <div class="uk-grid-small" uk-grid>
+                        <div class="uk-width-expand uk-text-muted">{{ 'Subtotal' | trans }}</div>
+                        <div>
+                            <span class="shk-price">{{ shoppingCart.subTotal | price }}</span>
+                            <span class="shk-currency">{{ currencySelected | default(currency) }}</span>
+                        </div>
+                    </div>
+                    {% if shoppingCart.discountPercent is not empty %}
                         <div class="uk-grid-small" uk-grid>
-                            <div class="uk-width-expand uk-text-muted">{{ 'Subtotal' | trans }}</div>
-                            <div>
-                                <span class="shk-price">{{ shoppingCart.subTotal }}</span>
+                            <div class="uk-width-expand uk-text-muted">{{ 'Discount' | trans }}</div>
+                            <div class="uk-text-danger">
+                                {{ shoppingCart.discountPercent }}%
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if shoppingCart.discount is not empty %}
+                        <div class="uk-grid-small" uk-grid>
+                            <div class="uk-width-expand uk-text-muted">{{ 'Discount' | trans }}</div>
+                            <div class="uk-text-danger">
+                                <span class="shk-price">{{ shoppingCart.discount }}</span>
                                 <span class="shk-currency">{{ currencySelected | default(currency) }}</span>
                             </div>
                         </div>
-                        {% if shoppingCart.discountPercent is not empty %}
-                            <div class="uk-grid-small" uk-grid>
-                                <div class="uk-width-expand uk-text-muted">{{ 'Discount' | trans }}</div>
-                                <div class="uk-text-danger">
-                                    {{ shoppingCart.discountPercent }}%
-                                </div>
-                            </div>
-                        {% endif %}
-                        {% if shoppingCart.discount is not empty %}
-                            <div class="uk-grid-small" uk-grid>
-                                <div class="uk-width-expand uk-text-muted">{{ 'Discount' | trans }}</div>
-                                <div class="uk-text-danger">
-                                    <span class="shk-price">{{ shoppingCart.discount }}</span>
-                                    <span class="shk-currency">{{ currencySelected | default(currency) }}</span>
-                                </div>
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="uk-card-body">
-                        <div class="uk-grid-small uk-flex-middle" uk-grid>
-                            <div class="uk-width-expand uk-text-muted">{{ 'Total' | trans }}</div>
-                            <div class="uk-text-lead uk-text-bolder">
-                                <span class="big shk-price">{{ priceTotal | price }}</span>
-                                <span class="shk-currency">{{ currencySelected | default(currency) }}</span>
-                            </div>
+                    {% endif %}
+                </div>
+                <div class="uk-card-body">
+                    <div class="uk-grid-small uk-flex-middle" uk-grid>
+                        <div class="uk-width-expand uk-text-muted">{{ 'Total' | trans }}</div>
+                        <div class="uk-text-lead uk-text-bolder">
+                            <span class="big shk-price">{{ priceTotal | price }}</span>
+                            <span class="shk-currency">{{ currencySelected | default(currency) }}</span>
                         </div>
-                        <a class="uk-button uk-button-primary uk-margin-small uk-width-1-1" href="{{ pathLocalized('page_checkout') }}">
-                            {{ 'Checkout' | trans }}
-                        </a>
                     </div>
+                    <a class="uk-button uk-button-primary uk-margin-small uk-width-1-1" href="{{ pathLocalized('page_checkout') }}">
+                        {{ 'Checkout' | trans }}
+                    </a>
                 </div>
             </div>
-            {% endif %}
-
         </div>
-    </div>
+    {% endif %}
+
 </div>
