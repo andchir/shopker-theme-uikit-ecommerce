@@ -36,7 +36,7 @@
                     <div class="uk-form-stacked uk-width-1-1 tm-checkout uk-width-expand@m">
                         <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
 
-                            <section>
+                            <section id="form-checkout-contacts">
                                 <h2 class="tm-checkout-title">{{ 'Contact information' | trans }}</h2>
                                 <div class="uk-card uk-card-default uk-card-small uk-card-body tm-ignore-container">
                                     <div uk-grid>
@@ -62,7 +62,7 @@
                                 </div>
                             </section>
                             {% if checkoutFields is empty or 'shipping' in checkoutFields %}
-                                <section>
+                                <section id="form-checkout-shipping">
                                     <h2 class="tm-checkout-title">{{ 'Delivery address' | trans }}</h2>
                                     <div class="uk-card uk-card-default uk-card-small uk-card-body tm-ignore-container">
                                         <div class="uk-margin-top" uk-grid>
