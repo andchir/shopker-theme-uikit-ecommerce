@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="uk-section uk-section-small">
+        <div class="uk-container">
+            <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
+                <section class="uk-text-center">
+                    <ul class="uk-breadcrumb uk-flex-center uk-margin-remove">
+                        <li>
+                            <a href="{{ app.request.get('locale_url_prefix') }}">
+                                {{ 'Home page' | trans }}
+                            </a>
+                        </li>
+                        <li><span>{{ 'Order checkout' | trans }}</span></li>
+                    </ul>
+                </section>
+                <section>
+                    <div>
+                        <article class="uk-card uk-card-default uk-card-body uk-article tm-ignore-container">
+                            <header class="uk-text-center">
+                                <h1 class="uk-article-title">{{ 'Order checkout' | trans }}</h1>
+                            </header>
+                            <div class="uk-article-body min-height300">
+
+                                {% for type, messages in app.session.flashbag.all() %}
+                                    {% for message in messages %}
+                                        {% if type == 'errors' %}
+                                            <div class="uk-alert-danger uk-box-shadow-small" uk-alert>
+                                                {{ message | trans }}
+                                            </div>
+                                        {% else %}
+                                            <div class="uk-alert-success uk-box-shadow-small" uk-alert>
+                                                {{ message | trans }}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+{% endblock %}

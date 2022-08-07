@@ -36,11 +36,11 @@
                     <div class="uk-form-stacked uk-width-1-1 tm-checkout uk-width-expand@m">
                         <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
 
-                            {% if checkoutFields is empty or 'options' in checkoutFields %}
+                            {% if checkoutFields is empty or 'shipping' in checkoutFields %}
                                 <section>
                                     <h2 class="tm-checkout-title">{{ 'Delivery address' | trans }}</h2>
                                     <div class="uk-card uk-card-default uk-card-small uk-card-body tm-ignore-container">
-                                        {{ form_widget(form.options) }}
+                                        {{ form_widget(form.shipping) }}
                                     </div>
                                 </section>
                             {% endif %}
