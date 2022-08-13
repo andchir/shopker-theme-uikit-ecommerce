@@ -39,3 +39,24 @@ shoppingCart
             alert(e.detail.response.message);
         }
     });
+
+// Reviews
+var shkComments;
+document.addEventListener('DOMContentLoaded', function() {
+    const threadId = document.getElementById('shk-comments').dataset.commentThreadId;
+    shkComments = new ShkComments({
+        baseUrl: '/comments',
+        currentUrl: '',
+        threadId: threadId,
+        selector: '#shk-comments',
+        loadingClass: 'shopping-cart-loading',
+        onAddSuccess: function(data) {// Optional, just a usage example
+            if (data.result && data.result.status === 'published') {
+                shkComments.getThreadHtml();
+            } else if (data.form) {
+                shkComments.getContainer().querySelector('form').outerHTML = data.form;
+                shkComments.formSubmitInit();
+            }
+        }
+    });
+});

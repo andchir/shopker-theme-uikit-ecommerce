@@ -683,94 +683,27 @@
                                                         </div>
                                                     </div>
                                                 </section>
+
                                                 <section>
                                                     <div class="uk-grid-small uk-grid-divider" uk-grid>
                                                         <div class="uk-width-1-1 uk-width-1-5@s uk-text-center tm-reviews-column">
-                                                            <div class="uk-text-meta uk-text-uppercase">average rating</div>
-                                                            <div class="uk-heading-primary">5.0</div>
-                                                            <div class="uk-flex uk-flex-center">
-                                                                <ul class="uk-iconnav tm-rating">
-                                                                    <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                                    </li>
-                                                                    <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                                    </li>
-                                                                    <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                                    </li>
-                                                                    <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                                    </li>
-                                                                    <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="uk-margin-small-top uk-text-meta">based on 2 reviews</div>
-                                                            <button class="uk-button uk-button-primary uk-margin-top uk-width-1-1" uk-toggle="target: #review">write a review</button>
+
+                                                            {% if currentPage.rating is defined and currentPage.rating is not empty %}
+                                                                <div class="uk-text-meta uk-text-uppercase">{{ 'Average rating' | trans }}</div>
+                                                                <div class="uk-heading-primary">{{ currentPage.rating | round }}</div>
+                                                                <span class="star-rating-value{{ currentPage.rating | round }}" title="{{ 'Product rating: %rating% of 5' | trans({'%rating%': currentPage.rating}) }}"></span>
+                                                            {% endif %}
+
+                                                            <button class="uk-button uk-button-primary uk-margin-top uk-width-1-1" uk-toggle="target: #review">{{ 'Write a review' | trans }}</button>
                                                         </div>
                                                         <div class="uk-width-1-1 uk-width-expand@s">
-                                                            <div class="uk-grid-small uk-grid-divider uk-child-width-1-1" uk-grid>
-                                                                <article>
-                                                                    <section class="uk-grid-small uk-child-width-1-1" uk-grid>
-                                                                        <header>
-                                                                            <div class="uk-h4 uk-margin-remove">Thomas Bruns</div>
-                                                                            <time class="uk-text-meta">May 21, 2018</time>
-                                                                        </header>
-                                                                        <div>
-                                                                            <ul class="uk-iconnav uk-margin-bottom tm-rating">
-                                                                                <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                                                </li>
-                                                                                <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                                                </li>
-                                                                                <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                                                </li>
-                                                                                <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                                                </li>
-                                                                                <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                                                </li>
-                                                                            </ul>
-                                                                            <div><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p></div>
-                                                                            <div class="uk-grid-small uk-flex-middle uk-margin-top" uk-grid>
-                                                                                <div class="uk-text-meta">Was this review helpful to you?</div>
-                                                                                <div>
-                                                                                    <button class="uk-button uk-button-default uk-button-small">Yes<span class="uk-margin-xsmall-left uk-text-muted">14</span></button>
-                                                                                    <button class="uk-button uk-button-default uk-button-small uk-margin-small-left">No<span class="uk-margin-xsmall-left uk-text-muted">2</span></button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </section>
-                                                                </article>
-                                                                <article>
-                                                                    <section class="uk-grid-small uk-child-width-1-1" uk-grid>
-                                                                        <header>
-                                                                            <div class="uk-h4 uk-margin-remove">George Clanton</div>
-                                                                            <time class="uk-text-meta">May 24, 2018</time>
-                                                                        </header>
-                                                                        <div>
-                                                                            <ul class="uk-iconnav uk-margin-bottom tm-rating">
-                                                                                <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                                                </li>
-                                                                                <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                                                </li>
-                                                                                <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                                                </li>
-                                                                                <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                                                </li>
-                                                                                <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                                                </li>
-                                                                            </ul>
-                                                                            <div><p>Nunc interdum odio non erat commodo lacinia. Aliquam nec tincidunt lorem. Nunc quis scelerisque nulla. Nam nulla ante, luctus non dignissim a, luctus quis sem. Curabitur consectetur porttitor leo. Donec molestie nisl vitae lorem porttitor vehicula. Etiam feugiat a magna ac dapibus. Donec vitae sollicitudin lectus.</p><p>Sed mollis ex tincidunt posuere blandit. Mauris sed tellus dolor. Suspendisse nibh mi, dignissim et molestie id, dictum in arcu. Duis sodales scelerisque quam, quis lobortis felis egestas eu. Sed nibh nulla, aliquet ac leo vel, rutrum dignissim metus. Sed non rhoncus ex. Curabitur accumsan porta lacus non viverra. Etiam feugiat sapien ut purus luctus, eu porttitor neque volutpat.</p></div>
-                                                                            <div class="uk-grid-small uk-flex-middle uk-margin-top" uk-grid>
-                                                                                <div class="uk-text-meta">Was this review helpful to you?</div>
-                                                                                <div>
-                                                                                    <button class="uk-button uk-button-default uk-button-small">Yes<span class="uk-margin-xsmall-left uk-text-muted">5</span></button>
-                                                                                    <button class="uk-button uk-button-default uk-button-small uk-margin-small-left">No<span class="uk-margin-xsmall-left uk-text-muted">0</span></button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </section>
-                                                                </article>
-                                                            </div>
+
+                                                            <div id="shk-comments" data-comment-thread-id="{{ currentCategory.contentTypeName ~ '_' ~ currentId }}"></div>
+
                                                         </div>
                                                     </div>
                                                 </section>
+
                                                 <section>
                                                     <ul class="uk-list-divider uk-list-large" uk-accordion="multiple: true">
                                                         <li><a class="uk-accordion-title" href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit?</a>
@@ -934,9 +867,13 @@
                                                     </article>
                                                     <article class="tm-product-card">
                                                         <div class="tm-product-card-media">
-                                                            <div class="tm-ratio tm-ratio-4-3"><a class="tm-media-box" href="product.html">
-                                                                    <figure class="tm-media-box-wrap"><img src="/assets/uikit-ecommerce/images/products/5/5-medium.jpg" alt="Dell XPS 15 9560-8968 (Silver)"/>
-                                                                    </figure></a></div>
+                                                            <div class="tm-ratio tm-ratio-4-3">
+                                                                <a class="tm-media-box" href="product.html">
+                                                                    <figure class="tm-media-box-wrap">
+                                                                        <img src="/assets/uikit-ecommerce/images/products/5/5-medium.jpg" alt="Dell XPS 15 9560-8968 (Silver)"/>
+                                                                    </figure>
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                         <div class="tm-product-card-body">
                                                             <div class="tm-product-card-info">
@@ -1091,48 +1028,6 @@
                         </section>
                     </div>
 
-                    <div id="review" uk-modal>
-                        <div class="uk-modal-dialog uk-modal-body">
-                            <button class="uk-modal-close-outside" type="button" uk-close></button>
-                            <h2 class="uk-modal-title uk-text-center">Review</h2>
-                            <form class="uk-form-stacked">
-                                <div class="uk-grid-small uk-child-width-1-1" uk-grid>
-                                    <div>
-                                        <label>
-                                            <div class="uk-form-label uk-form-label-required">Name</div>
-                                            <input class="uk-input" type="text" required>
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <div class="uk-form-label uk-form-label-required">Email</div>
-                                            <input class="uk-input" type="email" required>
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <div class="uk-form-label">Rating</div>
-                                        <ul class="uk-iconnav tm-rating">
-                                            <li><a uk-icon="star"></a></li>
-                                            <li><a uk-icon="star"></a></li>
-                                            <li><a uk-icon="star"></a></li>
-                                            <li><a uk-icon="star"></a></li>
-                                            <li><a uk-icon="star"></a></li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <div class="uk-form-label uk-form-label-required">Review</div>
-                                            <textarea class="uk-textarea" rows="5" required></textarea>
-                                        </label>
-                                    </div>
-                                    <div class="uk-text-center">
-                                        <button class="uk-button uk-button-primary">Send</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -1145,4 +1040,9 @@
         {"_id": "asc"},
         10, 1, 'banner-featurese'
     ) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/comments/js/comments.js') }}" defer></script>
 {% endblock %}

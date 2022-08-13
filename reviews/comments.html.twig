@@ -1,0 +1,73 @@
+
+{% include 'reviews/add_comment_form.html.twig' %}
+
+{% if comments | length > 0 %}
+    <div id="comments-list">
+        <div class="uk-grid-small uk-grid-divider uk-child-width-1-1" uk-grid>
+            {% for comment in comments %}
+            <article>
+                <section class="uk-grid-small uk-child-width-1-1 uk-padding-small uk-padding-remove-vertical uk-padding-remove-right" uk-grid>
+                    <div{% if comment.status != 'published' %} class="uk-padding-small uk-background-muted"{% endif %}>
+                        <header>
+                            <div class="uk-h4 uk-margin-remove">{{ comment.author.fullName }}</div>
+                            <time class="uk-text-meta">
+                                {{ comment.publishedTime | date('d.m.Y H:i:s', 'Europe/Moscow') }}
+                            </time>
+                        </header>
+                        <div class="uk-margin-remove-top uk-margin-small-bottom">
+                            <span class="star-rating-value{{ comment.vote }}{% if comment.status != 'published' %} text-muted{% endif %}"></span>
+                            <div>
+                                {{ comment.comment | nl2br }}
+                            </div>
+                        </div>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <form action="{{ path('comment_update', {itemId: comment.id}) }}" method="post">
+                                <div class="position-relative">
+                                    <div class="position-absolute text-right" style="bottom: 0; right: 0;">
+                                        {% if comment.status == 'published' %}
+                                            <button type="submit" class="uk-button uk-button-default uk-button-small" name="action" value="hide" data-id="{{ comment.id }}">
+                                                {{ 'Hide' | trans }}
+                                            </button>
+                                        {% else %}
+                                            <button type="submit" class="uk-button uk-button-default uk-button-small" name="action" value="publish" data-id="{{ comment.id }}">
+                                                {{ 'Publish' | trans }}
+                                            </button>
+                                        {% endif %}
+                                        <button type="button" class="uk-button uk-button-default uk-button-small" name="reply_toggle">
+                                            {{ 'Reply' | trans }}
+                                        </button>
+                                        <button type="submit" class="uk-button uk-button-default uk-button-small" name="action" value="delete" data-id="{{ comment.id }}">
+                                            {{ 'Delete' | trans }}
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="comment-reply-form-container uk-padding-small" style="display: none;">
+                                    <hr class="mt-0">
+                                    <textarea class="uk-textarea uk-margin-small-bottom" rows="2" name="reply">{{ comment.reply }}</textarea>
+                                    <div class="py-2 text-right">
+                                        <button type="submit" class="uk-button uk-button-default uk-button-small" name="action" value="reply" data-id="{{ comment.id }}">
+                                            {{ 'Submit' | trans }}
+                                        </button>
+                                        <button type="button" class="uk-button uk-button-default uk-button-small" name="reply_toggle">
+                                            {{ 'Cancel' | trans }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            {% if comment.reply is not empty %}
+                                <div class="uk-padding-small">
+                                    <div class="uk-card uk-card-body uk-card-default uk-background-muted" style="margin-left: 50px;">
+                                        <p>{{ comment.reply | nl2br }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </section>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+{% elseif is_granted('ROLE_USER') %}
+    <p>{{ 'Your review will be the first.' | trans }}</p>
+{% endif %}
