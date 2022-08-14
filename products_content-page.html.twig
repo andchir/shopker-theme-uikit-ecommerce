@@ -166,9 +166,11 @@
                                                     <li>
                                                         <a class="js-scroll-to-description" href="#description">{{ 'Reviews' | trans }}</a>
                                                     </li>
+                                                    {% if currentPage.faq is defined and currentPage.faq is not empty %}
                                                     <li>
                                                         <a class="js-scroll-to-description" href="#description">{{ 'Q&A' | trans }}</a>
                                                     </li>
+                                                    {% endif %}
                                                 </ul>
                                             </nav>
                                         </header>
@@ -191,220 +193,21 @@
                                                         </div>
                                                     </article>
                                                 </section>
+
                                                 <section>
-                                                    <h2>Performance</h2>
+                                                    <h2>{{ 'Specifications' | trans }}</h2>
+                                                    {% if currentPage.specification is defined and currentPage.specification is not empty %}
                                                     <table class="uk-table uk-table-divider uk-table-justify uk-table-responsive">
+                                                        {% for specificationItem in currentPage.specification %}
                                                         <tr>
-                                                            <th class="uk-width-medium">Processor</th>
-                                                            <td class="uk-table-expand">Intel&nbsp;Core i7&nbsp;Quad-Core</td>
+                                                            <th class="uk-width-medium">{{ specificationItem.name }}</th>
+                                                            <td class="uk-table-expand">{{ specificationItem.value }}</td>
                                                         </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Base Clock Speed</th>
-                                                            <td class="uk-table-expand">2.8&nbsp;GHz</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Maximum Boost Speed</th>
-                                                            <td class="uk-table-expand">3.8&nbsp;GHz</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Total Installed Memory</th>
-                                                            <td class="uk-table-expand">16&nbsp;GB</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Memory Type</th>
-                                                            <td class="uk-table-expand">LPDDR3&nbsp;SDRAM</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Memory Speed</th>
-                                                            <td class="uk-table-expand">2133&nbsp;MHz</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Onboard Memory</th>
-                                                            <td class="uk-table-expand">16&nbsp;GB</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Available Memory Slots</th>
-                                                            <td class="uk-table-expand">—</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Graphics Type</th>
-                                                            <td class="uk-table-expand">Hybrid</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">GPU</th>
-                                                            <td class="uk-table-expand">AMD Radeon&nbsp;Pro 555 with 2&nbsp;GB&nbsp;GDDR5 VRAM,<br>Intel HD Graphics&nbsp;630</td>
-                                                        </tr>
+                                                        {% endfor %}
                                                     </table>
-                                                    <h2>Display</h2>
-                                                    <table class="uk-table uk-table-divider uk-table-justify uk-table-responsive">
-                                                        <tr>
-                                                            <th class="uk-width-medium">Panel Type</th>
-                                                            <td class="uk-table-expand">IPS</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Size</th>
-                                                            <td class="uk-table-expand">15.4"</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Aspect Ratio</th>
-                                                            <td class="uk-table-expand">16:10</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Native Resolution</th>
-                                                            <td class="uk-table-expand">2880×1800</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Touchscreen</th>
-                                                            <td class="uk-table-expand">—</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Finish</th>
-                                                            <td class="uk-table-expand">Glossy</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Brightness</th>
-                                                            <td class="uk-table-expand">500&nbsp;cd/m<sup>2</sup></td>
-                                                        </tr>
-                                                    </table>
-                                                    <h2>Drives</h2>
-                                                    <table class="uk-table uk-table-divider uk-table-justify uk-table-responsive">
-                                                        <tr>
-                                                            <th class="uk-width-medium">Available Slots</th>
-                                                            <td class="uk-table-expand">—</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Total Capacity</th>
-                                                            <td class="uk-table-expand">256&nbsp;GB</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Solid State Storage</th>
-                                                            <td class="uk-table-expand">1 × 256&nbsp;GB&nbsp;Integrated PCIe</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Optical Drive</th>
-                                                            <td class="uk-table-expand">—</td>
-                                                        </tr>
-                                                    </table>
-                                                    <h2>Input/ Output Connectors</h2>
-                                                    <table class="uk-table uk-table-divider uk-table-justify uk-table-responsive">
-                                                        <tr>
-                                                            <th class="uk-width-medium">Ports</th>
-                                                            <td class="uk-table-expand">4 × Thunderbolt 3&nbsp;via USB Type-C</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Display</th>
-                                                            <td class="uk-table-expand">4 × DisplayPort&nbsp;via Type-C</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Audio</th>
-                                                            <td class="uk-table-expand">1 × 1/8" (3.5&nbsp;mm) Headphone Output,<br>2 × Integrated Speaker,<br>3 × Integrated Microphone</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Expansion Slots</th>
-                                                            <td class="uk-table-expand">—</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Media Card Slots</th>
-                                                            <td class="uk-table-expand">—</td>
-                                                        </tr>
-                                                    </table>
-                                                    <h2>Communications</h2>
-                                                    <table class="uk-table uk-table-divider uk-table-justify uk-table-responsive">
-                                                        <tr>
-                                                            <th class="uk-width-medium">Network</th>
-                                                            <td class="uk-table-expand">—</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Modem</th>
-                                                            <td class="uk-table-expand">—</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Wi-Fi</th>
-                                                            <td class="uk-table-expand">802.11ac; Dual-Band</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Bluetooth</th>
-                                                            <td class="uk-table-expand">Bluetooth 4.2</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Mobile Broadband</th>
-                                                            <td class="uk-table-expand">—</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">GPS</th>
-                                                            <td class="uk-table-expand">Not Specified by Manufacturer</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">NFC</th>
-                                                            <td class="uk-table-expand">Not Specified by Manufacturer</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Webcam</th>
-                                                            <td class="uk-table-expand">User-Facing: 720p Video</td>
-                                                        </tr>
-                                                    </table>
-                                                    <h2>Battery</h2>
-                                                    <table class="uk-table uk-table-divider uk-table-justify uk-table-responsive">
-                                                        <tr>
-                                                            <th class="uk-width-medium">Battery Chemistry</th>
-                                                            <td class="uk-table-expand">Lithium-Ion Polymer</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Watt Hours / Type</th>
-                                                            <td class="uk-table-expand">76&nbsp;Wh&nbsp;Non-Removable</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Maximum Runtime</th>
-                                                            <td class="uk-table-expand">10&nbsp;Hours</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Power Requirements</th>
-                                                            <td class="uk-table-expand">100-240&nbsp;VAC, 50-60&nbsp;Hz</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Power Supply</th>
-                                                            <td class="uk-table-expand">1 × 87&nbsp;W</td>
-                                                        </tr>
-                                                    </table>
-                                                    <h2>General</h2>
-                                                    <table class="uk-table uk-table-divider uk-table-justify uk-table-responsive">
-                                                        <tr>
-                                                            <th class="uk-width-medium">Operating System</th>
-                                                            <td class="uk-table-expand">macOS High Sierra</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Security</th>
-                                                            <td class="uk-table-expand">Not specified</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Keyboard</th>
-                                                            <td class="uk-table-expand">Keys: 64,<br>Type: Standard Notebook Keyboard,<br>Features: Backlight</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Pointing Device</th>
-                                                            <td class="uk-table-expand">Force Touch Trackpad</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Dimensions (W × H × D)</th>
-                                                            <td class="uk-table-expand">13.8 × 0.6 × 9.5"&nbsp;/&nbsp;35.1 × 1.5 × 24.1&nbsp;cm</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Weight</th>
-                                                            <td class="uk-table-expand">4.02&nbsp;lb&nbsp;/&nbsp;1.82&nbsp;kg</td>
-                                                        </tr>
-                                                    </table>
-                                                    <h2>Packaging Info</h2>
-                                                    <table class="uk-table uk-table-divider uk-table-justify uk-table-responsive">
-                                                        <tr>
-                                                            <th class="uk-width-medium">Package Weight</th>
-                                                            <td class="uk-table-expand">7.55&nbsp;lb</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="uk-width-medium">Box Dimensions (L × W × H)</th>
-                                                            <td class="uk-table-expand">16.2 × 11.6 × 3.7"</td>
-                                                        </tr>
-                                                    </table>
+                                                    {% endif %}
                                                 </section>
+
                                                 <section>
                                                     <div class="tm-wrapper">
                                                         <div class="uk-grid-collapse uk-child-width-1-3@s uk-child-width-1-4@m tm-products-grid" uk-grid>
@@ -711,25 +514,18 @@
                                                     </div>
                                                 </section>
 
+                                                {% if currentPage.faq is defined and currentPage.faq is not empty %}
                                                 <section>
                                                     <ul class="uk-list-divider uk-list-large" uk-accordion="multiple: true">
-                                                        <li><a class="uk-accordion-title" href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit?</a>
-                                                            <div class="uk-accordion-content">Vivamus imperdiet venenatis est. Phasellus vitae mauris imperdiet, condimentum eros vel, ullamcorper turpis. Maecenas sed libero quis orci egestas vehicula fermentum id diam.</div>
+                                                        {% for faqItem in currentPage.faq %}
+                                                        <li><a class="uk-accordion-title" href="#">{{ faqItem.question }}</a>
+                                                            <div class="uk-accordion-content">{{ faqItem.answer }}</div>
                                                         </li>
-                                                        <li><a class="uk-accordion-title" href="#">Nullam massa sem, mollis ut luctus at, tincidunt a lorem?</a>
-                                                            <div class="uk-accordion-content">Aliquam sed dictum elit, quis consequat metus. Proin in mauris finibus urna lacinia laoreet sed id orci.</div>
-                                                        </li>
-                                                        <li><a class="uk-accordion-title" href="#">Aliquam pretium diam et ullamcorper malesuada?</a>
-                                                            <div class="uk-accordion-content">Praesent feugiat lectus faucibus tellus congue pharetra. In viverra vehicula pellentesque. Etiam consectetur ultricies magna at bibendum.</div>
-                                                        </li>
-                                                        <li><a class="uk-accordion-title" href="#">Nulla fringilla sollicitudin mauris eu volutpat?</a>
-                                                            <div class="uk-accordion-content">Mauris quis neque nec lectus aliquet malesuada. Nunc ullamcorper purus id gravida aliquam. Integer eget blandit urna.</div>
-                                                        </li>
-                                                        <li><a class="uk-accordion-title" href="#">Nam luctus velit ante, id pulvinar nisl gravida eget?</a>
-                                                            <div class="uk-accordion-content">Vestibulum gravida nisi tempor malesuada iaculis. Phasellus finibus, nisl quis pellentesque scelerisque, erat erat mollis massa, eu semper diam eros id risus. Cras vitae nisi porta.</div>
-                                                        </li>
+                                                        {% endfor %}
                                                     </ul>
                                                 </section>
+                                                {% endif %}
+
                                             </div>
                                         </div>
                                     </div>

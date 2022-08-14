@@ -363,6 +363,27 @@
     "listOrder": 7
   },
   {
+    "title": "Категории",
+    "name": "categories",
+    "description": "Вы можете выбрать несколько категорий для товара.",
+    "inputType": "categories",
+    "inputProperties": {
+      "value": "",
+      "handler": "",
+      "layout": "vertical"
+    },
+    "outputType": "categories",
+    "outputProperties": {
+      "className": ""
+    },
+    "group": "Категории",
+    "required": false,
+    "showInTable": false,
+    "showInList": false,
+    "showOnPage": false,
+    "isFilter": false
+  },
+  {
     "title": "Параметры",
     "name": "parameters",
     "description": "",
@@ -386,24 +407,59 @@
     "isFilter": false
   },
   {
-    "title": "Категории",
-    "name": "categories",
-    "description": "Вы можете выбрать несколько категорий для товара.",
-    "inputType": "categories",
+    "id": 0,
+    "title": "FAQ",
+    "name": "faq",
+    "description": "",
+    "inputType": "parameters",
+    "outputType": "parameters",
+    "group": "Параметры",
+    "required": false,
+    "showInTable": false,
+    "showOnPage": true,
+    "showInList": false,
+    "isFilter": false,
     "inputProperties": {
       "value": "",
       "handler": "",
-      "layout": "vertical"
+      "names": "NAME,VALUE",
+      "keys": "question,answer",
+      "types": "text,text"
     },
-    "outputType": "categories",
     "outputProperties": {
-      "className": ""
-    },
-    "group": "Категории",
+      "className": "",
+      "chunkName": "",
+      "type": "radio",
+      "firstSelected": "1",
+      "groupByName": "0"
+    }
+  },
+  {
+    "id": 0,
+    "title": "Specification",
+    "name": "specification",
+    "description": "",
+    "inputType": "parameters",
+    "outputType": "parameters",
+    "group": "Параметры",
     "required": false,
     "showInTable": false,
+    "showOnPage": true,
     "showInList": false,
-    "showOnPage": false,
-    "isFilter": false
+    "isFilter": true,
+    "inputProperties": {
+      "value": "",
+      "handler": "",
+      "names": "NAME,VALUE",
+      "keys": "name,value",
+      "types": "text,text"
+    },
+    "outputProperties": {
+      "className": "",
+      "chunkName": "",
+      "type": "radio",
+      "firstSelected": "1",
+      "groupByName": "0"
+    }
   }
 ]
