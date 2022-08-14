@@ -43,20 +43,29 @@ shoppingCart
 // Reviews
 var shkComments;
 document.addEventListener('DOMContentLoaded', function() {
-    const threadId = document.getElementById('shk-comments').dataset.commentThreadId;
-    shkComments = new ShkComments({
-        baseUrl: '/comments',
-        currentUrl: '',
-        threadId: threadId,
-        selector: '#shk-comments',
-        loadingClass: 'shopping-cart-loading',
-        onAddSuccess: function(data) {// Optional, just a usage example
-            if (data.result && data.result.status === 'published') {
-                shkComments.getThreadHtml();
-            } else if (data.form) {
-                shkComments.getContainer().querySelector('form').outerHTML = data.form;
-                shkComments.formSubmitInit();
-            }
+    UIkit.util.on('.js-product-switcher', 'shown', function (e) {
+        if (e.target.dataset.commentThreadId && !document.getElementById('shk-comments').innerHTML) {
+            shkComments = new ShkComments({
+                baseUrl: '/comments',
+                currentUrl: '',
+                threadId: e.target.dataset.commentThreadId,
+                selector: '#shk-comments',
+                formContainerSelector: '#shk-comments-form',
+                loadingClass: 'shopping-cart-loading',
+                onAddSuccess: function(data) {
+                    if (data.success) {
+                        document.getElementById('add_comment_comment').value = '';
+                        Array.from(document.querySelectorAll('#add_comment_vote input')).forEach(function(inputEl) {
+                            inputEl.checked = false;
+                        });
+                        UIkit.modal(document.getElementById('reviewModal')).hide();
+                        shkComments.getThreadHtml();
+                    }
+                },
+                onAddFail: function(data) {
+                    console.log(data);
+                }
+            });
         }
     });
 });

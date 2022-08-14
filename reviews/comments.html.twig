@@ -1,5 +1,5 @@
 
-{% include 'reviews/add_comment_form.html.twig' %}
+{% include 'flash_messages.html.twig' %}
 
 {% if comments | length > 0 %}
     <div id="comments-list">
@@ -7,7 +7,7 @@
             {% for comment in comments %}
             <article>
                 <section class="uk-grid-small uk-child-width-1-1 uk-padding-small uk-padding-remove-vertical uk-padding-remove-right" uk-grid>
-                    <div{% if comment.status != 'published' %} class="uk-padding-small uk-background-muted"{% endif %}>
+                    <div{% if comment.status != 'published' %} class="uk-padding-small uk-background-muted" style="opacity: 0.6;"{% endif %}>
                         <header>
                             <div class="uk-h4 uk-margin-remove">{{ comment.author.fullName }}</div>
                             <time class="uk-text-meta">
@@ -56,7 +56,7 @@
                             </form>
                             {% if comment.reply is not empty %}
                                 <div class="uk-padding-small">
-                                    <div class="uk-card uk-card-body uk-card-default uk-background-muted" style="margin-left: 50px;">
+                                    <div class="uk-card uk-card-body uk-card-default uk-background-muted border" style="margin-left: 50px;">
                                         <p>{{ comment.reply | nl2br }}</p>
                                     </div>
                                 </div>

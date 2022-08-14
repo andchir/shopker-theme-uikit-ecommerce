@@ -2,36 +2,29 @@
 {% form_theme form '@Comments/Default/form/bootstrap_5_layout.html.twig' %}
 
 {%  if is_granted('ROLE_USER') %}
+    {{ form_start(form, {attr: {action: path('comment_add')}}) }}
 
-    <div id="review" uk-modal>
-        <div class="uk-modal-dialog uk-modal-body">
+    <div class="card card-body bg-light mb-3">
+        <h4>{{ 'Add Comment' | trans }}</h4>
 
-            {{ form_start(form, {attr: {action: path('comment_add')}}) }}
+        {{ form_row(form.comment, {attr: {rows: 4, class: 'uk-textarea uk-margin-small-bottom'}}) }}
 
-            <div class="card card-body bg-light mb-3">
-                <h4>{{ 'Add Comment' | trans }}</h4>
+        <div class="star-rating">
+            {{ form_row(form.vote, {label_attr: {class: 'radio-flat'}}) }}
+        </div>
 
-                {{ form_row(form.comment, {attr: {rows: 4}}) }}
+        {{ form_widget(form) }}
 
-                <div class="star-rating">
-                    {{ form_row(form.vote, {label_attr: {class: 'radio-flat'}}) }}
-                </div>
-
-                {{ form_widget(form) }}
-
-                <div class="form-group mb-0">
-                    <button type="submit" class="btn btn-primary" name="button-submit">
-                        {{ 'Submit' | trans }}
-                    </button>
-                </div>
-            </div>
-
-            {% include 'flash_messages.html.twig' %}
-
-            {{ form_end(form) }}
-
+        <div class="form-group mb-0">
+            <button type="submit" class="uk-button uk-button-primary" name="button-submit">
+                {{ 'Submit' | trans }}
+            </button>
         </div>
     </div>
+
+    {% include 'flash_messages.html.twig' %}
+
+    {{ form_end(form) }}
 
 {% else %}
 
