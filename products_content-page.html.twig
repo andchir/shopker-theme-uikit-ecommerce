@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% set reviewsCount = countContent('comment', {"threadId": currentCategory.contentTypeName ~ '_' ~ currentId, "status": "published"}) %}
+
 {% block body %}
     <section class="uk-section uk-section-small">
         <div class="uk-container">
@@ -18,25 +20,22 @@
 
                                     <div class="uk-width-1-1 uk-width-1-3@m tm-product-info">
                                         <div class="uk-card-body">
-                                            <div><a href="#" title="Apple"><img src="/assets/uikit-ecommerce/images/brands/apple.svg" alt="Apple" style="height: 40px;"></a></div>
                                             <div class="uk-margin">
                                                 <div class="uk-grid-small" uk-grid>
-                                                    <div class="uk-flex uk-flex-middle">
-                                                        <ul class="uk-iconnav uk-margin-xsmall-bottom tm-rating">
-                                                            <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                            </li>
-                                                            <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                            </li>
-                                                            <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                            </li>
-                                                            <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                            </li>
-                                                            <li><span class="uk-text-warning" uk-icon="star"></span>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="uk-margin-xsmall-left"><a class="uk-text-meta js-scroll-to-description" href="#description" onclick="UIkit.switcher('.js-product-switcher').show(3);">(2)</a></div>
-                                                    </div>
-                                                    <div><span class="uk-label uk-label-warning uk-margin-xsmall-right">top selling</span><span class="uk-label uk-label-danger uk-margin-xsmall-right">trade-in</span>
+                                                    {% if reviewsCount > 0 %}
+                                                        <div class="uk-flex uk-flex-middle">
+                                                            {% if currentPage.rating is defined and currentPage.rating is not empty %}
+                                                                <span class="star-rating-value{{ currentPage.rating | round }} uk-text-large" title="{{ 'Product rating: %rating% of 5' | trans({'%rating%': currentPage.rating}) }}"></span>
+                                                            {% endif %}
+                                                            <div class="uk-margin-xsmall-left">
+                                                                <a class="uk-text-meta js-scroll-to-description" href="#description" title="Reviews" onclick="UIkit.switcher('.js-product-switcher').show(3);">
+                                                                    ({{ reviewsCount }})
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                    <div>
+                                                        {{ renderOutputTypeChunk(currentPage, fields, 'tag', 'page_') }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -118,35 +117,22 @@
                                                 </div>
                                             </div>
                                             <div class="uk-margin">
-                                                <div class="uk-padding-small uk-background-muted uk-border-rounded">
-                                                    <div class="uk-grid-small uk-child-width-1-1 uk-text-small" uk-grid>
-                                                        <div>
-                                                            <div class="uk-grid-collapse" uk-grid><span class="uk-margin-xsmall-right" uk-icon="cart"></span>
-                                                                <div>
-                                                                    <div class="uk-text-bolder">Delivery</div>
-                                                                    <div class="uk-text-xsmall uk-text-muted">In stock, free, tomorrow</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="uk-grid-collapse" uk-grid><span class="uk-margin-xsmall-right" uk-icon="location"></span>
-                                                                <div>
-                                                                    <div class="uk-text-bolder">Pick up from store</div>
-                                                                    <div class="uk-text-xsmall uk-text-muted">In stock, free, tomorrow</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                {% if currentPage.specification is defined and currentPage.specification is not empty %}
+                                                    <ul class="uk-list uk-text-small uk-margin-remove">
+                                                        {% for specificationItem in currentPage.specification | slice(0, 5) %}
+                                                            <li>
+                                                                <span class="uk-text-muted">{{ specificationItem.name }}:</span>
+                                                                <span>{{ specificationItem.value }}</span>
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                {% endif %}
+                                                <div class="uk-margin-small-top">
+                                                    <a class="uk-link-heading js-scroll-to-description" href="#description" onclick="UIkit.switcher('.js-product-switcher').show(1);">
+                                                        <span class="tm-pseudo">{{ 'Detailed specifications' | trans }}</span>
+                                                        <span class="uk-margin-xsmall-left" uk-icon="icon: chevron-down; ratio: .75;"></span>
+                                                    </a>
                                                 </div>
-                                            </div>
-                                            <div class="uk-margin">
-                                                <ul class="uk-list uk-text-small uk-margin-remove">
-                                                    <li><span class="uk-text-muted">Diagonal display: </span><span>15.4"</span></li>
-                                                    <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i7</span></li>
-                                                    <li><span class="uk-text-muted">RAM: </span><span>16&nbsp;GB</span></li>
-                                                    <li><span class="uk-text-muted">Video Card: </span><span>AMD Radeon Pro 555</span></li>
-                                                </ul>
-                                                <div class="uk-margin-small-top"><a class="uk-link-heading js-scroll-to-description" href="#description" onclick="UIkit.switcher('.js-product-switcher').show(1);"><span class="tm-pseudo">Detailed specifications</span><span class="uk-margin-xsmall-left" uk-icon="icon: chevron-down; ratio: .75;"></span></a></div>
                                             </div>
                                         </div>
                                     </div>
@@ -161,7 +147,7 @@
                                                         <a class="js-scroll-to-description" href="#description">{{ 'Specifications' | trans }}</a>
                                                     </li>
                                                     <li>
-                                                        <a class="js-scroll-to-description" href="#description">{{ 'Accessories' | trans }}<span>(9)</span></a>
+                                                        <a class="js-scroll-to-description" href="#description">{{ 'Accessories' | trans }}</a>
                                                     </li>
                                                     <li>
                                                         <a class="js-scroll-to-description" href="#description">{{ 'Reviews' | trans }}</a>
@@ -179,17 +165,8 @@
                                                 <section>
                                                     <article class="uk-article">
                                                         <div class="uk-article-body">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod nisl nunc, a dictum magna laoreet eget. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
-                                                            <div class="tm-wrapper uk-text-center">
-                                                                <figure><a href="/assets/uikit-ecommerce/images/articles/macbook-photo.jpg"><img src="/assets/uikit-ecommerce/images/articles/macbook-photo.jpg" alt="MacBook Pro"></a>
-                                                                    <figcaption>MacBook Pro</figcaption>
-                                                                </figure>
-                                                            </div>
-                                                            <p>Sed sit amet ante eget nunc dictum auctor sagittis in libero. Aliquam ultricies tincidunt nisi, a vestibulum nisi tempor vitae. Praesent fermentum sem semper fermentum ultrices. Duis eleifend vel sapien dignissim auctor. Vestibulum at commodo leo. In vitae eros ut sapien egestas venenatis non sit amet elit. In gravida vitae ante a rutrum.</p>
-                                                            <h2>Touch Bar</h2>
-                                                            <p>Vivamus ornare tortor elit, sed rutrum felis iaculis in. Nunc ut molestie neque. Aenean vitae elementum arcu, at rutrum ligula. Pellentesque fringilla dictum viverra. Vestibulum eu ipsum nec risus pharetra iaculis. Donec quis nulla orci. Suspendisse eget dictum augue, et lobortis justo. Suspendisse velit dui, sollicitudin quis velit nec, tincidunt consequat arcu.</p>
-                                                            <h2>Retina Display</h2>
-                                                            <p>Pellentesque dictum imperdiet rutrum. Vestibulum egestas quam eget maximus rutrum. Etiam blandit a dolor laoreet vulputate. Nulla ullamcorper ipsum et libero finibus, vitae vestibulum odio feugiat.</p>
+                                                            <h2>{{ 'Overview' | trans }}</h2>
+                                                            {{ currentPage.description | raw }}
                                                         </div>
                                                     </article>
                                                 </section>
@@ -209,282 +186,22 @@
                                                 </section>
 
                                                 <section>
-                                                    <div class="tm-wrapper">
-                                                        <div class="uk-grid-collapse uk-child-width-1-3@s uk-child-width-1-4@m tm-products-grid" uk-grid>
-                                                            <article class="tm-product-card">
-                                                                <div class="tm-product-card-media">
-                                                                    <div class="tm-ratio tm-ratio-4-3"><a class="tm-media-box" href="product.html">
-                                                                            <div class="tm-product-card-labels"><span class="uk-label uk-label-warning">top selling</span><span class="uk-label uk-label-danger">trade-in</span>
-                                                                            </div>
-                                                                            <figure class="tm-media-box-wrap"><img src="/assets/uikit-ecommerce/images/products/1/1-medium.jpg" alt="Apple MacBook Pro 15&quot; Touch Bar MPTU2LL/A 256GB (Silver)"/>
-                                                                            </figure></a></div>
-                                                                </div>
-                                                                <div class="tm-product-card-body">
-                                                                    <div class="tm-product-card-info">
-                                                                        <div class="uk-text-meta uk-margin-xsmall-bottom">Laptop</div>
-                                                                        <h3 class="tm-product-card-title"><a class="uk-link-heading" href="product.html">Apple MacBook Pro 15&quot; Touch Bar MPTU2LL/A 256GB (Silver)</a></h3>
-                                                                        <ul class="uk-list uk-text-small tm-product-card-properties">
-                                                                            <li><span class="uk-text-muted">Diagonal display: </span><span>15.4"</span></li>
-                                                                            <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i7</span></li>
-                                                                            <li><span class="uk-text-muted">RAM: </span><span>16&nbsp;GB</span></li>
-                                                                            <li><span class="uk-text-muted">Video Card: </span><span>AMD Radeon Pro 555</span></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="tm-product-card-shop">
-                                                                        <div class="tm-product-card-prices">
-                                                                            <del class="uk-text-meta">$1899.00</del>
-                                                                            <div class="tm-product-card-price">$1599.00</div>
-                                                                        </div>
-                                                                        <div class="tm-product-card-add">
-                                                                            <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites tm-action-button-active js-added-to" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare tm-action-button-active js-added-to" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
-                                                                            <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart"><span class="tm-product-card-add-button-icon" uk-icon="cart"></span><span class="tm-product-card-add-button-text">add to cart</span>
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </article>
-                                                            <article class="tm-product-card">
-                                                                <div class="tm-product-card-media">
-                                                                    <div class="tm-ratio tm-ratio-4-3"><a class="tm-media-box" href="product.html">
-                                                                            <div class="tm-product-card-labels"><span class="uk-label uk-label-success">new</span><span class="uk-label uk-label-danger">trade-in</span>
-                                                                            </div>
-                                                                            <figure class="tm-media-box-wrap"><img src="/assets/uikit-ecommerce/images/products/2/2-medium.jpg" alt="Apple MacBook 12&quot; MNYN2LL/A 512GB (Rose Gold)"/>
-                                                                            </figure></a></div>
-                                                                </div>
-                                                                <div class="tm-product-card-body">
-                                                                    <div class="tm-product-card-info">
-                                                                        <div class="uk-text-meta uk-margin-xsmall-bottom">Laptop</div>
-                                                                        <h3 class="tm-product-card-title"><a class="uk-link-heading" href="product.html">Apple MacBook 12&quot; MNYN2LL/A 512GB (Rose Gold)</a></h3>
-                                                                        <ul class="uk-list uk-text-small tm-product-card-properties">
-                                                                            <li><span class="uk-text-muted">Diagonal display: </span><span>12"</span></li>
-                                                                            <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i5</span></li>
-                                                                            <li><span class="uk-text-muted">RAM: </span><span>8&nbsp;GB</span></li>
-                                                                            <li><span class="uk-text-muted">Video Card: </span><span>Intel® HD Graphics 615</span></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="tm-product-card-shop">
-                                                                        <div class="tm-product-card-prices">
-                                                                            <div class="tm-product-card-price">$1549.00</div>
-                                                                        </div>
-                                                                        <div class="tm-product-card-add">
-                                                                            <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites tm-action-button-active js-added-to" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare tm-action-button-active js-added-to" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
-                                                                            <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart"><span class="tm-product-card-add-button-icon" uk-icon="cart"></span><span class="tm-product-card-add-button-text">add to cart</span>
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </article>
-                                                            <article class="tm-product-card">
-                                                                <div class="tm-product-card-media">
-                                                                    <div class="tm-ratio tm-ratio-4-3"><a class="tm-media-box" href="product.html">
-                                                                            <figure class="tm-media-box-wrap"><img src="/assets/uikit-ecommerce/images/products/3/3-medium.jpg" alt="Lenovo IdeaPad YOGA 920-13IKB 80Y7001RRK (Copper)"/>
-                                                                            </figure></a></div>
-                                                                </div>
-                                                                <div class="tm-product-card-body">
-                                                                    <div class="tm-product-card-info">
-                                                                        <div class="uk-text-meta uk-margin-xsmall-bottom">Laptop</div>
-                                                                        <h3 class="tm-product-card-title"><a class="uk-link-heading" href="product.html">Lenovo IdeaPad YOGA 920-13IKB 80Y7001RRK (Copper)</a></h3>
-                                                                        <ul class="uk-list uk-text-small tm-product-card-properties">
-                                                                            <li><span class="uk-text-muted">Diagonal display: </span><span>13.9"</span></li>
-                                                                            <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i7 8550U</span></li>
-                                                                            <li><span class="uk-text-muted">RAM: </span><span>16&nbsp;GB</span></li>
-                                                                            <li><span class="uk-text-muted">Video Card: </span><span>Intel® HD Graphics 620</span></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="tm-product-card-shop">
-                                                                        <div class="tm-product-card-prices">
-                                                                            <div class="tm-product-card-price">$1199.00</div>
-                                                                        </div>
-                                                                        <div class="tm-product-card-add">
-                                                                            <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites tm-action-button-active js-added-to" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
-                                                                            <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart"><span class="tm-product-card-add-button-icon" uk-icon="cart"></span><span class="tm-product-card-add-button-text">add to cart</span>
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </article>
-                                                            <article class="tm-product-card">
-                                                                <div class="tm-product-card-media">
-                                                                    <div class="tm-ratio tm-ratio-4-3"><a class="tm-media-box" href="product.html">
-                                                                            <div class="tm-product-card-labels"><span class="uk-label uk-label-warning">top selling</span>
-                                                                            </div>
-                                                                            <figure class="tm-media-box-wrap"><img src="/assets/uikit-ecommerce/images/products/4/4-medium.jpg" alt="ASUS Zenbook UX330UA-FC020T (Rose Gold)"/>
-                                                                            </figure></a></div>
-                                                                </div>
-                                                                <div class="tm-product-card-body">
-                                                                    <div class="tm-product-card-info">
-                                                                        <div class="uk-text-meta uk-margin-xsmall-bottom">Laptop</div>
-                                                                        <h3 class="tm-product-card-title"><a class="uk-link-heading" href="product.html">ASUS Zenbook UX330UA-FC020T (Rose Gold)</a></h3>
-                                                                        <ul class="uk-list uk-text-small tm-product-card-properties">
-                                                                            <li><span class="uk-text-muted">Diagonal display: </span><span>13.3"</span></li>
-                                                                            <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i7-6500U</span></li>
-                                                                            <li><span class="uk-text-muted">RAM: </span><span>8&nbsp;GB</span></li>
-                                                                            <li><span class="uk-text-muted">Video Card: </span><span>Intel® HD Graphics 520</span></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="tm-product-card-shop">
-                                                                        <div class="tm-product-card-prices">
-                                                                            <div class="tm-product-card-price">$749.00</div>
-                                                                        </div>
-                                                                        <div class="tm-product-card-add">
-                                                                            <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
-                                                                            <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart"><span class="tm-product-card-add-button-icon" uk-icon="cart"></span><span class="tm-product-card-add-button-text">add to cart</span>
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </article>
-                                                            <article class="tm-product-card">
-                                                                <div class="tm-product-card-media">
-                                                                    <div class="tm-ratio tm-ratio-4-3"><a class="tm-media-box" href="product.html">
-                                                                            <figure class="tm-media-box-wrap"><img src="/assets/uikit-ecommerce/images/products/5/5-medium.jpg" alt="Dell XPS 15 9560-8968 (Silver)"/>
-                                                                            </figure></a></div>
-                                                                </div>
-                                                                <div class="tm-product-card-body">
-                                                                    <div class="tm-product-card-info">
-                                                                        <div class="uk-text-meta uk-margin-xsmall-bottom">Laptop</div>
-                                                                        <h3 class="tm-product-card-title"><a class="uk-link-heading" href="product.html">Dell XPS 15 9560-8968 (Silver)</a></h3>
-                                                                        <ul class="uk-list uk-text-small tm-product-card-properties">
-                                                                            <li><span class="uk-text-muted">Diagonal display: </span><span>15.6"</span></li>
-                                                                            <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i7 7700HQ</span></li>
-                                                                            <li><span class="uk-text-muted">RAM: </span><span>16&nbsp;GB</span></li>
-                                                                            <li><span class="uk-text-muted">Video Card: </span><span>NVIDIA GeForce GTX 960M</span></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="tm-product-card-shop">
-                                                                        <div class="tm-product-card-prices">
-                                                                            <del class="uk-text-meta">$999.00</del>
-                                                                            <div class="tm-product-card-price">$949.00</div>
-                                                                        </div>
-                                                                        <div class="tm-product-card-add">
-                                                                            <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
-                                                                            <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart"><span class="tm-product-card-add-button-icon" uk-icon="cart"></span><span class="tm-product-card-add-button-text">add to cart</span>
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </article>
-                                                            <article class="tm-product-card">
-                                                                <div class="tm-product-card-media">
-                                                                    <div class="tm-ratio tm-ratio-4-3"><a class="tm-media-box" href="product.html">
-                                                                            <div class="tm-product-card-labels"><span class="uk-label uk-label-danger">trade-in</span>
-                                                                            </div>
-                                                                            <figure class="tm-media-box-wrap"><img src="/assets/uikit-ecommerce/images/products/6/6-medium.jpg" alt="Apple MacBook Air 13&quot; MQD32LL/A 128GB (Silver)"/>
-                                                                            </figure></a></div>
-                                                                </div>
-                                                                <div class="tm-product-card-body">
-                                                                    <div class="tm-product-card-info">
-                                                                        <div class="uk-text-meta uk-margin-xsmall-bottom">Laptop</div>
-                                                                        <h3 class="tm-product-card-title"><a class="uk-link-heading" href="product.html">Apple MacBook Air 13&quot; MQD32LL/A 128GB (Silver)</a></h3>
-                                                                        <ul class="uk-list uk-text-small tm-product-card-properties">
-                                                                            <li><span class="uk-text-muted">Diagonal display: </span><span>13.3"</span></li>
-                                                                            <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i5</span></li>
-                                                                            <li><span class="uk-text-muted">RAM: </span><span>8&nbsp;GB</span></li>
-                                                                            <li><span class="uk-text-muted">Video Card: </span><span>Intel® HD Graphics 6000</span></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="tm-product-card-shop">
-                                                                        <div class="tm-product-card-prices">
-                                                                            <div class="tm-product-card-price">$849.00</div>
-                                                                        </div>
-                                                                        <div class="tm-product-card-add">
-                                                                            <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare tm-action-button-active js-added-to" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
-                                                                            <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart"><span class="tm-product-card-add-button-icon" uk-icon="cart"></span><span class="tm-product-card-add-button-text">add to cart</span>
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </article>
-                                                            <article class="tm-product-card">
-                                                                <div class="tm-product-card-media">
-                                                                    <div class="tm-ratio tm-ratio-4-3"><a class="tm-media-box" href="product.html">
-                                                                            <figure class="tm-media-box-wrap"><img src="/assets/uikit-ecommerce/images/products/7/7-medium.jpg" alt="Dell Inspiron 5378-2063 (Gray)"/>
-                                                                            </figure></a></div>
-                                                                </div>
-                                                                <div class="tm-product-card-body">
-                                                                    <div class="tm-product-card-info">
-                                                                        <div class="uk-text-meta uk-margin-xsmall-bottom">Laptop</div>
-                                                                        <h3 class="tm-product-card-title"><a class="uk-link-heading" href="product.html">Dell Inspiron 5378-2063 (Gray)</a></h3>
-                                                                        <ul class="uk-list uk-text-small tm-product-card-properties">
-                                                                            <li><span class="uk-text-muted">Diagonal display: </span><span>13.3"</span></li>
-                                                                            <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i3-7100U</span></li>
-                                                                            <li><span class="uk-text-muted">RAM: </span><span>4&nbsp;GB</span></li>
-                                                                            <li><span class="uk-text-muted">HDD Capacity: </span><span>1&nbsp;TB</span></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="tm-product-card-shop">
-                                                                        <div class="tm-product-card-prices">
-                                                                            <del class="uk-text-meta">$599.00</del>
-                                                                            <div class="tm-product-card-price">$579.00</div>
-                                                                        </div>
-                                                                        <div class="tm-product-card-add">
-                                                                            <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
-                                                                            <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart"><span class="tm-product-card-add-button-icon" uk-icon="cart"></span><span class="tm-product-card-add-button-text">add to cart</span>
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </article>
-                                                            <article class="tm-product-card">
-                                                                <div class="tm-product-card-media">
-                                                                    <div class="tm-ratio tm-ratio-4-3"><a class="tm-media-box" href="product.html">
-                                                                            <div class="tm-product-card-labels"><span class="uk-label uk-label-success">new</span>
-                                                                            </div>
-                                                                            <figure class="tm-media-box-wrap"><img src="/assets/uikit-ecommerce/images/products/8/8-medium.jpg" alt="Lenovo Yoga 720-13IKB 80X60059RK (Silver)"/>
-                                                                            </figure></a></div>
-                                                                </div>
-                                                                <div class="tm-product-card-body">
-                                                                    <div class="tm-product-card-info">
-                                                                        <div class="uk-text-meta uk-margin-xsmall-bottom">Laptop</div>
-                                                                        <h3 class="tm-product-card-title"><a class="uk-link-heading" href="product.html">Lenovo Yoga 720-13IKB 80X60059RK (Silver)</a></h3>
-                                                                        <ul class="uk-list uk-text-small tm-product-card-properties">
-                                                                            <li><span class="uk-text-muted">Diagonal display: </span><span>13.3"</span></li>
-                                                                            <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i5-7200U</span></li>
-                                                                            <li><span class="uk-text-muted">RAM: </span><span>8&nbsp;GB</span></li>
-                                                                            <li><span class="uk-text-muted">Video Card: </span><span>Intel® HD Graphics 620</span></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="tm-product-card-shop">
-                                                                        <div class="tm-product-card-prices">
-                                                                            <div class="tm-product-card-price">$1099.00</div>
-                                                                        </div>
-                                                                        <div class="tm-product-card-add">
-                                                                            <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
-                                                                            <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart"><span class="tm-product-card-add-button-icon" uk-icon="cart"></span><span class="tm-product-card-add-button-text">add to cart</span>
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </article>
-                                                            <article class="tm-product-card">
-                                                                <div class="tm-product-card-media">
-                                                                    <div class="tm-ratio tm-ratio-4-3"><a class="tm-media-box" href="product.html">
-                                                                            <figure class="tm-media-box-wrap"><span class="uk-text-muted" uk-icon="icon: image; ratio: 3;"></span>
-                                                                            </figure></a></div>
-                                                                </div>
-                                                                <div class="tm-product-card-body">
-                                                                    <div class="tm-product-card-info">
-                                                                        <div class="uk-text-meta uk-margin-xsmall-bottom">Laptop</div>
-                                                                        <h3 class="tm-product-card-title"><a class="uk-link-heading" href="product.html">Lenovo ThinkPad X380 Yoga 20LH000MUS (Black)</a></h3>
-                                                                        <ul class="uk-list uk-text-small tm-product-card-properties">
-                                                                            <li><span class="uk-text-muted">Diagonal display: </span><span>13.3"</span></li>
-                                                                            <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i7 8550U</span></li>
-                                                                            <li><span class="uk-text-muted">RAM: </span><span>4&nbsp;GB</span></li>
-                                                                            <li><span class="uk-text-muted">Video Card: </span><span>Intel® UHD Graphics 620</span></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="tm-product-card-shop">
-                                                                        <div class="tm-product-card-prices">
-                                                                            <div class="uk-text-muted">Product not available</div>
-                                                                        </div>
-                                                                        <div class="tm-product-card-add">
-                                                                            <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </article>
+                                                    <h2>{{ 'Accessories' | trans }}</h2>
+                                                    {% if currentPage.accessories is defined and currentPage.accessories is not empty %}
+                                                        <div class="tm-wrapper">
+                                                            <div class="uk-grid-collapse uk-child-width-1-3@s uk-child-width-1-4@m tm-products-grid" uk-grid>
+                                                                {{ contentList(
+                                                                    'content_list',
+                                                                    'products',
+                                                                    {"isActive": true, "_id": {"$in": currentPage.accessories | map((value, key) => value + 0)}},
+                                                                    {"_id": "desc"},
+                                                                    30, 1, '', 'acc_page', 'acc_limit', {currency: currency}
+                                                                ) }}
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    {% else %}
+                                                        <p class="uk-text-center uk-padding-small">{{ 'Empty.' | trans }}</p>
+                                                    {% endif %}
                                                 </section>
 
                                                 <section data-comment-thread-id="{{ currentCategory.contentTypeName ~ '_' ~ currentId }}">
@@ -535,299 +252,37 @@
 
                         <!-- Related items-->
                         <section>
-                            <div uk-slider="finite: true">
-                                <div class="uk-grid-small uk-flex-middle uk-margin-bottom" uk-grid>
-                                    <h2 class="uk-width-expand uk-text-center uk-text-left@s">Related Products</h2>
-                                    <div class="uk-visible@s"><a class="tm-slidenav" href="#" uk-slider-item="previous" uk-slidenav-previous></a><a class="tm-slidenav" href="#" uk-slider-item="next" uk-slidenav-next></a></div>
-                                </div>
-                                <div>
-                                    <div class="uk-card uk-card-default uk-card-small tm-ignore-container">
-                                        <div class="uk-position-relative">
-                                            <div class="uk-slider-container">
-                                                <div class="uk-slider-items uk-grid-collapse uk-child-width-1-3 uk-child-width-1-4@m tm-products-grid">
-                                                    <article class="tm-product-card">
-                                                        <div class="tm-product-card-media">
-                                                            <div class="tm-ratio tm-ratio-4-3"><a class="tm-media-box" href="product.html">
-                                                                    <div class="tm-product-card-labels"><span class="uk-label uk-label-warning">top selling</span><span class="uk-label uk-label-danger">trade-in</span>
-                                                                    </div>
-                                                                    <figure class="tm-media-box-wrap"><img src="/assets/uikit-ecommerce/images/products/1/1-medium.jpg" alt="Apple MacBook Pro 15&quot; Touch Bar MPTU2LL/A 256GB (Silver)"/>
-                                                                    </figure></a></div>
-                                                        </div>
-                                                        <div class="tm-product-card-body">
-                                                            <div class="tm-product-card-info">
-                                                                <div class="uk-text-meta uk-margin-xsmall-bottom">Laptop</div>
-                                                                <h3 class="tm-product-card-title"><a class="uk-link-heading" href="product.html">Apple MacBook Pro 15&quot; Touch Bar MPTU2LL/A 256GB (Silver)</a></h3>
-                                                                <ul class="uk-list uk-text-small tm-product-card-properties">
-                                                                    <li><span class="uk-text-muted">Diagonal display: </span><span>15.4"</span></li>
-                                                                    <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i7</span></li>
-                                                                    <li><span class="uk-text-muted">RAM: </span><span>16&nbsp;GB</span></li>
-                                                                    <li><span class="uk-text-muted">Video Card: </span><span>AMD Radeon Pro 555</span></li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="tm-product-card-shop">
-                                                                <div class="tm-product-card-prices">
-                                                                    <del class="uk-text-meta">$1899.00</del>
-                                                                    <div class="tm-product-card-price">$1599.00</div>
-                                                                </div>
-                                                                <div class="tm-product-card-add">
-                                                                    <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites tm-action-button-active js-added-to" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare tm-action-button-active js-added-to" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
-                                                                    <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart"><span class="tm-product-card-add-button-icon" uk-icon="cart"></span><span class="tm-product-card-add-button-text">add to cart</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </article>
-                                                    <article class="tm-product-card">
-                                                        <div class="tm-product-card-media">
-                                                            <div class="tm-ratio tm-ratio-4-3"><a class="tm-media-box" href="product.html">
-                                                                    <div class="tm-product-card-labels"><span class="uk-label uk-label-success">new</span><span class="uk-label uk-label-danger">trade-in</span>
-                                                                    </div>
-                                                                    <figure class="tm-media-box-wrap"><img src="/assets/uikit-ecommerce/images/products/2/2-medium.jpg" alt="Apple MacBook 12&quot; MNYN2LL/A 512GB (Rose Gold)"/>
-                                                                    </figure></a></div>
-                                                        </div>
-                                                        <div class="tm-product-card-body">
-                                                            <div class="tm-product-card-info">
-                                                                <div class="uk-text-meta uk-margin-xsmall-bottom">Laptop</div>
-                                                                <h3 class="tm-product-card-title"><a class="uk-link-heading" href="product.html">Apple MacBook 12&quot; MNYN2LL/A 512GB (Rose Gold)</a></h3>
-                                                                <ul class="uk-list uk-text-small tm-product-card-properties">
-                                                                    <li><span class="uk-text-muted">Diagonal display: </span><span>12"</span></li>
-                                                                    <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i5</span></li>
-                                                                    <li><span class="uk-text-muted">RAM: </span><span>8&nbsp;GB</span></li>
-                                                                    <li><span class="uk-text-muted">Video Card: </span><span>Intel® HD Graphics 615</span></li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="tm-product-card-shop">
-                                                                <div class="tm-product-card-prices">
-                                                                    <div class="tm-product-card-price">$1549.00</div>
-                                                                </div>
-                                                                <div class="tm-product-card-add">
-                                                                    <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites tm-action-button-active js-added-to" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare tm-action-button-active js-added-to" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
-                                                                    <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart"><span class="tm-product-card-add-button-icon" uk-icon="cart"></span><span class="tm-product-card-add-button-text">add to cart</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </article>
-                                                    <article class="tm-product-card">
-                                                        <div class="tm-product-card-media">
-                                                            <div class="tm-ratio tm-ratio-4-3"><a class="tm-media-box" href="product.html">
-                                                                    <figure class="tm-media-box-wrap"><img src="/assets/uikit-ecommerce/images/products/3/3-medium.jpg" alt="Lenovo IdeaPad YOGA 920-13IKB 80Y7001RRK (Copper)"/>
-                                                                    </figure></a></div>
-                                                        </div>
-                                                        <div class="tm-product-card-body">
-                                                            <div class="tm-product-card-info">
-                                                                <div class="uk-text-meta uk-margin-xsmall-bottom">Laptop</div>
-                                                                <h3 class="tm-product-card-title"><a class="uk-link-heading" href="product.html">Lenovo IdeaPad YOGA 920-13IKB 80Y7001RRK (Copper)</a></h3>
-                                                                <ul class="uk-list uk-text-small tm-product-card-properties">
-                                                                    <li><span class="uk-text-muted">Diagonal display: </span><span>13.9"</span></li>
-                                                                    <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i7 8550U</span></li>
-                                                                    <li><span class="uk-text-muted">RAM: </span><span>16&nbsp;GB</span></li>
-                                                                    <li><span class="uk-text-muted">Video Card: </span><span>Intel® HD Graphics 620</span></li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="tm-product-card-shop">
-                                                                <div class="tm-product-card-prices">
-                                                                    <div class="tm-product-card-price">$1199.00</div>
-                                                                </div>
-                                                                <div class="tm-product-card-add">
-                                                                    <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites tm-action-button-active js-added-to" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
-                                                                    <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart"><span class="tm-product-card-add-button-icon" uk-icon="cart"></span><span class="tm-product-card-add-button-text">add to cart</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </article>
-                                                    <article class="tm-product-card">
-                                                        <div class="tm-product-card-media">
-                                                            <div class="tm-ratio tm-ratio-4-3"><a class="tm-media-box" href="product.html">
-                                                                    <div class="tm-product-card-labels"><span class="uk-label uk-label-warning">top selling</span>
-                                                                    </div>
-                                                                    <figure class="tm-media-box-wrap"><img src="/assets/uikit-ecommerce/images/products/4/4-medium.jpg" alt="ASUS Zenbook UX330UA-FC020T (Rose Gold)"/>
-                                                                    </figure></a></div>
-                                                        </div>
-                                                        <div class="tm-product-card-body">
-                                                            <div class="tm-product-card-info">
-                                                                <div class="uk-text-meta uk-margin-xsmall-bottom">Laptop</div>
-                                                                <h3 class="tm-product-card-title"><a class="uk-link-heading" href="product.html">ASUS Zenbook UX330UA-FC020T (Rose Gold)</a></h3>
-                                                                <ul class="uk-list uk-text-small tm-product-card-properties">
-                                                                    <li><span class="uk-text-muted">Diagonal display: </span><span>13.3"</span></li>
-                                                                    <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i7-6500U</span></li>
-                                                                    <li><span class="uk-text-muted">RAM: </span><span>8&nbsp;GB</span></li>
-                                                                    <li><span class="uk-text-muted">Video Card: </span><span>Intel® HD Graphics 520</span></li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="tm-product-card-shop">
-                                                                <div class="tm-product-card-prices">
-                                                                    <div class="tm-product-card-price">$749.00</div>
-                                                                </div>
-                                                                <div class="tm-product-card-add">
-                                                                    <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
-                                                                    <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart"><span class="tm-product-card-add-button-icon" uk-icon="cart"></span><span class="tm-product-card-add-button-text">add to cart</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </article>
-                                                    <article class="tm-product-card">
-                                                        <div class="tm-product-card-media">
-                                                            <div class="tm-ratio tm-ratio-4-3">
-                                                                <a class="tm-media-box" href="product.html">
-                                                                    <figure class="tm-media-box-wrap">
-                                                                        <img src="/assets/uikit-ecommerce/images/products/5/5-medium.jpg" alt="Dell XPS 15 9560-8968 (Silver)"/>
-                                                                    </figure>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tm-product-card-body">
-                                                            <div class="tm-product-card-info">
-                                                                <div class="uk-text-meta uk-margin-xsmall-bottom">Laptop</div>
-                                                                <h3 class="tm-product-card-title"><a class="uk-link-heading" href="product.html">Dell XPS 15 9560-8968 (Silver)</a></h3>
-                                                                <ul class="uk-list uk-text-small tm-product-card-properties">
-                                                                    <li><span class="uk-text-muted">Diagonal display: </span><span>15.6"</span></li>
-                                                                    <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i7 7700HQ</span></li>
-                                                                    <li><span class="uk-text-muted">RAM: </span><span>16&nbsp;GB</span></li>
-                                                                    <li><span class="uk-text-muted">Video Card: </span><span>NVIDIA GeForce GTX 960M</span></li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="tm-product-card-shop">
-                                                                <div class="tm-product-card-prices">
-                                                                    <del class="uk-text-meta">$999.00</del>
-                                                                    <div class="tm-product-card-price">$949.00</div>
-                                                                </div>
-                                                                <div class="tm-product-card-add">
-                                                                    <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
-                                                                    <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart"><span class="tm-product-card-add-button-icon" uk-icon="cart"></span><span class="tm-product-card-add-button-text">add to cart</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </article>
-                                                    <article class="tm-product-card">
-                                                        <div class="tm-product-card-media">
-                                                            <div class="tm-ratio tm-ratio-4-3"><a class="tm-media-box" href="product.html">
-                                                                    <div class="tm-product-card-labels"><span class="uk-label uk-label-danger">trade-in</span>
-                                                                    </div>
-                                                                    <figure class="tm-media-box-wrap"><img src="/assets/uikit-ecommerce/images/products/6/6-medium.jpg" alt="Apple MacBook Air 13&quot; MQD32LL/A 128GB (Silver)"/>
-                                                                    </figure></a></div>
-                                                        </div>
-                                                        <div class="tm-product-card-body">
-                                                            <div class="tm-product-card-info">
-                                                                <div class="uk-text-meta uk-margin-xsmall-bottom">Laptop</div>
-                                                                <h3 class="tm-product-card-title"><a class="uk-link-heading" href="product.html">Apple MacBook Air 13&quot; MQD32LL/A 128GB (Silver)</a></h3>
-                                                                <ul class="uk-list uk-text-small tm-product-card-properties">
-                                                                    <li><span class="uk-text-muted">Diagonal display: </span><span>13.3"</span></li>
-                                                                    <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i5</span></li>
-                                                                    <li><span class="uk-text-muted">RAM: </span><span>8&nbsp;GB</span></li>
-                                                                    <li><span class="uk-text-muted">Video Card: </span><span>Intel® HD Graphics 6000</span></li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="tm-product-card-shop">
-                                                                <div class="tm-product-card-prices">
-                                                                    <div class="tm-product-card-price">$849.00</div>
-                                                                </div>
-                                                                <div class="tm-product-card-add">
-                                                                    <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare tm-action-button-active js-added-to" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
-                                                                    <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart"><span class="tm-product-card-add-button-icon" uk-icon="cart"></span><span class="tm-product-card-add-button-text">add to cart</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </article>
-                                                    <article class="tm-product-card">
-                                                        <div class="tm-product-card-media">
-                                                            <div class="tm-ratio tm-ratio-4-3"><a class="tm-media-box" href="product.html">
-                                                                    <figure class="tm-media-box-wrap"><img src="/assets/uikit-ecommerce/images/products/7/7-medium.jpg" alt="Dell Inspiron 5378-2063 (Gray)"/>
-                                                                    </figure></a></div>
-                                                        </div>
-                                                        <div class="tm-product-card-body">
-                                                            <div class="tm-product-card-info">
-                                                                <div class="uk-text-meta uk-margin-xsmall-bottom">Laptop</div>
-                                                                <h3 class="tm-product-card-title"><a class="uk-link-heading" href="product.html">Dell Inspiron 5378-2063 (Gray)</a></h3>
-                                                                <ul class="uk-list uk-text-small tm-product-card-properties">
-                                                                    <li><span class="uk-text-muted">Diagonal display: </span><span>13.3"</span></li>
-                                                                    <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i3-7100U</span></li>
-                                                                    <li><span class="uk-text-muted">RAM: </span><span>4&nbsp;GB</span></li>
-                                                                    <li><span class="uk-text-muted">HDD Capacity: </span><span>1&nbsp;TB</span></li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="tm-product-card-shop">
-                                                                <div class="tm-product-card-prices">
-                                                                    <del class="uk-text-meta">$599.00</del>
-                                                                    <div class="tm-product-card-price">$579.00</div>
-                                                                </div>
-                                                                <div class="tm-product-card-add">
-                                                                    <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
-                                                                    <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart"><span class="tm-product-card-add-button-icon" uk-icon="cart"></span><span class="tm-product-card-add-button-text">add to cart</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </article>
-                                                    <article class="tm-product-card">
-                                                        <div class="tm-product-card-media">
-                                                            <div class="tm-ratio tm-ratio-4-3"><a class="tm-media-box" href="product.html">
-                                                                    <div class="tm-product-card-labels"><span class="uk-label uk-label-success">new</span>
-                                                                    </div>
-                                                                    <figure class="tm-media-box-wrap"><img src="/assets/uikit-ecommerce/images/products/8/8-medium.jpg" alt="Lenovo Yoga 720-13IKB 80X60059RK (Silver)"/>
-                                                                    </figure></a></div>
-                                                        </div>
-                                                        <div class="tm-product-card-body">
-                                                            <div class="tm-product-card-info">
-                                                                <div class="uk-text-meta uk-margin-xsmall-bottom">Laptop</div>
-                                                                <h3 class="tm-product-card-title"><a class="uk-link-heading" href="product.html">Lenovo Yoga 720-13IKB 80X60059RK (Silver)</a></h3>
-                                                                <ul class="uk-list uk-text-small tm-product-card-properties">
-                                                                    <li><span class="uk-text-muted">Diagonal display: </span><span>13.3"</span></li>
-                                                                    <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i5-7200U</span></li>
-                                                                    <li><span class="uk-text-muted">RAM: </span><span>8&nbsp;GB</span></li>
-                                                                    <li><span class="uk-text-muted">Video Card: </span><span>Intel® HD Graphics 620</span></li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="tm-product-card-shop">
-                                                                <div class="tm-product-card-prices">
-                                                                    <div class="tm-product-card-price">$1099.00</div>
-                                                                </div>
-                                                                <div class="tm-product-card-add">
-                                                                    <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
-                                                                    <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart"><span class="tm-product-card-add-button-icon" uk-icon="cart"></span><span class="tm-product-card-add-button-text">add to cart</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </article>
-                                                    <article class="tm-product-card">
-                                                        <div class="tm-product-card-media">
-                                                            <div class="tm-ratio tm-ratio-4-3"><a class="tm-media-box" href="product.html">
-                                                                    <figure class="tm-media-box-wrap"><span class="uk-text-muted" uk-icon="icon: image; ratio: 3;"></span>
-                                                                    </figure></a></div>
-                                                        </div>
-                                                        <div class="tm-product-card-body">
-                                                            <div class="tm-product-card-info">
-                                                                <div class="uk-text-meta uk-margin-xsmall-bottom">Laptop</div>
-                                                                <h3 class="tm-product-card-title"><a class="uk-link-heading" href="product.html">Lenovo ThinkPad X380 Yoga 20LH000MUS (Black)</a></h3>
-                                                                <ul class="uk-list uk-text-small tm-product-card-properties">
-                                                                    <li><span class="uk-text-muted">Diagonal display: </span><span>13.3"</span></li>
-                                                                    <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i7 8550U</span></li>
-                                                                    <li><span class="uk-text-muted">RAM: </span><span>4&nbsp;GB</span></li>
-                                                                    <li><span class="uk-text-muted">Video Card: </span><span>Intel® UHD Graphics 620</span></li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="tm-product-card-shop">
-                                                                <div class="tm-product-card-prices">
-                                                                    <div class="uk-text-muted">Product not available</div>
-                                                                </div>
-                                                                <div class="tm-product-card-add">
-                                                                    <div class="uk-text-meta tm-product-card-actions"><a class="tm-product-card-action js-add-to js-add-to-favorites" title="Add to favorites"><span uk-icon="icon: heart; ratio: .75;"></span><span class="tm-product-card-action-text">Add to favorites</span></a><a class="tm-product-card-action js-add-to js-add-to-compare" title="Add to compare"><span uk-icon="icon: copy; ratio: .75;"></span><span class="tm-product-card-action-text">Add to compare</span></a></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </article>
+                            {% if currentPage.related is defined and currentPage.related is not empty %}
+                                <div uk-slider="finite: true">
+                                    <div class="uk-grid-small uk-flex-middle uk-margin-bottom" uk-grid>
+                                        <h2 class="uk-width-expand uk-text-center uk-text-left@s">{{ 'Related products' | trans }}</h2>
+                                        <div class="uk-visible@s">
+                                            <a class="tm-slidenav" href="#" uk-slider-item="previous" uk-slidenav-previous></a>
+                                            <a class="tm-slidenav" href="#" uk-slider-item="next" uk-slidenav-next></a>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="uk-card uk-card-default uk-card-small tm-ignore-container">
+                                            <div class="uk-position-relative">
+                                                <div class="uk-slider-container">
+                                                    <div class="uk-slider-items uk-grid-collapse uk-child-width-1-3 uk-child-width-1-4@m tm-products-grid">
+
+                                                        {{ contentList(
+                                                            'content_list',
+                                                            'products',
+                                                            {"isActive": true, "_id": {"$in": currentPage.related | map((value, key) => value + 0)}},
+                                                            {"_id": "desc"},
+                                                            30, 1, '', '', '', {currency: currency}
+                                                        ) }}
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin-top uk-hidden@s"></ul>
                                     </div>
-                                    <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin-top uk-hidden@s"></ul>
                                 </div>
-                            </div>
+                            {% endif %}
                         </section>
                     </div>
 
