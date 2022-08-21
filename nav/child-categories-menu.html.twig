@@ -24,7 +24,7 @@
                                     <div class="uk-card uk-card-default uk-card-small tm-ignore-container">
                                         <header class="uk-card-header">
                                             <div class="uk-grid-small uk-flex-middle" uk-grid>
-                                                <a href="category.html">
+                                                <a href="{{ catalogPath(category.uri) }}">
                                                     <img src="{{ imageUrl(category.image, '/assets/uikit-ecommerce/images/catalog/shopping.svg') }}" alt="{{ category.title }}" width="50" height="50">
                                                 </a>
                                                 <div class="uk-width-expand">
@@ -33,7 +33,9 @@
                                                             {{ category.title }}
                                                         </a>
                                                     </h2>
-                                                    <div class="uk-text-meta">367 items</div>
+                                                    <div class="uk-text-meta">
+                                                        {{ '%count% item|%count% items' | trans({'%count%': countContent(category.contentTypeName, {"isActive": true, "parentId": category.id}) }) }}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </header>

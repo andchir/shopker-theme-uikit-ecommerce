@@ -176,7 +176,7 @@
                                                             {{ contentList(
                                                                 'content_list',
                                                                 'products',
-                                                                {"isActive": true, "_id": {"$in": currentPage.accessories | map((value, key) => value + 0)}},
+                                                                {"isActive": true, "_id": {"$in": currentPage.accessories | map((value, key) => value | intval)}},
                                                                 {"_id": "desc"},
                                                                 30, 1, 'accessories' ~ currentPage.id, 'acc_page', 'acc_limit', {currency: currency}
                                                             ) }}
@@ -250,7 +250,7 @@
                                                     {{ contentList(
                                                         'content_list',
                                                         'products',
-                                                        {"isActive": true, "_id": {"$in": currentPage.related | map((value, key) => value + 0)}},
+                                                        {"isActive": true, "_id": {"$in": currentPage.related | map((value, key) => value | intval)}},
                                                         {"_id": "desc"},
                                                         30, 1, 'related' ~ currentPage.id, '', '', {"currency": currency}
                                                     ) }}
