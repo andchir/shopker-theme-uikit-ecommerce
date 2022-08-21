@@ -10,7 +10,7 @@
                 {% for item in items %}
                 <li>
                     <div class="tm-ratio tm-ratio-4-3">
-                        <a class="uk-link-muted uk-text-center uk-display-block uk-padding-small uk-box-shadow-hover-large tm-media-box" href="{{ catalogPath(currentCategory.uri, item.name, item, 'categories') }}" title="{{ item.title }}">
+                        <a class="uk-link-muted uk-text-center uk-display-block uk-padding-small uk-box-shadow-hover-large tm-media-box" href="{{ catalogPath('brands/', item.name, item, 'categories') }}" title="{{ item.title }}">
                             <figure class="tm-media-box-wrap">
                                 <img src="{{ imageUrl(item.image) }}" alt="{{ item.title }}">
                             </figure>

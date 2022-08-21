@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="uk-section uk-section-small">
+        <div class="uk-container">
+            <div>
+                <div class="uk-text-center">
+                    {% include 'nav/breadcrumbs.html.twig' %}
+                    <h1 class="uk-margin-small-top">{{ currentPage.title }}</h1>
+                </div>
+
+                <div class="uk-card uk-card-default uk-card-small tm-ignore-container">
+                    <div class="uk-grid-collapse uk-child-width-1-1" id="products" uk-grid>
+                        <div>
+                            {{ contentList(
+                                'content_list',
+                                'products',
+                                {"isActive": true, "brand": currentPage.title},
+                                {"title": "asc"}, 20, 1, '', 'page', 'limit', {"currency": currency}
+                            ) }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

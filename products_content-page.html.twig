@@ -120,8 +120,6 @@
                                         </div>
                                     </div>
 
-
-
                                     <div class="uk-width-1-1 tm-product-description" id="description">
                                         <header>
                                             <nav class="tm-product-nav" uk-sticky="offset: 80; bottom: #description; cls-active: tm-product-nav-fixed;">
@@ -175,15 +173,13 @@
                                                     <h2>{{ 'Accessories' | trans }}</h2>
                                                     {% if currentPage.accessories is defined and currentPage.accessories is not empty %}
                                                         <div class="tm-wrapper">
-                                                            <div class="uk-grid-collapse uk-child-width-1-3@s uk-child-width-1-4@m tm-products-grid" uk-grid>
-                                                                {{ contentList(
-                                                                    'content_list',
-                                                                    'products',
-                                                                    {"isActive": true, "_id": {"$in": currentPage.accessories | map((value, key) => value + 0)}},
-                                                                    {"_id": "desc"},
-                                                                    30, 1, 'accessories' ~ currentPage.id, 'acc_page', 'acc_limit', {currency: currency}
-                                                                ) }}
-                                                            </div>
+                                                            {{ contentList(
+                                                                'content_list',
+                                                                'products',
+                                                                {"isActive": true, "_id": {"$in": currentPage.accessories | map((value, key) => value + 0)}},
+                                                                {"_id": "desc"},
+                                                                30, 1, 'accessories' ~ currentPage.id, 'acc_page', 'acc_limit', {currency: currency}
+                                                            ) }}
                                                         </div>
                                                     {% else %}
                                                         <p class="uk-text-center uk-padding-small">{{ 'Empty.' | trans }}</p>
@@ -251,17 +247,13 @@
                                         <div class="uk-card uk-card-default uk-card-small tm-ignore-container">
                                             <div class="uk-position-relative">
                                                 <div class="uk-slider-container">
-                                                    <div class="uk-slider-items uk-grid-collapse uk-child-width-1-3 uk-child-width-1-4@m tm-products-grid">
-
-                                                        {{ contentList(
-                                                            'content_list',
-                                                            'products',
-                                                            {"isActive": true, "_id": {"$in": currentPage.related | map((value, key) => value + 0)}},
-                                                            {"_id": "desc"},
-                                                            30, 1, 'related' ~ currentPage.id, '', '', {currency: currency}
-                                                        ) }}
-
-                                                    </div>
+                                                    {{ contentList(
+                                                        'content_list',
+                                                        'products',
+                                                        {"isActive": true, "_id": {"$in": currentPage.related | map((value, key) => value + 0)}},
+                                                        {"_id": "desc"},
+                                                        30, 1, 'related' ~ currentPage.id, '', '', {"currency": currency}
+                                                    ) }}
                                                 </div>
                                             </div>
                                         </div>
