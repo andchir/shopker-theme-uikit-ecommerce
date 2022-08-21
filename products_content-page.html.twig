@@ -21,6 +21,16 @@
                                     <div class="uk-width-1-1 uk-width-1-3@m tm-product-info">
                                         <div class="uk-card-body">
                                             <div class="uk-margin">
+                                                {% if currentPage.brand is defined %}
+                                                    <div class="uk-margin-small-bottom">
+                                                        {{ contentList(
+                                                            'content_brand_logo',
+                                                            'brand',
+                                                            {"isActive": true, "title": currentPage.brand},
+                                                            {"_id": "desc"}, 1, 1, 'product_brand' ~ currentPage.id
+                                                        ) }}
+                                                    </div>
+                                                {% endif %}
                                                 <div class="uk-grid-small" uk-grid>
                                                     {% if reviewsCount > 0 %}
                                                         <div class="uk-flex uk-flex-middle">
@@ -40,41 +50,15 @@
                                                 </div>
                                             </div>
                                             <div class="uk-margin">
-                                                <div class="uk-grid-medium" uk-grid>
-                                                    <div>
-                                                        <div class="uk-text-small uk-margin-xsmall-bottom">Color</div>
-                                                        <ul class="uk-subnav uk-subnav-pill tm-variations" uk-switcher>
-                                                            <li>
-                                                                <a class="tm-variation-color" uk-tooltip="Space Grey">
-                                                                    <div style="background-color: #aaaeb1"></div>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="tm-variation-color" uk-tooltip="Silver">
-                                                                    <div style="background-color: #dddfde"></div>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div>
-                                                        <div class="uk-text-small uk-margin-xsmall-bottom">SSD Storage</div>
-                                                        <ul class="uk-subnav uk-subnav-pill tm-variations" uk-switcher>
-                                                            <li><a>256 GB</a>
-                                                            </li>
-                                                            <li><a>512 GB</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="uk-margin">
-                                                <div class="uk-padding-small uk-background-primary-lighten uk-border-rounded js-shopping-cart-product">
 
-                                                    <form id="shk-form" action="{{ pathLocalized('shop_cart_action') }}" method="post">
-                                                        <input type="hidden" name="item_id" value="{{ currentPage.id }}">
-                                                        <input type="hidden" name="category_id" value="{{ currentPage.parentId }}">
-                                                        <input type="hidden" name="type" value="shop">
+                                                <form id="shk-form" action="{{ pathLocalized('shop_cart_action') }}" method="post">
+                                                    <input type="hidden" name="item_id" value="{{ currentPage.id }}">
+                                                    <input type="hidden" name="category_id" value="{{ currentPage.parentId }}">
+                                                    <input type="hidden" name="type" value="shop">
 
+                                                    {{ renderOutputTypeChunk(currentPage, fields, 'parameters', 'page_') }}
+
+                                                    <div class="uk-padding-small uk-background-primary-lighten uk-border-rounded js-shopping-cart-product">
                                                         <div class="uk-grid-small uk-child-width-1-1" uk-grid>
                                                             <div>
                                                                 {% if currentPage.old_price is defined and currentPage.old_price is not empty %}
@@ -111,10 +95,9 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
 
-                                                    </form>
-
-                                                </div>
+                                                </form>
                                             </div>
                                             <div class="uk-margin">
                                                 {% if currentPage.specification is defined and currentPage.specification is not empty %}
@@ -136,6 +119,9 @@
                                             </div>
                                         </div>
                                     </div>
+
+
+
                                     <div class="uk-width-1-1 tm-product-description" id="description">
                                         <header>
                                             <nav class="tm-product-nav" uk-sticky="offset: 80; bottom: #description; cls-active: tm-product-nav-fixed;">
@@ -195,7 +181,7 @@
                                                                     'products',
                                                                     {"isActive": true, "_id": {"$in": currentPage.accessories | map((value, key) => value + 0)}},
                                                                     {"_id": "desc"},
-                                                                    30, 1, '', 'acc_page', 'acc_limit', {currency: currency}
+                                                                    30, 1, 'accessories' ~ currentPage.id, 'acc_page', 'acc_limit', {currency: currency}
                                                                 ) }}
                                                             </div>
                                                         </div>
@@ -272,7 +258,7 @@
                                                             'products',
                                                             {"isActive": true, "_id": {"$in": currentPage.related | map((value, key) => value + 0)}},
                                                             {"_id": "desc"},
-                                                            30, 1, '', '', '', {currency: currency}
+                                                            30, 1, 'related' ~ currentPage.id, '', '', {currency: currency}
                                                         ) }}
 
                                                     </div>

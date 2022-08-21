@@ -75,7 +75,7 @@
     "inputProperties": {
       "value": "",
       "handler": "",
-      "rows": 6
+      "rows": "10"
     },
     "outputType": "textarea",
     "outputProperties": {
@@ -87,7 +87,8 @@
     "showInTable": false,
     "showInList": false,
     "showOnPage": true,
-    "isFilter": false
+    "isFilter": false,
+    "id": ""
   },
   {
     "id": "",
@@ -436,7 +437,7 @@
   },
   {
     "id": 0,
-    "title": "Specification",
+    "title": "Спецификация",
     "name": "specification",
     "description": "",
     "inputType": "parameters",
@@ -460,6 +461,50 @@
       "type": "radio",
       "firstSelected": "1",
       "groupByName": "0"
+    }
+  },
+  {
+    "id": 0,
+    "title": "Аксессуары",
+    "name": "accessories",
+    "description": "",
+    "inputType": "tags",
+    "outputType": "tags",
+    "group": "Параметры",
+    "required": false,
+    "showInTable": false,
+    "showOnPage": true,
+    "showInList": false,
+    "isFilter": false,
+    "inputProperties": {
+      "value": "",
+      "handler": ""
+    },
+    "outputProperties": {
+      "className": "",
+      "chunkName": ""
+    }
+  },
+  {
+    "id": 0,
+    "title": "Сопутствующие",
+    "name": "related",
+    "description": "",
+    "inputType": "tags",
+    "outputType": "tags",
+    "group": "Параметры",
+    "required": false,
+    "showInTable": false,
+    "showOnPage": true,
+    "showInList": false,
+    "isFilter": false,
+    "inputProperties": {
+      "value": "",
+      "handler": ""
+    },
+    "outputProperties": {
+      "className": "",
+      "chunkName": ""
     }
   }
 ]

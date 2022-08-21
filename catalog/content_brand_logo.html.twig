@@ -1,0 +1,5 @@
+{% for item in items %}
+    <a href="#">
+        <img src="{{ imageUrl(item.image, '/img/nofoto.png')}}" alt="{{ item.title }}" style="height:50px;">
+    </a>
+{% endfor %}
