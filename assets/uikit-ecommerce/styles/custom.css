@@ -55,3 +55,8 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle { top: 16px; right: -7px; left
 .star-rating-value3:before { content: '\e901 \e901 \e901'; }
 .star-rating-value4:before { content: '\e901 \e901 \e901 \e901'; }
 .star-rating-value5:before { content: '\e901 \e901 \e901 \e901 \e901'; }
+
+/* uk-button-check */
+.uk-button-check {  }
+.uk-button-check-input { position: absolute; clip: rect(0,0,0,0); pointer-events: none; }
+.uk-button-check-input:checked + .uk-button-check { border-color: #1e87f0; }
