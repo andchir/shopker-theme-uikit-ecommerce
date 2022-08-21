@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ currentPage.title | default('') }} - {{ app_name }}{% endblock %}
+
+{% block body %}
+    <section class="uk-section uk-section-small">
+        <div class="uk-container">
+            <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
+                <div class="uk-text-center">
+                    {% include 'nav/breadcrumbs.html.twig' %}
+                    <h1 class="uk-margin-small-top uk-margin-remove-bottom">{{ currentCategory.title }}</h1>
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'features.html.twig' %}
+{% endblock %}

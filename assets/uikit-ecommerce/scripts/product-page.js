@@ -1,6 +1,10 @@
 
 const shk = new Shopkeeper();
 
+if (document.getElementById('shk-form')) {
+    shk.productParametersInit('#shk-form', '.shk-price');
+}
+
 // Shopping cart
 const shoppingCart = new ShoppingCart({
     baseUrl: '/',

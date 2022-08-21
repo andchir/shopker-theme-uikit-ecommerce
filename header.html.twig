@@ -1,3 +1,6 @@
+{% if currentCategory is not defined %}
+{% set currentCategory = null %}
+{% endif %}
 <header>
     <div class="uk-navbar-container uk-light uk-visible@m tm-toolbar-container">
         <div class="uk-container" uk-navbar>
@@ -71,7 +74,8 @@
                             'brand',
                             {"isActive": true, "parentId": 29},
                             {"title": "asc"},
-                            12, 1, 'brands-menu-homepage'
+                            12, 1, 'brands-menu-homepage', '', '',
+                            {"currentCategory": currentCategory}
                         ) }}
 
                         <li><a href="/blog/">{{ 'Blog' | trans }}</a></li>

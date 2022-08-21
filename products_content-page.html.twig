@@ -23,14 +23,12 @@
                                             <div class="uk-margin">
 
                                                 {% if currentPage.brand is defined %}
-                                                    <div class="uk-margin-small-bottom">
-                                                        {{ contentList(
-                                                            'content_brand_logo',
-                                                            'brand',
-                                                            {"isActive": true, "title": currentPage.brand},
-                                                            {"_id": "desc"}, 1, 1, 'product_brand' ~ currentPage.id
-                                                        ) }}
-                                                    </div>
+                                                    {{ contentList(
+                                                        'content_brand_logo',
+                                                        'brand',
+                                                        {"isActive": true, "title": currentPage.brand},
+                                                        {"_id": "desc"}, 1, 1, 'product_brand' ~ currentPage.id
+                                                    ) }}
                                                 {% endif %}
 
                                                 <div class="uk-grid-small" uk-grid>
