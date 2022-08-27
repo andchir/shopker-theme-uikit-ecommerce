@@ -34,7 +34,7 @@
                                                         </a>
                                                     </h2>
                                                     <div class="uk-text-meta">
-                                                        {{ '%count% item|%count% items' | trans({'%count%': countContent(category.contentTypeName, {"isActive": true, "parentId": category.id}) }) }}
+                                                        {{ '%count% item|%count% items' | trans({'%count%': countContent(category.contentTypeName, {"isActive": true, "parentId": {"$in": childCategories(category.id)}}) }) }}
                                                     </div>
                                                 </div>
                                             </div>
