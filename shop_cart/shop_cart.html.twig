@@ -1,4 +1,4 @@
-<div id="shoppingCartSmallContainer">
+<div id="shoppingCartSmallContainer" data-items-total="{{ countTotal }}">
 
     {% if 'shop_cart_edit' not in app.request.attributes.get('_route') %}
         <div id="cart-offcanvas" uk-offcanvas="overlay: true; flip: true">

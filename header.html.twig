@@ -96,19 +96,14 @@
                         </div>
                     </div>
                 </div>
-                <a class="uk-navbar-item uk-link-muted uk-visible@m tm-navbar-button" href="compare.html">
-                    <span uk-icon="copy"></span>
-                    <span class="uk-badge">3</span>
-                </a>
-                <a class="uk-navbar-item uk-link-muted tm-navbar-button" href="account.html" uk-icon="user"></a>
+
+                <a class="uk-navbar-item uk-link-muted tm-navbar-button" href="{{ pathLocalized('profile') }}" uk-icon="user"></a>
                 <div class="uk-padding-small uk-margin-remove" uk-dropdown="pos: bottom-right; offset: -10; delay-hide: 200;" style="min-width: 150px;">
                     <ul class="uk-nav uk-dropdown-nav">
                         {% if is_granted('ROLE_USER') %}
                             {% if is_granted('ROLE_ADMIN') %}
                                 <li><a href="{{ path('admin') }}" target="_blank" rel="nofollow">{{ 'Administration' | trans }}</a></li>
                             {% endif %}
-                            <li><a href="account.html">Orders<span>(2)</span></a></li>
-                            <li><a href="favorites.html">Favorites<span>(3)</span></a></li>
                             <li><a href="personal.html">Personal</a></li>
                             <li><a href="settings.html">Settings</a></li>
                             <li class="uk-nav-divider"></li>
@@ -119,12 +114,16 @@
                     </ul>
                 </div>
 
+                {{ shopCart('compare_link', 'compare') }}
+
+                {{ shopCart('favorites_link', 'favorites') }}
+
                 <a class="uk-navbar-item uk-link-muted tm-navbar-button"
                    href="#"
                    uk-toggle="target: #cart-offcanvas"
                    onclick="return false">
                     <span uk-icon="cart"></span>
-                    <span class="uk-badge shopping-cart-count-total"></span>
+                    <span class="uk-badge shopping-cart-count-total uk-hidden"></span>
                 </a>
 
             </div>

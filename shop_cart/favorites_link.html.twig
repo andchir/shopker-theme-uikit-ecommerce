@@ -1,4 +1,6 @@
-<a href="{{ pathLocalized('shop_cart_edit', {type: 'favorites'}) }}" {% if countUniqueTotal == 0 %} class="text-muted"{% endif %}id="favoritesLinkContainer" data-shoppingcart-ids="{{ itemsIds | join(',') }}">
-    {{ 'Favorites' | trans }}
-    (<span id="favoritesCountUniqueTotal">{{ countUniqueTotal }}</span>)
-</a>
+<span id="userFavoritesLink">
+    <a class="uk-navbar-item uk-link-muted uk-visible@m tm-navbar-button" href="{{ pathLocalized('saved_items_edit_localized', {type: 'favorites'}) }}">
+        <span uk-icon="heart"></span>
+        {% if countUniqueTotal > 0 %}<span class="uk-badge">{{ countUniqueTotal }}</span>{% endif %}
+    </a>
+</span>

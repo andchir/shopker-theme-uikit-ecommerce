@@ -1,8 +1,10 @@
 
-const shk = new Shopkeeper();
+if (!window.shk) {
+    window.shk = new Shopkeeper();
+}
 
 if (document.getElementById('shk-form')) {
-    shk.productParametersInit('#shk-form', '.shk-price');
+    window.shk.productParametersInit('#shk-form', '.shk-price');
 }
 
 // Shopping cart
@@ -11,20 +13,22 @@ const shoppingCart = new ShoppingCart({
     connectorUrl: 'shop_cart/action',
     selector: '#shoppingCartSmallContainer',
     productFormSelector: '.js-shopping-cart-product form',
-    templateName: 'shop_cart'
+    templateName: 'shop_cart',
+    autoUpdateElements: true,
+    hiddenClassName: 'uk-hidden'
 });
 shoppingCart
-    .addEventListener('formSubmitBefore', function(e) {// До отправки данных формы
+    .addEventListener('formSubmitBefore', function(e) {
         var buttonEl = e.detail.element.querySelector('button[type="submit"]');
         if (buttonEl) {
-            buttonEl.setAttribute('disabled', '');// Блокируем кнопку
+            buttonEl.setAttribute('disabled', '');
         }
     })
-    .addEventListener('load', function(e) {// После получения ответа корзины покупок
+    .addEventListener('load', function(e) {
         if (e.detail.element) {
             var buttonEl = e.detail.element.querySelector('button[type="submit"]');
             if (buttonEl) {
-                buttonEl.removeAttribute('disabled');// Убираем блокировку кнопки
+                buttonEl.removeAttribute('disabled');
             }
         }
         if (e.detail.response && e.detail.response.items_total) {
@@ -34,8 +38,6 @@ shoppingCart
                 pos: 'bottom-right'
             });
         }
-    })
-    .addEventListener('load', function(e) {
         if (e.detail
             && e.detail.response
             && !e.detail.response.success
@@ -43,6 +45,33 @@ shoppingCart
             alert(e.detail.response.message);
         }
     });
+
+if (document.getElementById('shoppingCartSmallContainer')) {
+    const itemsTotal = document.getElementById('shoppingCartSmallContainer').dataset.itemsTotal;
+    shoppingCart.updateData({
+        type: 'shop',
+        items_total: parseInt(itemsTotal, 10)
+    });
+    shoppingCart.updateElementsBySelectors();
+}
+
+// Favorites
+const shoppingCartFavorites = new ShoppingCart({
+    baseUrl: '/',
+    connectorUrl: 'shop_cart/action',
+    selector: '#userFavoritesLink',
+    productFormSelector: '.js-shopping-cart-favorites form',
+    templateName: 'favorites_link'
+});
+
+// Compare items
+const shoppingCartCompare = new ShoppingCart({
+    baseUrl: '/',
+    connectorUrl: 'shop_cart/action',
+    selector: '#userCompareLink',
+    productFormSelector: '.js-shopping-cart-compare form',
+    templateName: 'compare_link'
+});
 
 // Reviews
 var shkComments;
