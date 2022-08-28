@@ -65,7 +65,6 @@ const shoppingCartFavorites = new ShoppingCart({
 });
 shoppingCartFavorites
     .addEventListener('load', function(e) {
-        console.log(shoppingCartFavorites.data.favorites.ids, e.detail.response);
         if (e.detail.response && e.detail.response.items_total) {
             const message = '<span class="uk-margin-small-right" uk-icon=\'heart\'></span>Added to <a href="/saved_items/favorites">favorites</a>';
             UIkit.notification({

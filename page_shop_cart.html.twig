@@ -3,25 +3,20 @@
 {% set shoppingCartTemplateName = 'shop_cart_edit' %}
 {% if shoppingCartContentType == 'favorites' %}
     {% set shoppingCartTemplateName = 'favorites_edit' %}
+{% elseif shoppingCartContentType == 'compare' %}
+    {% set shoppingCartTemplateName = 'compare_edit' %}
 {% endif %}
 
 {% block body %}
     <section class="uk-section uk-section-small">
         <div class="uk-container">
 
-            <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
-                <div class="uk-text-center">
-                    <h1 class="uk-margin-small-top uk-margin-remove-bottom">
-                        {{ 'Shopping cart' | trans }}
-                    </h1>
-                </div>
-                <div class="min-height300">
+            <div class="min-height300">
 
-                    {% include 'flash_messages.html.twig' %}
+                {% include 'flash_messages.html.twig' %}
 
-                    {{ shopCart(shoppingCartTemplateName, shoppingCartContentType) }}
+                {{ shopCart(shoppingCartTemplateName, shoppingCartContentType) }}
 
-                </div>
             </div>
 
         </div>
