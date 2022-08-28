@@ -31,7 +31,7 @@ shoppingCart
                 buttonEl.removeAttribute('disabled');
             }
         }
-        if (e.detail.response && e.detail.response.items_total) {
+        if (e.detail.response && e.detail.response.action === 'add_to_cart') {
             const message = '<span class="uk-margin-small-right" uk-icon=\'cart\'></span>Added to <a href="/shop_cart">shopping cart</a>';
             UIkit.notification({
                 message: message,
@@ -56,7 +56,7 @@ const shoppingCartFavorites = new ShoppingCart({
 });
 shoppingCartFavorites
     .addEventListener('load', function(e) {
-        if (e.detail.response && e.detail.response.items_total) {
+        if (e.detail.response && e.detail.response.action === 'add_to_cart') {
             const message = '<span class="uk-margin-small-right" uk-icon=\'heart\'></span>Added to <a href="/saved_items/favorites">favorites</a>';
             UIkit.notification({
                 message: message,
@@ -75,7 +75,7 @@ const shoppingCartCompare = new ShoppingCart({
 });
 shoppingCartCompare
     .addEventListener('load', function(e) {
-        if (e.detail.response && e.detail.response.items_total) {
+        if (e.detail.response && e.detail.response.action === 'add_to_cart') {
             const message = '<span class="uk-margin-small-right" uk-icon=\'copy\'></span>Added to <a href="/saved_items/compare">compare</a>';
             UIkit.notification({
                 message: message,

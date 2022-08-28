@@ -14,8 +14,9 @@
                             </div>
                         </header>
                         <div class="uk-card-body uk-overflow-auto">
-                            <ul class="uk-list uk-list-divider">
 
+                            {% if items | length > 0 %}
+                            <ul class="uk-list uk-list-divider">
                                 {% for item in items %}
                                     <li class="uk-visible-toggle">
                                         <arttcle>
@@ -50,9 +51,15 @@
                                         </arttcle>
                                     </li>
                                 {% endfor %}
-
                             </ul>
+                            {% else %}
+                                <div class="uk-text-center">
+                                    {{ 'Empty.' | trans }}
+                                </div>
+                            {% endif %}
+
                         </div>
+                        {% if items | length > 0 %}
                         <footer class="uk-card-footer">
                             <div class="uk-grid-small" uk-grid>
                                 <div class="uk-width-expand uk-text-muted uk-h4">{{ 'Total' | trans }}</div>
@@ -74,6 +81,7 @@
                                 </div>
                             </div>
                         </footer>
+                        {% endif %}
                     </div>
                 </form>
             </aside>

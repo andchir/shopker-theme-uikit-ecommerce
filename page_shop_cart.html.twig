@@ -1,10 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% set shoppingCartTemplateName = 'shop_cart_edit' %}
-{% if shoppingCartContentType == 'favorites' %}
-    {% set shoppingCartTemplateName = 'favorites_edit' %}
-{% elseif shoppingCartContentType == 'compare' %}
-    {% set shoppingCartTemplateName = 'compare_edit' %}
+{% if shoppingCartContentType != 'shop' %}
+    {% set shoppingCartTemplateName = shoppingCartContentType ~ '_edit' %}
 {% endif %}
 
 {% block body %}
