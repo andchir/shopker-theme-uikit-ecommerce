@@ -119,7 +119,13 @@
                     </ul>
                 </div>
 
-                {{ shopCart('shop_cart', 'shop', 'shop_cart_empty') }}
+                <a class="uk-navbar-item uk-link-muted tm-navbar-button"
+                   href="#"
+                   uk-toggle="target: #cart-offcanvas"
+                   onclick="return false">
+                    <span uk-icon="cart"></span>
+                    <span class="uk-badge shopping-cart-count-total"></span>
+                </a>
 
             </div>
         </div>

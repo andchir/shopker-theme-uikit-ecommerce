@@ -49,7 +49,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="uk-margin">
+                                            <div class="uk-margin js-shopping-cart-product">
 
                                                 <form id="shk-form" action="{{ pathLocalized('shop_cart_action') }}" method="post">
                                                     <input type="hidden" name="item_id" value="{{ currentPage.id }}">
@@ -58,7 +58,7 @@
 
                                                     {{ renderOutputTypeChunk(currentPage, fields, 'parameters', 'page_') }}
 
-                                                    <div class="uk-padding-small uk-background-primary-lighten uk-border-rounded js-shopping-cart-product">
+                                                    <div class="uk-padding-small uk-background-primary-lighten uk-border-rounded">
                                                         <div class="uk-grid-small uk-child-width-1-1" uk-grid>
                                                             <div>
                                                                 {% if currentPage.old_price is defined and currentPage.old_price is not empty %}
