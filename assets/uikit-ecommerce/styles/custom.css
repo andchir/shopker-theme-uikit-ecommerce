@@ -1,6 +1,7 @@
 
 .border { border: 1px solid rgba(0,0,0,0.1); }
 .min-height300 { min-height: 300px; }
+.btn-icon-only { background-color: transparent; border: 0; cursor: pointer; }
 
 /* slider */
 .shk-slider-range input { display: none; }
@@ -60,3 +61,4 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle { top: 16px; right: -7px; left
 .uk-button-check {  }
 .uk-button-check-input { position: absolute; clip: rect(0,0,0,0); pointer-events: none; }
 .uk-button-check-input:checked + .uk-button-check { border-color: #1e87f0; }
+
