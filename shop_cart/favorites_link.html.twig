@@ -1,5 +1,5 @@
 <span id="userFavoritesLink">
-    <a class="uk-navbar-item uk-link-muted uk-visible@m tm-navbar-button" href="{{ pathLocalized('saved_items_edit_localized', {type: 'favorites'}) }}">
+    <a class="uk-navbar-item uk-link-muted uk-visible@m tm-navbar-button" href="{{ pathLocalized('saved_items_edit', {type: 'favorites'}) }}">
         <span uk-icon="heart"></span>
         {% if countUniqueTotal > 0 %}<span class="uk-badge">{{ countUniqueTotal }}</span>{% endif %}
     </a>
