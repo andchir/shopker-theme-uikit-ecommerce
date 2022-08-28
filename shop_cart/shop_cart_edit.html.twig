@@ -21,6 +21,7 @@
                 </header>
 
                 <form action="{{ path('shop_cart_action') }}" method="post">
+                    <input type="hidden" name="type" value="{{ type }}">
                     {% for item in items %}
                         <div class="uk-card-body">
                             <div class="uk-grid-small uk-child-width-1-1 uk-child-width-1-2@m uk-flex-middle" uk-grid>

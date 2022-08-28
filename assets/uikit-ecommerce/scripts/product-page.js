@@ -32,7 +32,7 @@ shoppingCart
             }
         }
         if (e.detail.response && e.detail.response.items_total) {
-            const message = '<span class="uk-margin-small-right" uk-icon=\'check\'></span>Added to <a href="/shop_cart">shopping cart</a>';
+            const message = '<span class="uk-margin-small-right" uk-icon=\'cart\'></span>Added to <a href="/shop_cart">shopping cart</a>';
             UIkit.notification({
                 message: message,
                 pos: 'bottom-right'
@@ -63,6 +63,17 @@ const shoppingCartFavorites = new ShoppingCart({
     productFormSelector: '.js-shopping-cart-favorites form',
     templateName: 'favorites_link'
 });
+shoppingCartFavorites
+    .addEventListener('load', function(e) {
+        console.log(shoppingCartFavorites.data.favorites.ids, e.detail.response);
+        if (e.detail.response && e.detail.response.items_total) {
+            const message = '<span class="uk-margin-small-right" uk-icon=\'heart\'></span>Added to <a href="/saved_items/favorites">favorites</a>';
+            UIkit.notification({
+                message: message,
+                pos: 'bottom-right'
+            });
+        }
+    });
 
 // Compare items
 const shoppingCartCompare = new ShoppingCart({
@@ -72,6 +83,16 @@ const shoppingCartCompare = new ShoppingCart({
     productFormSelector: '.js-shopping-cart-compare form',
     templateName: 'compare_link'
 });
+shoppingCartCompare
+    .addEventListener('load', function(e) {
+        if (e.detail.response && e.detail.response.items_total) {
+            const message = '<span class="uk-margin-small-right" uk-icon=\'copy\'></span>Added to <a href="/saved_items/compare">compare</a>';
+            UIkit.notification({
+                message: message,
+                pos: 'bottom-right'
+            });
+        }
+    });
 
 // Reviews
 var shkComments;
