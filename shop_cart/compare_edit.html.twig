@@ -1,6 +1,6 @@
-<div id="shoppingCartContainer">
+<div id="shoppingCartContainer" data-shopping-cart-type="compare" data-shopping-cart-data="{&quot;items_total&quot;: {{ countUniqueTotal }} }">
     <h1>
-        {{ 'Favorites' | trans }}
+        {{ 'Compare' | trans }}
     </h1>
     {% if items | length > 0 %}
         <div class="uk-card uk-card-default uk-card-small tm-ignore-container">
@@ -21,6 +21,7 @@
 
             <form action="{{ path('shop_cart_action') }}" method="post">
                 <input type="hidden" name="type" value="{{ type }}">
+                <input type="hidden" name="templateName" value="compare_edit">
                 {% for item in items %}
                     <div class="uk-card-body">
                         <div class="uk-grid-small uk-child-width-1-1 uk-child-width-1-2@m uk-flex-middle" uk-grid>

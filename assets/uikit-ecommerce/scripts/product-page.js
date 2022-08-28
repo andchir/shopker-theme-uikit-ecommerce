@@ -46,15 +46,6 @@ shoppingCart
         }
     });
 
-if (document.getElementById('shoppingCartSmallContainer')) {
-    const itemsTotal = document.getElementById('shoppingCartSmallContainer').dataset.itemsTotal;
-    shoppingCart.updateData({
-        type: 'shop',
-        items_total: parseInt(itemsTotal, 10)
-    });
-    shoppingCart.updateElementsBySelectors();
-}
-
 // Favorites
 const shoppingCartFavorites = new ShoppingCart({
     baseUrl: '/',

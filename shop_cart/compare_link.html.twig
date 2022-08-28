@@ -1,6 +1,6 @@
-<span id="userCompareLink">
+<span id="userCompareLink" data-shopping-cart-type="compare" data-shopping-cart-data="{&quot;items_total&quot;: {{ countUniqueTotal }} }">
     <a class="uk-navbar-item uk-link-muted uk-visible@m tm-navbar-button" href="{{ pathLocalized('saved_items_edit', {type: 'compare'}) }}">
         <span uk-icon="copy"></span>
-        {% if countUniqueTotal > 0 %}<span class="uk-badge">{{ countUniqueTotal }}</span>{% endif %}
+        <span class="uk-badge js-shopping-cart-compare-count-total{% if items | length == 0 %} uk-hidden{% endif %}">{{ countUniqueTotal }}</span>
     </a>
 </span>
