@@ -1,6 +1,6 @@
 {% for type, messages in app.flashes %}
     {% for message in messages %}
-        <div class="uk-alert-{% if type == 'errors' %}danger{% else %}success{% endif %} border uk-box-shadow-small" uk-alert>
+        <div class="uk-alert-{% if type == 'errors' %}danger{% else %}success{% endif %} border uk-box-shadow-small border" uk-alert>
             <a class="uk-alert-close" uk-close></a>
             <p>{{ message | trans }}.</p>
         </div>
