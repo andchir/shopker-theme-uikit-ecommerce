@@ -5,59 +5,140 @@
     {% if items | length > 0 %}
         <div class="uk-card uk-card-default uk-card-small tm-ignore-container">
 
-            <header class="uk-card-header uk-text-uppercase uk-text-muted uk-text-center uk-text-small uk-visible@m">
-                <div class="uk-grid-small uk-child-width-1-2" uk-grid>
-                    <div>{{ 'Product' | trans }}</div>
-                    <div>
-                        <div class="uk-grid-small uk-child-width-expand" uk-grid>
-                            <div>{{ 'Price' | trans }}</div>
-                            <div class="uk-width-auto">
-                                <div style="width: 20px;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
             <form action="{{ path('shop_cart_action') }}" method="post">
                 <input type="hidden" name="type" value="{{ type }}">
                 <input type="hidden" name="templateName" value="compare_edit">
-                {% for item in items %}
-                    <div class="uk-card-body">
-                        <div class="uk-grid-small uk-child-width-1-1 uk-child-width-1-2@m uk-flex-middle" uk-grid>
-                            <div>
-                                <div class="uk-grid-small" uk-grid>
-                                    <div class="uk-width-expand">
-                                        <a class="uk-link-heading" href="/{{ item.uri }}">
-                                            {{ item.title }}
-                                        </a>
-                                        <div class="uk-text-meta">{{ item.parametersString | raw }}</div>
-                                        {% if item.filesString is not empty %}
-                                            <div class="uk-text-meta">
-                                                <span uk-icon="file"></span>
-                                                {{ 'File|Files' | trans({'%count%': item.files | length}) }}: {{ item.filesString }}
+
+                <div>
+                    <div class="uk-card uk-card-default uk-overflow-auto tm-ignore-container">
+                        <table class="uk-table uk-table-divider tm-compare-table">
+                            <thead>
+                            <tr class="uk-child-width-1-4">
+                                <td class="uk-table-middle uk-text-center tm-compare-column">
+                                    {#<input class="tm-checkbox" id="show-difference" type="checkbox">
+                                    <label for="show-difference">Show differences only</label>#}
+                                </td>
+
+                                {% for item in items | slice(0, 3) %}
+                                    <td class="tm-compare-table-column">
+                                        <div class="uk-height-1-1">
+                                            <div class="uk-grid-small uk-child-width-1-1 uk-height-1-1" uk-grid>
+                                                <div class="uk-text-center">
+                                                    <button class="uk-text-small uk-text-danger uk-icon" type="submit" name="remove_by_index" value="{{ loop.index0 }}">
+                                                        <span uk-icon="icon: close; ratio: .75;"></span>
+                                                        <span class="uk-margin-xsmall-left tm-pseudo">{{ 'Delete' | trans }}</span>
+                                                    </button>
+                                                </div>
+                                                <div>
+                                                    <div class="uk-grid-small uk-height-1-1" uk-grid="uk-grid">
+                                                        <div class="uk-width-1-3">
+                                                            <div class="tm-ratio tm-ratio-4-3">
+                                                                <a class="tm-media-box" href="/{{ item.uri }}">
+                                                                    <figure class="tm-media-box-wrap">
+                                                                        <img src="{{ item.image | default('/img/nofoto.png') | imagine_filter('thumb_small') }}" alt="">
+                                                                    </figure>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="uk-width-expand">
+                                                            <div class="tm-product-card-body uk-padding-remove uk-height-1-1">
+                                                                <div class="tm-product-card-info">
+                                                                    <a class="tm-product-card-title" href="/{{ item.uri }}">
+                                                                        {{ item.title }}
+                                                                    </a>
+                                                                </div>
+                                                                <div class="tm-product-card-shop">
+                                                                    <div class="tm-product-card-prices">
+                                                                        <div>
+                                                                            <span class="uk-text-meta shk-price">{{ item.priceTotal | price }}</span>
+                                                                            <span class="tm-product-card-price shk-currency">{{ currencySelected | default(currency) }}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="tm-product-card-add">
+                                                                        <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart">
+                                                                            <span class="tm-product-add-button-icon"
+                                                                                  uk-icon="cart"></span><span
+                                                                                    class="tm-product-card-add-button-text">add to cart</span>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="uk-grid-small uk-child-width-1-1 uk-child-width-expand@s uk-text-center" uk-grid>
-                                    <div>
-                                        <div class="uk-text-muted uk-hidden@m">{{ 'Price' | trans }}</div>
-                                        <div>
-                                            <span class="shk-price">{{ item.priceTotal | price }}</span>
-                                            <span class="shk-currency">{{ currencySelected | default(currency) }}</span>
                                         </div>
-                                    </div>
-                                    <div class="uk-width-auto@s">
-                                        <button class="uk-text-danger" uk-icon="close" type="submit" name="remove_by_index" value="{{ loop.index0 }}" uk-tooltip="{{ 'Delete item' | trans }}"></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                    </td>
+                                {% endfor %}
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Processor</th>
+                                    <td>Intel&nbsp;Core i7&nbsp;Quad-Core</td>
+                                    <td>Intel&nbsp;Core i5&nbsp;Dual-Core</td>
+                                    <td>Intel&nbsp;Core i5&nbsp;Dual-Core</td>
+                                </tr>
+                                <tr>
+                                    <th>Base Clock Speed</th>
+                                    <td>2.8&nbsp;GHz</td>
+                                    <td>1.3&nbsp;GHz</td>
+                                    <td>1.8&nbsp;GHz</td>
+                                </tr>
+                                <tr>
+                                    <th>Maximum Boost Speed</th>
+                                    <td>3.8&nbsp;GHz</td>
+                                    <td>3.2&nbsp;GHz</td>
+                                    <td>2.9&nbsp;GHz</td>
+                                </tr>
+                                <tr>
+                                    <th>Total Installed Memory</th>
+                                    <td>16&nbsp;GB</td>
+                                    <td>8&nbsp;GB</td>
+                                    <td>8&nbsp;GB</td>
+                                </tr>
+                                <tr>
+                                    <th>Memory Type</th>
+                                    <td>LPDDR3&nbsp;SDRAM</td>
+                                    <td>LPDDR3&nbsp;SDRAM</td>
+                                    <td>LPDDR3&nbsp;SDRAM</td>
+                                </tr>
+                                <tr>
+                                    <th>Memory Speed</th>
+                                    <td>2133&nbsp;MHz</td>
+                                    <td>1866&nbsp;MHz</td>
+                                    <td>1600&nbsp;MHz</td>
+                                </tr>
+                                <tr>
+                                    <th>Onboard Memory</th>
+                                    <td>16&nbsp;GB</td>
+                                    <td>8&nbsp;GB</td>
+                                    <td>8&nbsp;GB</td>
+                                </tr>
+                                <tr>
+                                    <th>Available Memory Slots</th>
+                                    <td>—</td>
+                                    <td>—</td>
+                                    <td>—</td>
+                                </tr>
+                                <tr>
+                                    <th>Graphics Type</th>
+                                    <td>Hybrid</td>
+                                    <td>Integrated</td>
+                                    <td>Integrated</td>
+                                </tr>
+                                <tr>
+                                    <th>GPU</th>
+                                    <td>AMD Radeon&nbsp;Pro 555 with 2&nbsp;GB&nbsp;GDDR5 VRAM,<br>Intel HD Graphics&nbsp;630</td>
+                                    <td>Intel HD Graphics&nbsp;615</td>
+                                    <td>Intel HD Graphics&nbsp;6000</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                {% endfor %}
+                </div>
+
             </form>
 
         </div>
