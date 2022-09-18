@@ -6,7 +6,7 @@
                     <a class="uk-logo" href="{{ pathLocalized('homepage') }}">
                         <img src="{{ app_logo_image_url }}" height="36" alt="{{ app_name }}">
                     </a>
-                    <p class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut mauris eros. Nulla quis ante sed tortor efficitur facilisis.</p>
+                    <p class="uk-text-small"></p>
                     <ul class="uk-iconnav">
                         <li><a href="#" title="Facebook" uk-icon="facebook"></a></li>
                         <li><a href="#" title="Twitter" uk-icon="twitter"></a></li>
@@ -18,19 +18,19 @@
                     <nav class="uk-grid-small uk-child-width-1-2" uk-grid>
                         <div>
                             <ul class="uk-nav uk-nav-default">
-                                <li><a href="catalog.html">Catalog</a></li>
-                                <li><a href="brands.html">Brands</a></li>
-                                <li><a href="delivery.html">Delivery</a></li>
-                                <li><a href="faq.html">FAQ</a></li>
-                                <li><a href="#">Payment</a></li>
+                                <li><a href="catalog.html">{{ 'Catalog' | trans }}</a></li>
+                                <li><a href="brands.html">{{ 'Brands' | trans }}</a></li>
+                                <li><a href="delivery.html">{{ 'Delivery' | trans }}</a></li>
+                                <li><a href="faq.html">{{ 'FAQ' | trans }}</a></li>
+                                <li><a href="#">{{ 'Payment' | trans }}</a></li>
                             </ul>
                         </div>
                         <div>
                             <ul class="uk-nav uk-nav-default">
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="contacts.html">Contacts</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="news.html">News</a></li>
+                                <li><a href="about.html">{{ 'About' | trans }}</a></li>
+                                <li><a href="contacts.html">{{ 'Contacts' | trans }}</a></li>
+                                <li><a href="blog.html">{{ 'Blog' | trans }}</a></li>
+                                <li><a href="news.html">{{ 'News' | trans }}</a></li>
                             </ul>
                         </div>
                     </nav>
@@ -41,13 +41,13 @@
                 <div>
                     <form class="uk-form-stacked">
                         <label>
-                            <div class="uk-form-label uk-text-muted">Subscribe for updates</div>
+                            <div class="uk-form-label uk-text-muted">{{ 'Subscribe for updates' | trans }}</div>
                             <div class="uk-inline uk-width-1-1"><a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="mail"></a>
-                                <input class="uk-input" type="email" placeholder="Your email" required>
+                                <input class="uk-input" type="email" placeholder="{{ 'Your email' | trans }}" required>
                             </div>
                         </label>
                     </form>
-                    <div class="uk-margin uk-text-small uk-text-muted">Shopping Categories icons by Jaro Sigrist from Noun Project</div>
+                    <div class="uk-margin uk-text-small uk-text-muted">{{ 'Be aware of new products and special offers.' | trans }}</div>
                 </div>
             </div>
         </div>
