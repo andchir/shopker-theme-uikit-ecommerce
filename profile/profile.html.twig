@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="uk-section uk-section-small">
+        <div class="uk-container">
+            <div class="uk-grid-medium" uk-grid>
+                <div class="uk-width-1-1 uk-width-1-4@m tm-aside-column">
+                    <div class="uk-card uk-card-default uk-card-small tm-ignore-container" uk-sticky="offset: 90; bottom: true; media: @m;">
+                        <div class="uk-card-header">
+                            <div class="uk-grid-small uk-child-width-1-1" uk-grid>
+                                <div class="uk-text-center">
+                                    <div class="uk-h4 uk-margin-remove">{{ app.user.email }}</div>
+                                    <div class="uk-text-meta">
+                                        {{ app.user.createdDate | date }}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="uk-grid-small uk-flex-center" uk-grid>
+                                        <div>
+                                            <a class="uk-button uk-button-default uk-button-small" href="{{ logout_path() }}" title="{{ 'Log out' | trans }}">
+                                                <span uk-icon="icon: sign-out; ratio: .75;"></span>
+                                                {{ 'Log out' | trans }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <nav>
+                                <ul class="uk-nav uk-nav-default tm-nav">
+                                    <li{% if 'profile_history_orders' in app.request.attributes.get('_route') %} class="uk-active"{% endif %}>
+                                        <a href="{{ pathLocalized('profile_history_orders') }}">
+                                            {{ 'History of orders' | trans }}
+                                        </a>
+                                    </li>
+                                    <li{% if 'profile_contacts' in app.request.attributes.get('_route') %} class="uk-active"{% endif %}>
+                                        <a href="{{ pathLocalized('profile_contacts') }}">
+                                            {{ 'Contact details' | trans }}
+                                        </a>
+                                    </li>
+                                    <li{% if 'timezone' in app.request.attributes.get('_route') %} class="uk-active"{% endif %}>
+                                        <a href="{{ pathLocalized('profile_timezone') }}">
+                                            {{ 'Timezone' | trans }}
+                                        </a>
+                                    </li>
+                                    <li{% if 'profile_change_password' in app.request.attributes.get('_route') %} class="uk-active"{% endif %}>
+                                        <a href="{{ pathLocalized('profile_change_password') }}">
+                                            {{ 'Change password' | trans }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-1-1 uk-width-expand@m">
+                    <div class="uk-card uk-card-default uk-card-small tm-ignore-container">
+
+                        {% include 'flash_messages.html.twig' %}
+
+                        {% block content %}{% endblock %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'profile/profile.html.twig' %}
+
+{% form_theme form 'form/uikit-form.html.twig' %}
+
+{% block content %}
+    <header class="uk-card-header">
+        <h1 class="uk-h2">{{ 'Contact details' | trans }}</h1>
+    </header>
+    <section class="uk-card-body">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div class="form-group">
+            <button type="submit" class="uk-button uk-button-primary" name="button-submit">
+                {{ 'Submit' | trans }}
+            </button>
+        </div>
+        {{ form_end(form) }}
+    </section>
+{% endblock %}
