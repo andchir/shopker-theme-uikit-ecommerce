@@ -1,3 +1,7 @@
+{%
+set firstItem = items | length ? getContent(items[0].contentTypeName, items[0].id) : {}
+%}
+
 <div id="shoppingCartContainer" data-shopping-cart-type="compare" data-shopping-cart-data="{&quot;items_total&quot;: {{ countUniqueTotal }} }">
     <h1>
         {{ 'Compare' | trans }}
@@ -74,66 +78,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>Processor</th>
-                                    <td>Intel&nbsp;Core i7&nbsp;Quad-Core</td>
-                                    <td>Intel&nbsp;Core i5&nbsp;Dual-Core</td>
-                                    <td>Intel&nbsp;Core i5&nbsp;Dual-Core</td>
-                                </tr>
-                                <tr>
-                                    <th>Base Clock Speed</th>
-                                    <td>2.8&nbsp;GHz</td>
-                                    <td>1.3&nbsp;GHz</td>
-                                    <td>1.8&nbsp;GHz</td>
-                                </tr>
-                                <tr>
-                                    <th>Maximum Boost Speed</th>
-                                    <td>3.8&nbsp;GHz</td>
-                                    <td>3.2&nbsp;GHz</td>
-                                    <td>2.9&nbsp;GHz</td>
-                                </tr>
-                                <tr>
-                                    <th>Total Installed Memory</th>
-                                    <td>16&nbsp;GB</td>
-                                    <td>8&nbsp;GB</td>
-                                    <td>8&nbsp;GB</td>
-                                </tr>
-                                <tr>
-                                    <th>Memory Type</th>
-                                    <td>LPDDR3&nbsp;SDRAM</td>
-                                    <td>LPDDR3&nbsp;SDRAM</td>
-                                    <td>LPDDR3&nbsp;SDRAM</td>
-                                </tr>
-                                <tr>
-                                    <th>Memory Speed</th>
-                                    <td>2133&nbsp;MHz</td>
-                                    <td>1866&nbsp;MHz</td>
-                                    <td>1600&nbsp;MHz</td>
-                                </tr>
-                                <tr>
-                                    <th>Onboard Memory</th>
-                                    <td>16&nbsp;GB</td>
-                                    <td>8&nbsp;GB</td>
-                                    <td>8&nbsp;GB</td>
-                                </tr>
-                                <tr>
-                                    <th>Available Memory Slots</th>
-                                    <td>—</td>
-                                    <td>—</td>
-                                    <td>—</td>
-                                </tr>
-                                <tr>
-                                    <th>Graphics Type</th>
-                                    <td>Hybrid</td>
-                                    <td>Integrated</td>
-                                    <td>Integrated</td>
-                                </tr>
-                                <tr>
-                                    <th>GPU</th>
-                                    <td>AMD Radeon&nbsp;Pro 555 with 2&nbsp;GB&nbsp;GDDR5 VRAM,<br>Intel HD Graphics&nbsp;630</td>
-                                    <td>Intel HD Graphics&nbsp;615</td>
-                                    <td>Intel HD Graphics&nbsp;6000</td>
-                                </tr>
+                                {% if firstItem.specification is defined %}
+                                    {% for row in firstItem.specification %}
+                                        <tr>
+                                            <th>{{ row.name }}</th>
+                                            {% for item in items | slice(0, 3) %}
+                                                <td>&mdash;</td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
                             </tbody>
                         </table>
                     </div>
