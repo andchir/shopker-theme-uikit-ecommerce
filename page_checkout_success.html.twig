@@ -25,16 +25,20 @@
                                 {% for type, messages in app.session.flashbag.all() %}
                                     {% for message in messages %}
                                         {% if type == 'errors' %}
-                                            <div class="uk-alert-danger uk-box-shadow-small" uk-alert>
+                                            <div class="uk-alert-danger border uk-box-shadow-small border" uk-alert>
                                                 {{ message | trans }}
                                             </div>
                                         {% else %}
-                                            <div class="uk-alert-success uk-box-shadow-small" uk-alert>
+                                            <div class="uk-alert-success border uk-box-shadow-small border" uk-alert>
                                                 {{ message | trans }}
                                             </div>
                                         {% endif %}
                                     {% endfor %}
                                 {% endfor %}
+
+                                <p class="uk-text-center">
+                                    <a href="{{ pathLocalized('homepage') }}">{{ 'Go to home page' | trans }}</a>
+                                </p>
 
                             </div>
                         </article>

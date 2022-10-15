@@ -55,6 +55,7 @@
 {% endblock %}
 
 {% block javascripts -%}
+    <script src="{{ asset('assets/uikit-ecommerce/scripts/lang_' ~ app.request.locale ~ '.js') }}"></script>
     <script src="{{ asset('assets/uikit-ecommerce/scripts/uikit.js') }}"></script>
     <script src="{{ asset('assets/uikit-ecommerce/scripts/uikit-icons.js') }}"></script>
     <script src="{{ asset('assets/uikit-ecommerce/scripts/script.js') }}"></script>

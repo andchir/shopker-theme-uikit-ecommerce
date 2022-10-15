@@ -32,7 +32,8 @@ shoppingCart
             }
         }
         if (e.detail.response && e.detail.response.action === 'add_to_cart') {
-            const message = '<span class="uk-margin-small-right" uk-icon=\'cart\'></span>Added to <a href="/shop_cart">shopping cart</a>';
+            const message = '<span class="uk-margin-small-right" uk-icon=\'cart\'></span>' + site_lang.addedTo
+                + ' <a href="/shop_cart">' + site_lang.shoppingCart + '</a>';
             UIkit.notification({
                 message: message,
                 pos: 'bottom-right'
@@ -57,7 +58,8 @@ const shoppingCartFavorites = new ShoppingCart({
 shoppingCartFavorites
     .addEventListener('load', function(e) {
         if (e.detail.response && e.detail.response.action === 'add_to_cart') {
-            const message = '<span class="uk-margin-small-right" uk-icon=\'heart\'></span>Added to <a href="/saved_items/favorites">favorites</a>';
+            const message = '<span class="uk-margin-small-right" uk-icon=\'heart\'></span>' + site_lang.addedTo
+                + ' <a href="/saved_items/favorites">' + site_lang.favorites + '</a>';
             UIkit.notification({
                 message: message,
                 pos: 'bottom-right'
@@ -76,7 +78,8 @@ const shoppingCartCompare = new ShoppingCart({
 shoppingCartCompare
     .addEventListener('load', function(e) {
         if (e.detail.response && e.detail.response.action === 'add_to_cart') {
-            const message = '<span class="uk-margin-small-right" uk-icon=\'copy\'></span>Added to <a href="/saved_items/compare">compare</a>';
+            const message = '<span class="uk-margin-small-right" uk-icon=\'copy\'></span>' + site_lang.addedTo
+                + ' <a href="/saved_items/compare">' + site_lang.compare + '</a>';
             UIkit.notification({
                 message: message,
                 pos: 'bottom-right'
