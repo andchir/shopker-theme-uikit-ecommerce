@@ -1,105 +1,23 @@
-{%
-set firstItem = items | length ? getContent(items[0].contentTypeName, items[0].id) : {}
-%}
-
 <div id="shoppingCartContainer" data-shopping-cart-type="compare" data-shopping-cart-data="{&quot;items_total&quot;: {{ countUniqueTotal }} }">
     <h1>
         {{ 'Compare' | trans }}
     </h1>
+
     {% if items | length > 0 %}
-        <div class="uk-card uk-card-default uk-card-small tm-ignore-container">
 
-            <form action="{{ path('shop_cart_action') }}" method="post">
-                <input type="hidden" name="type" value="{{ type }}">
-                <input type="hidden" name="templateName" value="compare_edit">
+        {{ contentList(
+            'content_list_compare',
+            items[0].contentTypeName,
+            {"isActive": true, "_id": {"$in": itemsIds}},
+            {"_id": "asc"},
+            3, 1, '', '', '', {currency: currency}
+        ) }}
 
-                <div>
-                    <div class="uk-card uk-card-default uk-overflow-auto tm-ignore-container">
-                        <table class="uk-table uk-table-divider tm-compare-table">
-                            <thead>
-                            <tr class="uk-child-width-1-4">
-                                <td class="uk-table-middle uk-text-center tm-compare-column">
-                                    {#<input class="tm-checkbox" id="show-difference" type="checkbox">
-                                    <label for="show-difference">Show differences only</label>#}
-                                </td>
-
-                                {% for item in items | slice(0, 3) %}
-                                    <td class="tm-compare-table-column">
-                                        <div class="uk-height-1-1">
-                                            <div class="uk-grid-small uk-child-width-1-1 uk-height-1-1" uk-grid>
-                                                <div class="uk-text-center">
-                                                    <button class="uk-text-small uk-text-danger uk-icon" type="submit" name="remove_by_index" value="{{ loop.index0 }}">
-                                                        <span uk-icon="icon: close; ratio: .75;"></span>
-                                                        <span class="uk-margin-xsmall-left tm-pseudo">{{ 'Delete' | trans }}</span>
-                                                    </button>
-                                                </div>
-                                                <div>
-                                                    <div class="uk-grid-small uk-height-1-1" uk-grid="uk-grid">
-                                                        <div class="uk-width-1-3">
-                                                            <div class="tm-ratio tm-ratio-4-3">
-                                                                <a class="tm-media-box" href="/{{ item.uri }}">
-                                                                    <figure class="tm-media-box-wrap">
-                                                                        <img src="{{ item.image | default('/img/nofoto.png') | imagine_filter('thumb_small') }}" alt="">
-                                                                    </figure>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="uk-width-expand">
-                                                            <div class="tm-product-card-body uk-padding-remove uk-height-1-1">
-                                                                <div class="tm-product-card-info">
-                                                                    <a class="tm-product-card-title" href="/{{ item.uri }}">
-                                                                        {{ item.title }}
-                                                                    </a>
-                                                                </div>
-                                                                <div class="tm-product-card-shop">
-                                                                    <div class="tm-product-card-prices">
-                                                                        <div>
-                                                                            <span class="uk-text-meta shk-price">{{ item.priceTotal | price }}</span>
-                                                                            <span class="tm-product-card-price shk-currency">{{ currencySelected | default(currency) }}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="tm-product-card-add">
-                                                                        <button class="uk-button uk-button-primary tm-product-card-add-button tm-shine js-add-to-cart">
-                                                                            <span class="tm-product-add-button-icon"
-                                                                                  uk-icon="cart"></span><span
-                                                                                    class="tm-product-card-add-button-text">add to cart</span>
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                {% endfor %}
-
-                            </tr>
-                            </thead>
-                            <tbody>
-                                {% if firstItem.specification is defined %}
-                                    {% for row in firstItem.specification %}
-                                        <tr>
-                                            <th>{{ row.name }}</th>
-                                            {% for item in items | slice(0, 3) %}
-                                                <td>&mdash;</td>
-                                            {% endfor %}
-                                        </tr>
-                                    {% endfor %}
-                                {% endif %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </form>
-
-        </div>
     {% else %}
         <div class="uk-alert-primary uk-box-shadow-small border" uk-alert>
             <a class="uk-alert-close" uk-close></a>
             <p>{{ 'Compare is empty' | trans }}.</p>
         </div>
     {% endif %}
+
 </div>
