@@ -1,43 +1,25 @@
+{% set sortingOptions = [{'name': 'id_desc', 'title': 'catalog.sort_by_novelty'}, {'name': 'price_asc', 'title': 'catalog.sort_by_price_increase'}, {'name': 'price_desc', 'title': 'catalog.sort_by_price_reduction'}, {'name': 'title_asc', 'title': 'catalog.sort_by_name'}] %}
 <div class="uk-card-header">
     <div class="uk-grid-small uk-flex-middle" uk-grid>
         <div class="uk-width-1-1 uk-width-expand@s uk-flex uk-flex-center uk-flex-left@s uk-text-small">
             <span class="uk-margin-small-right uk-text-muted">{{ 'Sort by' | trans }}:</span>
             <ul class="uk-subnav uk-margin-remove">
                 <li class="uk-active uk-padding-remove">
-                    <a class="uk-text-capitalize" href="#">
-                        {{ 'catalog.sort_by_novelty' | trans }}
+                    <a href="#">
+                        {% for sortingOption in sortingOptions %}
+                            {% if queryOptions.order_by == sortingOption.name %}{{ sortingOption.title | trans }}{% endif %}
+                        {% endfor %}
                         <span class="uk-margin-xsmall-left" uk-icon="icon: chevron-down; ratio: .5;"></span>
                     </a>
                     <div class="uk-width-medium" uk-dropdown="mode: click">
                         <ul class="uk-nav uk-dropdown-nav" id="shkNavSortBy" data-sortvar="{{ pagesOptions.orderByVar }}">
-                            <li class="uk-active">
-                                <a data-sort="id_desc" href="#">
-                                    <span uk-icon="clock"></span>
-                                    <span class="uk-margin-small-right" uk-icon="chevron-down"></span>
-                                    {{ 'catalog.sort_by_novelty' | trans }}
-                                </a>
-                            </li>
-                            <li class="uk-active">
-                                <a data-sort="price_asc" href="#">
-                                    <span uk-icon="tag"></span>
-                                    <span class="uk-margin-small-right" uk-icon="chevron-up"></span>
-                                    {{ 'catalog.sort_by_price_increase' | trans }}
-                                </a>
-                            </li>
-                            <li class="uk-active">
-                                <a data-sort="price_desc" href="#">
-                                    <span uk-icon="tag"></span>
-                                    <span class="uk-margin-small-right" uk-icon="chevron-down"></span>
-                                    {{ 'catalog.sort_by_price_reduction' | trans }}
-                                </a>
-                            </li>
-                            <li class="uk-active">
-                                <a data-sort="title_asc" href="#">
-                                    <span uk-icon="list"></span>
-                                    <span class="uk-margin-small-right" uk-icon="chevron-down"></span>
-                                    {{ 'catalog.sort_by_name' | trans }}
-                                </a>
-                            </li>
+                            {% for sortingOption in sortingOptions %}
+                                <li{% if queryOptions.order_by == sortingOption.name %} class="uk-active"{% endif %}>
+                                    <a data-sort="{{ sortingOption.name }}" href="#">
+                                        {{ sortingOption.title | trans }}
+                                    </a>
+                                </li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </li>
