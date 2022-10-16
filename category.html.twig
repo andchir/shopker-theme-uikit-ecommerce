@@ -10,7 +10,7 @@
 
                     {% include 'nav/breadcrumbs.html.twig' %}
 
-                    <h1 class="uk-margin-small-top uk-margin-remove-bottom">{{ currentCategory.title }}</h1>
+                    <h1 class="uk-margin-small-top uk-margin-remove-bottom">{{ fieldByLocale(currentPage, 'title') }}</h1>
                     {% if itemsTotal > 0 %}
                         <div class="uk-text-meta uk-margin-xsmall-top">
                             {{ itemsTotal }}

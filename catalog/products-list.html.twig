@@ -27,10 +27,12 @@
                                                 <a class="uk-link-heading" href="{{ catalogPath(currentCategory.uri, item.name, item, 'categories') }}">{{ item.title }}</a>
                                             </h3>
                                             <ul class="uk-list uk-text-small tm-product-card-properties">
-                                                <li><span class="uk-text-muted">Diagonal display: </span><span>15.4"</span></li>
-                                                <li><span class="uk-text-muted">CPU: </span><span>Intel®&nbsp;Core™ i7</span></li>
-                                                <li><span class="uk-text-muted">RAM: </span><span>16&nbsp;GB</span></li>
-                                                <li><span class="uk-text-muted">Video Card: </span><span>AMD Radeon Pro 555</span></li>
+                                                {% for specificationItem in item.specification | slice(0, 5) %}
+                                                    <li>
+                                                        <span class="uk-text-muted">{{ specificationItem.name }}:</span>
+                                                        <span>{{ specificationItem.value }}</span>
+                                                    </li>
+                                                {% endfor %}
                                             </ul>
                                         </div>
                                         <div class="tm-product-card-shop">
@@ -50,26 +52,25 @@
                                             </div>
                                             <div class="tm-product-card-add">
                                                 <div class="uk-text-meta tm-product-card-actions">
-                                                    <div class="uk-display-inline-block js-shopping-cart-favorites">
+                                                    <div class="uk-display-inline-block js-shopping-cart-favorites uk-margin-small-bottom">
                                                         <form action="{{ pathLocalized('shop_cart_action') }}" method="post">
                                                             <input type="hidden" name="item_id" value="{{ item._id }}">
                                                             <input type="hidden" name="category_id" value="{{ item.parentId }}">
                                                             <input type="hidden" name="type" value="favorites">
-                                                            <button class="btn-icon-only tm-product-card-action tm-action-button-active" type="submit" title="{{ 'Add to favorites' | trans }}">
+                                                            <button class="btn-icon-only tm-product-card-action tm-action-button-active uk-padding-remove" type="submit" title="{{ 'Add to favorites' | trans }}">
                                                                 <span uk-icon="icon: heart; ratio: .75;"></span>
-                                                                <span class="tm-product-card-add-button-text">{{ 'Add to favorites' | trans }}</span>
+                                                                <span class="tm-product-card-action-text">{{ 'Add to favorites' | trans }}</span>
                                                             </button>
                                                         </form>
                                                     </div>
-
-                                                    <div class="uk-display-inline-block js-shopping-cart-compare">
+                                                    <div class="uk-display-inline-block js-shopping-cart-compare uk-margin-small-bottom">
                                                         <form action="{{ pathLocalized('shop_cart_action') }}" method="post">
                                                             <input type="hidden" name="item_id" value="{{ item._id }}">
                                                             <input type="hidden" name="category_id" value="{{ item.parentId }}">
                                                             <input type="hidden" name="type" value="compare">
-                                                            <button class="btn-icon-only tm-product-card-action tm-action-button-active" type="submit" title="{{ 'Add to compare' | trans }}">
+                                                            <button class="btn-icon-only tm-product-card-action tm-action-button-active uk-padding-remove" type="submit" title="{{ 'Add to compare' | trans }}">
                                                                 <span uk-icon="icon: copy; ratio: .75;"></span>
-                                                                <span class="tm-product-card-add-button-text">{{ 'Add to compare' | trans }}</span>
+                                                                <span class="tm-product-card-action-text">{{ 'Add to compare' | trans }}</span>
                                                             </button>
                                                         </form>
                                                     </div>
