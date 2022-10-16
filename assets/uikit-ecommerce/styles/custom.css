@@ -4,6 +4,8 @@
 .btn-icon-only { background-color: transparent; border: 0; cursor: pointer; }
 .float-left { float: left; }
 .float-right { float: right; }
+.uk-padding-small-top { padding-top: 10px; }
+.tm-products-grid .tm-product-card-action { margin-left: 10px; vertical-align: middle; }
 
 /* slider */
 .shk-slider-range input { display: none; }
