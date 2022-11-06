@@ -1,0 +1,9 @@
+<ul class="{{ classsName }}">
+    {% for category in children %}
+        <li class="nav-item active{{ category.id }}-{% if category.children|length > 0 %} parent{% endif %}">
+            <a href="{{ catalogPath(category.uri, '', category) }}">
+                {{ category.title }}
+            </a>
+        </li>
+    {%  endfor %}
+</ul>

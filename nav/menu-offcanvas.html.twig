@@ -1,0 +1,10 @@
+{% if children | length > 0 %}
+    <ul class="uk-nav-default uk-nav-parent-icon uk-list-divider" uk-nav>
+        {% for category in children %}
+            <li class="uk-parent">
+                <a href="{{ catalogPath(category.uri, '', category) }}">{{ category.title }}</a>
+                {{ categoriesTree(category.id, 'menu-child', category, null, false, 'active', {classsName: 'uk-nav-sub uk-list-divider'}) }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

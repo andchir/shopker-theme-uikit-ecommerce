@@ -1,0 +1,32 @@
+<div id="nav-offcanvas" uk-offcanvas="overlay: true">
+    <aside class="uk-offcanvas-bar uk-padding-remove">
+        <div class="uk-card uk-card-default uk-card-small tm-shadow-remove">
+            <header class="uk-card-header uk-flex uk-flex-middle">
+                <div><a class="uk-link-muted uk-text-bold" href="#">8 800 799 99 99</a>
+                    <div class="uk-text-xsmall uk-text-muted" style="margin-top: -2px;">
+                        <div>St.&nbsp;Petersburg, Nevsky&nbsp;Prospect&nbsp;28</div>
+                        <div>Daily 10:00–22:00</div>
+                    </div>
+                </div>
+            </header>
+            <nav class="uk-card-small uk-card-body">
+                {{ categoriesTree(1, 'menu-offcanvas', null, activeCategoriesIds, true) }}
+            </nav>
+            <nav class="uk-card-small uk-card-body">
+                <ul class="uk-nav uk-nav-default">
+                    <li><a href="/news/">News</a></li>
+                    <li><a href="/faq">FAQ</a></li>
+                    <li><a href="/payment">Payment</a></li>
+                </ul>
+            </nav>
+            <nav class="uk-card-body">
+                <ul class="uk-iconnav uk-flex-center">
+                    <li><a href="#" title="Facebook" uk-icon="facebook"></a></li>
+                    <li><a href="#" title="Twitter" uk-icon="twitter"></a></li>
+                    <li><a href="#" title="YouTube" uk-icon="youtube"></a></li>
+                    <li><a href="#" title="Instagram" uk-icon="instagram"></a></li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+</div>
